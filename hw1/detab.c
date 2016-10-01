@@ -15,10 +15,11 @@
  *  -3 - Could not open specified file
  *
  * EXAMPLE
- *  ./detab file1 2
+ *  ./detab detab_test.txt 2
  *
  * NOTES
- *  Compile using gcc -o detab detab.c 
+ *  Compile using "gcc -o detab detab.c"
+ *  If makefile is available, use "make detab"
  *
  * Alex Z. Chen - 09/30/2016
  * alexac9@uw.edu

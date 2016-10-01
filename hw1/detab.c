@@ -10,8 +10,8 @@
  *
  * RETURN
  *  0 - from main()
- *  1 - Incorrect number of inputs entered
- *  2 - Negative number of spaces specified
+ *  -1 - Incorrect number of inputs entered
+ *  -2 - Negative number of spaces specified
  *
  * EXAMPLE
  *  ./detab file1 2
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   // Check for correct number of inputs
   if (argc != 3) {
     printf("Incorrect number of inputs entered.\nPlease enter 2 inputs.\n");
-    exit(1);
+    exit(-1);
   }
   // Convert number of spaces to an integer
   spaces = argv[2];
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
   // Check if number of spaces specified is negative
   if (numSpaces < 0) {
     printf("Please enter zero or a postive for number of spaces.\n");
-    exit(2);
+    exit(-2);
   }
   //Open file in read mode to start file stream
   fileName = argv[1];

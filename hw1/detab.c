@@ -12,6 +12,7 @@
  *  0 - from main()
  *  -1 - Incorrect number of inputs entered
  *  -2 - Negative number of spaces specified
+ *  -3 - Could not open specified file
  *
  * EXAMPLE
  *  ./detab file1 2
@@ -48,8 +49,12 @@ int main(int argc, char *argv[])
     exit(-2);
   }
   //Open file in read mode to start file stream
-  fileName = argv[1];
+  filename = argv[1];
   fp = fopen(filename, "r");
+  if (fp == NULL) {
+    printf("Could not open the file.\n");
+    exit(-3);
+  }
   while ((nextChar = fgetc(fp)) != EOF) {
     // If the character is a tab, print spaces. Otherwise, print the character
     if (nextChar == '\t') {

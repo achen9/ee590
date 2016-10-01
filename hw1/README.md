@@ -7,6 +7,6 @@
 
 # To run hw1 code
 Make sure the program you want to run has been compiled first.
-* Type "./detab <filename> <n>" to run the "detab" program.
-* Type "./reverse <file>" to run the "reverse" program.
-* Type "./fsm <regular expression>" to run the "fsm" program.
+* Type "./detab \<filename\> \<n\>" to run the "detab" program.
+* Type "./reverse \<file\>" to run the "reverse" program.
+* Type "./fsm \<regular expression\>" to run the "fsm" program.

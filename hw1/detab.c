@@ -50,9 +50,7 @@ int main(int argc, char *argv[])
   //Open file in read mode to start file stream
   fileName = argv[1];
   fp = fopen(filename, "r");
-  while (*fp != EOF) {
-    // Get next character in file stream until we reach the end of file
-    nextChar = fgetc(fp);
+  while ((nextChar = fgetc(fp)) != EOF) {
     // If the character is a tab, print spaces. Otherwise, print the character
     if (nextChar == '\t') {
       for (i = 0; i < numSpaces; i++) {
@@ -61,8 +59,6 @@ int main(int argc, char *argv[])
     } else {
       putchar(nextChar);
     }
-    // Increment file pointer to read next character in file
-    fp++;
   }
   fclose(fp);
   putchar('\n');

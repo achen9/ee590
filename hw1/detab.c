@@ -27,7 +27,7 @@
 
 int main(int argc, char *argv[])
 {
-  char *fileName;
+  char *filename;
   char *spaces;
   int nextChar;
   int numSpaces;
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
   //Open file in read mode to start file stream
   fileName = argv[1];
   fp = fopen(filename, "r");
-  while (fp != EOF) {
+  while (*fp != EOF) {
     // Get next character in file stream until we reach the end of file
     nextChar = fgetc(fp);
     // If the character is a tab, print spaces. Otherwise, print the character
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
         putchar(' ');
         }
     } else {
-      putchar(nextChar)
+      putchar(nextChar);
     }
     // Increment file pointer to read next character in file
     fp++;

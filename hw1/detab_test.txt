@@ -1,0 +1,7 @@
+This is a test text file to input into detab.
+	There is 1 tab on this line.
+		There are 2 tabs on this line.
+			There are 3 tabs on this line.
+There is 1 tab after the colon:	and 2 tabs after the semi-colon;		some other text.
+Here are some special characters separated by 1 tab each:
+###	@@@	$$$	%%%	&&&	***	)))	(((	<<<	>>>	!!!

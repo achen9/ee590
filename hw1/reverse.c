@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
   filename = argv[1];
   fp = fopen(filename, "r");
   if (fp == NULL) {
-    printf("Could not open the file. Please check  the file name.\n");
+    printf("Could not open the file. Please check the file name.\n");
     exit(-2);
   }
   // Find length of file

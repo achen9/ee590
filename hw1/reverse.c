@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     fclose(fp);
     exit(-5);
   }
+  rewind(fp);
   // Add file content to temporary array storage
   while ((nextChar = fgetc(fp)) != EOF) {
     temp[(int)pos] = nextChar;

@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
   long pos = 0;
   fpos_t *ptr;
   FILE *fp;
-  char temp[MAX_FILE_LEN];
-  char nextChar;
+  int temp[MAX_FILE_LEN];
+  int nextChar;
   
   // Check for correct number of inputs
   if (argc != 2) {

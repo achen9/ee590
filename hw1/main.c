@@ -64,7 +64,7 @@ int main ( int argc, char * argv[] )
   char * input;
 
   if (argc < 2) {
-    printf("Not enough inputs. Please enter 1 filename input.");
+    printf("Not enough inputs. Please enter 1 filename input.\n");
     exit(-1);
   }
   input = argv[1];

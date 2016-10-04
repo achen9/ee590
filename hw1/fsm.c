@@ -1,6 +1,7 @@
 /*
  * FSM Functions
  */
+#include "fsm.h"
 
 /* Return the index of the first instance of the character c in str */
 int indexOf(char str[], char c) {
@@ -13,7 +14,7 @@ int indexOf(char str[], char c) {
 }
 
 /* Walk through the given fsm for the given input file */
-int fsm ( char alphabet[], int num_rules, int rules[3][num_rules], const char str[] ) {
+int fsm ( char alphabet[], int num_rules, int rules[MAX_INPUTS][num_rules], const char str[] ) {
 
   int i, j;
   int state = 0;

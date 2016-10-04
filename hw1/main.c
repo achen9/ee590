@@ -16,8 +16,9 @@
  *
  * RETURN
  *  0 - from main()
- * -1 - failed to open the file
- * -2 - failed to read line from file using fgets()
+ * -1 - not enough inputs error
+ * -2 - failed to open the file
+ * -3 - failed to read line from file using fgets()
  *
  * EXAMPLE
  *  ./fsm decimal.csv abbbc for a regular expression defined to be ab*c
@@ -37,8 +38,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fsm.h"
-
-
 
 int main ( int argc, char * argv[] )
 {
@@ -62,28 +61,33 @@ int main ( int argc, char * argv[] )
   /* Matrix implementation. Maximum 100 inputs and 100 states*/
   int rules[MAX_INPUTS][MAX_STATES];
   /* Check the input string */
-  char * input = argv[1];
+  char * input;
 
+  if (argc < 2) {
+    printf("Not enough inputs. Please enter 1 filename input.");
+    exit(-1);
+  }
+  input = argv[1];
   // Open csv file defining the FSM
   fp = fopen(input, "r");
   if (fp == NULL) {
     printf("Could not open file. Please check the file name.\n");
     fclose(fp);
-    exit(-1);
+    exit(-2);
   }
   // Assume 1st line in csv file is alphabet
   pos = 0;
   if (fgets(alphabet, MAX_ALPHA, fp) == NULL) {
     printf("Failed to read first line from file. Please check the file.\n");
     fclose(fp);
-    exit(-2);
+    exit(-3);
   }
   alphabet[strcspn(alphabet,"\n")] = '\0'; // Eliminate newline from alphabet
   // Discard 2nd line in csv file
   if (fgets(fsmRowBuffer, MAX_STATES * 4, fp) == NULL) {
     printf("Failed to read second line from file. Please check the file.\n");
     fclose(fp);
-    exit(-2);
+    exit(-3);
   }
   // Get FSM matrix one line at a time. Parse the line for the comma separated values.
   row = 0;

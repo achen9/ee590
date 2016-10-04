@@ -14,7 +14,7 @@ int indexOf(char str[], char c) {
 }
 
 /* Walk through the given fsm for the given input file */
-int fsm ( char alphabet[], int num_rules, int rules[MAX_INPUTS][num_rules], const char str[] ) {
+int fsm ( char alphabet[], int num_rules, int rules[MAX_INPUTS][MAX_STATES], const char str[] ) {
 
   int i, j;
   int state = 0;

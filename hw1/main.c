@@ -21,14 +21,14 @@
  * -3 - failed to read line from file using fgets()
  *
  * EXAMPLE
- *  ./fsm decimal.csv abbbc for a regular expression defined to be ab*c
+ *  ./fsm fsm.csv 0.123 for a valid decimal number
  *
  * NOTES
  *  Compile using "gcc -c main.c fsm.c
  *                 gcc -o fsm main.o fsm.o"
  *  If makefile is available, use "make fsm"
  *
- *  Character alphabets input assumes unique character set is given.
+ *  Character alphabet input assumes unique character set is given.
  *  Number of inputs and states cannot exceed 100 each.
  *
  * Alex Z. Chen - 10/02/2016
@@ -107,9 +107,9 @@ int main ( int argc, char * argv[] )
     row++;
   }
   fclose(fp);
-  numState = col + 1;
-  numInput = row + 1;
-  if ( fsm(alphabet,MAX_STATES,rules,input) <= numState ) {
+  numState = col;
+  numInput = strlen(alphabet);
+  if ( fsm(alphabet,numState,rules,input) < numState ) {
     printf ( "accept\n");
   } else {
     printf ( "reject\n");

@@ -61,15 +61,17 @@ int main ( int argc, char * argv[] )
   /* Matrix implementation. Maximum 100 inputs and 100 states*/
   int rules[MAX_INPUTS][MAX_STATES];
   /* Check the input string */
+  char *filename;
   char * input;
-
-  if (argc < 2) {
-    printf("Not enough inputs. Please enter 1 filename input.\n");
+  
+  if (argc != 3) {
+    printf("Incorrect number of inputs entered.\nPlease enter 2 inputs.\n");
     exit(-1);
   }
-  input = argv[1];
+  filename = argv[1];
+  input = argv[2];
   // Open csv file defining the FSM
-  fp = fopen(input, "r");
+  fp = fopen(filename, "r");
   if (fp == NULL) {
     printf("Could not open file. Please check the file name.\n");
     fclose(fp);

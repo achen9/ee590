@@ -19,6 +19,7 @@
  * -1 - not enough inputs error
  * -2 - failed to open the file
  * -3 - failed to read line from file using fgets()
+ * -4 - no comma separated values found
  *
  * EXAMPLE
  *  ./fsm fsm.csv 0.123 for a valid decimal number
@@ -62,7 +63,7 @@ int main ( int argc, char * argv[] )
   int rules[MAX_INPUTS][MAX_STATES];
   /* Check the input string */
   char *filename;
-  char * input;
+  char *input;
   
   if (argc != 3) {
     printf("Incorrect number of inputs entered.\nPlease enter 2 inputs.\n");
@@ -74,7 +75,6 @@ int main ( int argc, char * argv[] )
   fp = fopen(filename, "r");
   if (fp == NULL) {
     printf("Could not open file. Please check the file name.\n");
-    fclose(fp);
     exit(-2);
   }
   // Assume 1st line in csv file is alphabet
@@ -97,13 +97,15 @@ int main ( int argc, char * argv[] )
     fsmRowBuffer[strcspn(fsmRowBuffer, "\n")] = '\0';
     col = 0;
     token = strtok(fsmRowBuffer, ",");
-    rules[row][col] = atoi(token);
-    col++;
-    while (token != NULL) {
-      token = strtok(NULL, ",");
+    if (token == NULL) {
+      printf("No comma separated values found.\nPlease check the csv file.\n");
+      exit(-4);
+    }
+    do {
       rules[row][col] = atoi(token);
       col++;
-    }
+      token = strtok(NULL, ",");
+    } while (token != NULL);
     row++;
   }
   fclose(fp);

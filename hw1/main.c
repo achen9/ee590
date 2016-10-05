@@ -51,7 +51,7 @@ int main ( int argc, char * argv[] )
   char *token;
   /* Input alphabet */
   char alphabet[MAX_ALPHA];
-  char fsmRowBuffer[MAX_STATES * 4]
+  char fsmRowBuffer[MAX_STATES * 4];
   /*
      Example Regular Expression: ab*c
      0 -a-> 1                2 = ACCEPT

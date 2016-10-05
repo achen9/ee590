@@ -42,17 +42,19 @@
 
 int main ( int argc, char * argv[] )
 {
-  FILE *fp;
-  int nextChar;
-  int pos;
-  int numInput;
-  int numState;
-  int col;
-  int row;
-  char *token;
+  FILE *fp;       // file pointer
+  int numState;   // total number of states
+  int numSuccess; // total number of success states
+  int col;        // FSM matrix column iterator
+  int row;        // FSM matrix row iterator
+  int fsmResult;  // final state from running fsm()
+  int i;          // success state check iterator
+  int successFlag = 0; // if 1: accept, if 0: reject
+  char *token;    // token for parsing csv file rows
   /* Input alphabet */
-  char alphabet[MAX_ALPHA];
-  char fsmRowBuffer[MAX_STATES * 4];
+  char alphabet[MAX_ALPHA]; // alphabet array
+  int success[MAX_SUCCESS]; // success state array
+  char fsmRowBuffer[MAX_STATES * 4]; // csv row buffer array
   /*
      Example Regular Expression: ab*c
      0 -a-> 1                2 = ACCEPT
@@ -78,19 +80,26 @@ int main ( int argc, char * argv[] )
     exit(-2);
   }
   // Assume 1st line in csv file is alphabet
-  pos = 0;
   if (fgets(alphabet, MAX_ALPHA, fp) == NULL) {
     printf("Failed to read first line from file. Please check the file.\n");
     fclose(fp);
     exit(-3);
   }
   alphabet[strcspn(alphabet,"\n")] = '\0'; // Eliminate newline from alphabet
-  // Discard 2nd line in csv file
+  // Input success states into an array of int
   if (fgets(fsmRowBuffer, MAX_STATES * 4, fp) == NULL) {
     printf("Failed to read second line from file. Please check the file.\n");
     fclose(fp);
     exit(-3);
   }
+  fsmRowBuffer[strcspn(fsmRowBuffer, "\n")] = '\0';
+  numSuccess = 0;
+  token = strtok(fsmRowBuffer, ",");
+  do {
+    success[numSuccess] = atoi(token);
+    numSuccess++;
+    token = strtok(NULL, ",");
+  } while (token != NULL);
   // Get FSM matrix one line at a time. Parse the line for the comma separated values.
   row = 0;
   while (fgets(fsmRowBuffer, MAX_STATES * 4, fp) != NULL) {
@@ -110,8 +119,14 @@ int main ( int argc, char * argv[] )
   }
   fclose(fp);
   numState = col;
-  numInput = strlen(alphabet);
-  if ( fsm(alphabet,numState,rules,input) < numState ) {
+  fsmResult = fsm(alphabet, numState, rules, input);
+  for (i = 0; i < numSuccess; i++) {
+    if (fsmResult == success[i]) {
+      successFlag = 1;
+      break;
+    }
+  }
+  if (successFlag) {
     printf ( "accept\n");
   } else {
     printf ( "reject\n");

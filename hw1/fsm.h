@@ -5,6 +5,7 @@
 #define FSM
 
 #define MAX_ALPHA 100
+#define MAX_SUCCESS 100
 #define MAX_INPUTS 100
 #define MAX_STATES 100
 

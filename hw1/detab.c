@@ -67,6 +67,5 @@ int main(int argc, char *argv[])
     }
   }
   fclose(fp);
-  putchar('\n');
   return 0;
 }

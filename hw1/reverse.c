@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
   for (; pos >= 0; pos--) {
     putchar(temp[pos]);
   }
-  putchar('\n');
   close(fp);
   return 0;
 }

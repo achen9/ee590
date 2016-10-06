@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
   int check;
   long fileLen;
   long pos = 0;
-  fpos_t *ptr;
   FILE *fp;
   int temp[MAX_FILE_LEN];
   int nextChar;
@@ -80,6 +79,6 @@ int main(int argc, char *argv[])
   for (; pos >= 0; pos--) {
     putchar(temp[pos]);
   }
-  close(fp);
+  fclose(fp);
   return 0;
 }

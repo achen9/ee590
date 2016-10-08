@@ -2,7 +2,7 @@
  *  stack.c
  *
  * DESCRIPTION
- *  Replaces tabs with a specified number of spaces in a text file
+ *  Simulates a stack by using an input file to store stack variables
  *
  * PARAMETERS
  *  string filename - file to perform changes on
@@ -15,7 +15,7 @@
  *  -3 - Incorrect command given
  *
  * EXAMPLE
- *  ./detab detab_test.txt 2
+ *  ./stack testfile.txt pop
  *
  * NOTES
  *  Compile using "gcc -o stack stack.c"
@@ -34,13 +34,19 @@ int pop(char *filename);
 int print_top(char *filename);
 int swap_top(char *filename);
 
-int pop(char *filename) {
+int pop(char *filename) 
+{
+  FILE *fp, *tmp;
+  char buffer[BUF_SIZE];
+
+
 
   printf("pop() not implemented yet...\n");
 
   return 0;
 }
-int print_top(char *filename) {
+int print_top(char *filename) 
+{
   FILE *fp;
   char buffer[BUF_SIZE];
 
@@ -55,7 +61,8 @@ int print_top(char *filename) {
 
   return 0;
 }
-int swap_top(char *filename) {
+int swap_top(char *filename) 
+{
 
   printf("swap_top() not implemented yet...\n");
 

@@ -174,7 +174,7 @@ int swap_top(char *filename)
     return -1;
   }
   // Populate rest of stack in temp file
-  while (fgets(buffer, BUF_SIZE, fp) != EOF) {
+  while (fgets(buffer, BUF_SIZE, fp) != NULL) {
     check = fputs(buffer, tmp);
     if (EOF == check) {
       printf("Failed to write to temp file.\n");

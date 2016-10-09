@@ -50,7 +50,7 @@ int pop(char *filename)
   // Pop top item from stack
   fgets_check = fgets(buffer, BUF_SIZE, fp);
   if (NULL == fgets_check) {
-    printf("Stack is empty.\n");
+    printf("Stack is empty!\n");
     return -1;
   } else {
     printf("%s", buffer);
@@ -105,20 +105,25 @@ int print_top(char *filename)
 {
   FILE *fp;
   char buffer[BUF_SIZE];
+  char *check;
 
   fp = fopen(filename, "r");
   if (NULL == fp) {
     printf("Failed to open file. Double check the file name.\n");
     return -1;
   }
-  fgets(buffer, BUF_SIZE, fp);
-  printf("%s", buffer);
+  check = fgets(buffer, BUF_SIZE, fp);
+  if (NULL == check) {
+    printf("Stack is empty!\n");
+    return -1;
+  } else {
+    printf("%s", buffer);
+  }
   fclose(fp);
   return 0;
 }
 int swap_top(char *filename) 
 {
-
   printf("swap_top() not implemented yet...\n");
   return 0;
 }

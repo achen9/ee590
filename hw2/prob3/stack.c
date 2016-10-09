@@ -94,6 +94,7 @@ int pop(char *filename)
       return -1;
     }
   }
+  // Delete temp file
   check = remove(tmpfilename);
   if (0 != check) {
     printf("Failed to delete temp file.\n");

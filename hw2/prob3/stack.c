@@ -56,7 +56,7 @@ int pop(char *filename)
     printf("%s", buffer);
   }
   // Store rest of stack in temp file
-  tmpfilename = tmpname(NULL);
+  tmpfilename = tmpnam(NULL);
   tmp = fopen(tmpfilename, "w");
   if (NULL == tmp) {
     printf("Failed to create temp file.\n");
@@ -78,7 +78,7 @@ int pop(char *filename)
   tmp = fopen(tmpfilename, "r");
   if (NULL == tmp) {
     printf("Failed to open temp file for reading.\n");
-    return -1
+    return -1;
   }
   fp = fopen(filename, "w");
   if (NULL == fp) {

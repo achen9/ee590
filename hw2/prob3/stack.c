@@ -63,7 +63,7 @@ int pop(char *filename)
     fclose(fp);
     return -1;
   }
-  while (fgets(buffer, BUF_SIZE, fp) != EOF) {
+  while (fgets(buffer, BUF_SIZE, fp) != NULL) {
     check = fputs(buffer, tmp);
     if (EOF == check) {
       printf("Failed to write to temp file.\n");
@@ -85,7 +85,7 @@ int pop(char *filename)
     printf("Failed to open %s for writing.\n", filename);
     return -1;
   }
-  while (fgets(buffer, BUF_SIZE, tmp) != EOF) {
+  while (fgets(buffer, BUF_SIZE, tmp) != NULL) {
     check = fputs(buffer, fp);
     if (EOF == check) {
       printf("Failed to write to %s\n", filename);

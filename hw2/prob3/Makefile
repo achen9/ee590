@@ -35,7 +35,7 @@ all: $(SOURCES) $(TARGET)
 # the target from the objects. $@ refers to whatever is before the ":". the
 # -o flag tells gcc the name of the binary (so it isn't a.out).
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@
+	$(CC) $(OBJECTS) -o $@ -Wall
 
 # Here we define a rule schema. It says how to make any object file from its
 # source. Here % is a stem wildcard that matches any target name. Because of
@@ -43,7 +43,7 @@ $(TARGET): $(OBJECTS)
 # This rule says how to make it. Note that $< matches the _first_ dependency,
 # which is the c file, so this command wouldn't work if $(HEADERS) came first.
 %.o: %.c $(HEADERS)
-	$(CC) -c $<
+	$(CC) -c $< -Wall
 
 # As usual, here's a way to clean up.
 clean:

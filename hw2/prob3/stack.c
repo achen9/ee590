@@ -204,6 +204,7 @@ int swap_top(char *filename)
       fclose(fp);
       return -1;
     }
+    printf("%s", buffer);
   }
   fclose(tmp);
   fclose(fp);

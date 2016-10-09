@@ -94,6 +94,8 @@ int pop(char *filename)
       return -1;
     }
   }
+  fclose(tmp);
+  fclose(fp);
   // Delete temp file
   check = remove(tmpfilename);
   if (0 != check) {
@@ -125,7 +127,92 @@ int print_top(char *filename)
 }
 int swap_top(char *filename) 
 {
-  printf("swap_top() not implemented yet...\n");
+  FILE *fp, *tmp;
+  char buffer[BUF_SIZE];
+  char stack_top[BUF_SIZE];
+  int check;
+  char *fgets_check;
+  char *tmpfilename;
+
+  fp = fopen(filename, "r");
+  if (NULL == fp) {
+    printf("Failed to open %s for reading. Please check the file name.\n", filename);
+    return -1;
+  }
+  // Take top two items in stack
+  fgets_check = fgets(stack_top, BUF_SIZE, fp);
+  if (NULL == fgets_check) {
+    printf("Stack is empty!\n");
+    return -1;
+  }
+  fgets_check = fgets(buffer, BUF_SIZE, fp);
+  if (NULL == fgets_check) {
+    return 0; // Stack only has one element in it.
+  }
+  // Store modified stack in temp file
+  tmpfilename = tmpnam(NULL);
+  tmp = fopen(tmpfilename, "w");
+  if (NULL == tmp) {
+    printf("Failed to create temp file.\n");
+    fclose(fp);
+    return -1;
+  }
+  // Store second item in stack first
+  check = fputs(buffer, tmp);
+  if (EOF == check) {
+    printf("Failed to write to temp file.\n");
+    fclose(tmp);
+    fclose(fp);
+    return -1;
+  }
+  // Store top item in stack second
+  check = fputs(stack_top, tmp);
+  if (EOF == check) {
+    printf("Failed to write to temp file.\n");
+    fclose(tmp);
+    fclose(fp);
+    return -1;
+  }
+  // Populate rest of stack in temp file
+  while (fgets(buffer, BUF_SIZE, fp) != EOF) {
+    check = fputs(buffer, tmp);
+    if (EOF == check) {
+      printf("Failed to write to temp file.\n");
+      fclose(tmp);
+      fclose(fp);
+      return -1;
+    }
+  }
+  fclose(tmp);
+  fclose(fp);
+  // Write contents of temp file to stack file
+  tmp = fopen(tmpfilename, "r");
+  if (NULL == tmp) {
+    printf("Failed to open temp file for reading.\n");
+    return -1;
+  }
+  fp = fopen(filename, "w");
+  if (NULL == fp) {
+    printf("Failed to open %s for writing.\n", filename);
+    return -1;
+  }
+  while (fgets(buffer, BUF_SIZE, tmp) != NULL) {
+    check = fputs(buffer, fp);
+    if (EOF == check) {
+      printf("Failed to write to %s\n", filename);
+      fclose(tmp);
+      fclose(fp);
+      return -1;
+    }
+  }
+  fclose(tmp);
+  fclose(fp);
+  // Delete temp file
+  check = remove(tmpfilename);
+  if (0 != check) {
+    printf("Failed to delete temp file.\n");
+    return -1;
+  }
   return 0;
 }
 int main(int argc, char *argv[])

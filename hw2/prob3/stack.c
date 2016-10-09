@@ -38,11 +38,67 @@ int pop(char *filename)
 {
   FILE *fp, *tmp;
   char buffer[BUF_SIZE];
+  int check;
+  char *fgets_check;
+  char *tmpfilename;
 
-
-
-  printf("pop() not implemented yet...\n");
-
+  fp = fopen(filename, "r");
+  if (NULL == fp) {
+    printf("Failed to open %s for reading. Please check the file name.\n", filename);
+    return -1;
+  }
+  // Pop top item from stack
+  fgets_check = fgets(buffer, BUF_SIZE, fp);
+  if (NULL == fgets_check) {
+    printf("Stack is empty.\n");
+    return -1;
+  } else {
+    printf("%s", buffer);
+  }
+  // Store rest of stack in temp file
+  tmpfilename = tmpname(NULL);
+  tmp = fopen(tmpfilename, "w");
+  if (NULL == tmp) {
+    printf("Failed to create temp file.\n");
+    fclose(fp);
+    return -1;
+  }
+  while (fgets(buffer, BUF_SIZE, fp) != EOF) {
+    check = fputs(buffer, tmp);
+    if (EOF == check) {
+      printf("Failed to write to temp file.\n");
+      fclose(tmp);
+      fclose(fp);
+      return -1;
+    }
+  } 
+  fclose(tmp);
+  fclose(fp);
+  // Write contents of temp file to stack file
+  tmp = fopen(tmpfilename, "r");
+  if (NULL == tmp) {
+    printf("Failed to open temp file for reading.\n");
+    return -1
+  }
+  fp = fopen(filename, "w");
+  if (NULL == fp) {
+    printf("Failed to open %s for writing.\n", filename);
+    return -1;
+  }
+  while (fgets(buffer, BUF_SIZE, tmp) != EOF) {
+    check = fputs(buffer, fp);
+    if (EOF == check) {
+      printf("Failed to write to %s\n", filename);
+      fclose(tmp);
+      fclose(fp);
+      return -1;
+    }
+  }
+  check = remove(tmpfilename);
+  if (0 != check) {
+    printf("Failed to delete temp file.\n");
+    return -1;
+  }
   return 0;
 }
 int print_top(char *filename) 
@@ -51,21 +107,19 @@ int print_top(char *filename)
   char buffer[BUF_SIZE];
 
   fp = fopen(filename, "r");
-  if (fp == NULL) {
+  if (NULL == fp) {
     printf("Failed to open file. Double check the file name.\n");
     return -1;
   }
   fgets(buffer, BUF_SIZE, fp);
   printf("%s", buffer);
   fclose(fp);
-
   return 0;
 }
 int swap_top(char *filename) 
 {
 
   printf("swap_top() not implemented yet...\n");
-
   return 0;
 }
 int main(int argc, char *argv[])
@@ -73,26 +127,26 @@ int main(int argc, char *argv[])
   int check;
 
   // Check for correct # of inputs
-  if (argc != 3) {
+  if (3 != argc) {
     printf("Incorrect number of inputs entered.\nPlease enter 2 inputs.\n");
     exit(-1);
   }
   // Identify stack command
   if (strcmp(argv[2], "pop") == 0) {
     check = pop(argv[1]);
-    if (check != 0) {
+    if (0 != check) {
       printf("Pop failed. See error message from pop above.\n");
       exit(-2);
     }
   } else if (strcmp(argv[2], "print_top") == 0) {
     check = print_top(argv[1]);
-    if (check != 0) {
+    if (0 != check) {
       printf("print_top failed. See error message from print_top above.\n");
       exit(-2);
     }
   } else if (strcmp(argv[2], "swap_top") == 0) {
     check = swap_top(argv[1]);
-    if (check != 0) {
+    if (0 != check) {
       printf("swap_top failed. See error message from swap_top above.\n");
       exit(-2);
     }
@@ -100,6 +154,5 @@ int main(int argc, char *argv[])
     printf("Incorrect command entered.\n");
     exit(-3);
   }
-
   return 0;
 }

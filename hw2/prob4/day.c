@@ -33,7 +33,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-static char *daytab[] = {
+static char daytab[2][13] = {
   { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 },
   { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
 };
@@ -50,7 +50,7 @@ void month_day(long year, long yearday, long *pmonth, long *pday)
 {
   int i, leap;
 
-  leap = year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+  leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
   for (i = 1; yearday > *(*(daytab + leap) + i); i++) {
     yearday -= *(*(daytab + leap) + i);
   }
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
       exit(-2);
     }
     month_day(year, yearday, &month, &day);
-    printf("%ld %ld", *pmonth, *pday);
+    printf("%ld %ld", month, day);
   } else if (4 == argc) {
     month = strtol(argv[2], NULL, 10);
     if (1 > month || 12 < month) {

@@ -23,7 +23,12 @@ void matrix_print ( Matrix * M );
 /* operations */
 Matrix * matrix_add ( Matrix * A, Matrix * B );
 Matrix * matrix_minor ( Matrix * M, int n );
-double matrix_det ( Matrix * M );
+double matrix_det(Matrix * M);
+int matrix_equal(Matrix *A, Matrix *B);     // return 1 if A == B (element wise) and 0 otherwise
+Matrix * matrix_scale(Matrix *M, double s); // return s * M, multiplying each element of M by s
+Matrix * matrix_transpose(Matrix *M);       // return the transpose of M
+Matrix * matrix_mult(Matrix *A, Matrix *B); // return A*B using matrix multiplication
+Matrix * matrix_power(Matrix *M, int n);    // return M^n = M * M * ... * M (n times)
 
 /* utilities */
 #define ASSERT(_cond_) {                                                          \
@@ -33,6 +38,7 @@ double matrix_det ( Matrix * M );
     exit ( -1 );                                                                  \
   }                                                                               \
 }
+Matrix * matrix_identity(int n);  // return the nxn identity matrix
 
 #define NL printf ( "\n" );
 

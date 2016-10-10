@@ -10,5 +10,6 @@ All programs perform some basic input error checking and will recommend a fix if
 * Type "./stack \<filename.csv\> \<"pop", "print_top", or "swap_top"\>" to run the "stack" program.
 
 ###Test notes
-All code has been tested on a Raspberry Pi 3 Model B running Raspbian.
-gcc version 4.9.2 was used to compile the code.
+* All code has been tested on a Raspberry Pi 3 Model B running Raspbian.
+* gcc version 4.9.2 was used to compile the code.
+* The Makefile with all warnings enabled. A warning about the use of "typenam" may display when compiling. The code will still work even with that warning.

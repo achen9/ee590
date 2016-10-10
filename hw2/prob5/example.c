@@ -1,3 +1,25 @@
+/* NAME
+ *  day.c
+ *
+ * DESCRIPTION
+ *  Runs library functions from matrix.c
+ *
+ * PARAMETERS
+ *  none
+ *
+ * RETURN
+ *  0 - from main()
+ * -1 - Incorrect number of inputs entered
+ *
+ * EXAMPLE
+ *  ./example
+ *
+ * NOTES
+ *  Compile using the makefile
+ * 
+ * Alex Z. Chen - 10/09/2016
+ * alexac9@uw.edu
+ */
 #include <stdio.h>
 #include "matrix.h"
 

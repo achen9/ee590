@@ -10,4 +10,6 @@ All programs perform some basic input error checking and will recommend a fix if
 * Type "./day \<year\> \<day of year\>" or "./day \<year\> \<month\> \<day\>" to run the "day" program.
 
 ###Test notes
+* All code has been tested on a Raspberry Pi 3 Model B running Raspbian.
+* gcc version 4.9.2 was used to compile the code.
 

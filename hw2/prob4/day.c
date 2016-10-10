@@ -48,7 +48,7 @@ long day_of_year(long year, long month, long day)
   leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
   if (day > *(*(daytab + leap) + month)) {
     printf("Month %ld does not have %ld days in year %ld.\n", month, day, year);
-    printf("Enter a day between 1 and %ld.\n", *(*(daytab + leap) + month));
+    printf("Enter a day between 1 and %d.\n", *(*(daytab + leap) + month));
     return -1;
   }
   for (i = 1; i < month; i++) {

@@ -39,40 +39,59 @@ static char daytab[2][13] = {
 };
 
 long day_of_year(long year, long month, long day);
-void month_day(long year, long yearday, long *pmonth, long *pday);
+long month_day(long year, long yearday, long *pmonth, long *pday);
 
 long day_of_year(long year, long month, long day)
 {
-  printf("day_of_year() not implemented yet...\n");
-  return 0;
+  long i, leap;
+
+  leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+  if (day > *(*(daytab + leap) + month)) {
+    printf("Month %ld does not have %ld days in year %ld.\n", month, day, year);
+    printf("Enter a day between 1 and %ld.\n", *(*(daytab + leap) + month));
+    return -1;
+  }
+  for (i = 1; i < month; i++) {
+    day += *(*(daytab + leap) + i);
+  }
+  return day;
 }
-void month_day(long year, long yearday, long *pmonth, long *pday)
+long month_day(long year, long yearday, long *pmonth, long *pday)
 {
   int i, leap;
 
   leap = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+  if (!leap && 365 < yearday) {
+    printf("Year %ld was not a leap year.\nEnter a yearday between 1 and 365.\n", year);
+    return -1;
+  }
   for (i = 1; yearday > *(*(daytab + leap) + i); i++) {
     yearday -= *(*(daytab + leap) + i);
   }
   *pmonth = i;
   *pday = yearday;
+  return 0;
 }
 int main(int argc, char *argv[])
 {
-  long year = 0, month = 0, day = 0, yearday = 0;
+  long year = 0, month = 0, day = 0, yearday = 0, check;
   char *endp;
 
   year = strtol(argv[1], &endp, 10);
   if ('\0' != *endp) {
     printf("Invalid year entered.\nEnter a year between %ld and %ld", LONG_MIN, LONG_MAX);
   }
+  // Decide to use day_of_year() or month_day()
   if (3 == argc) {
     yearday = strtol(argv[2], NULL, 10);
     if (1 > yearday || 366 < yearday) {
       printf("Invalid yearday entered.\nEnter a yearday between 1 and 366.\n");
       exit(-2);
     }
-    month_day(year, yearday, &month, &day);
+    check = month_day(year, yearday, &month, &day);
+    if (0 != check) {
+      exit(-2);
+    }
     printf("%ld %ld", month, day);
   } else if (4 == argc) {
     month = strtol(argv[2], NULL, 10);
@@ -86,6 +105,9 @@ int main(int argc, char *argv[])
       exit(-2);
     }
     yearday = day_of_year(year, month, day);
+    if (0 > yearday) {
+      exit(-2);
+    }
     printf("%ld", yearday);
   } else {
     printf("Incorrect number of inputs entered.\n");

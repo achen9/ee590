@@ -44,7 +44,7 @@ $(TARGET): $(OBJECTS)
 # This rule says how to make it. Note that $< matches the _first_ dependency,
 # which is the c file, so this command wouldn't work if $(HEADERS) came first.
 %.o: %.c $(HEADERS)
-	$(CC) -c $< -Wall
+	$(CC) -c $< -Wall -std=c99
 
 # As usual, here's a way to clean up.
 clean:

@@ -1,5 +1,5 @@
 /* NAME
- *  day.c
+ *  example.c
  *
  * DESCRIPTION
  *  Runs library functions from matrix.c
@@ -9,7 +9,6 @@
  *
  * RETURN
  *  0 - from main()
- * -1 - Incorrect number of inputs entered
  *
  * EXAMPLE
  *  ./example
@@ -45,15 +44,28 @@ int main ( int argc, char * argv[] ) {
 
   printf("Beginning matrix_identity() test...\n");
   C = matrix_identity(4);
-  matrix_print(C);
+  matrix_print(C); NL;
 
   printf("Beginning matrix_scale() test...\n");
   D = matrix_scale(A, 2.5);
   matrix_print(A); NL;
   matrix_print(D); NL;
+  matrix_destroy(D);
   D = matrix_scale(C, 0.0);
   matrix_print(C); NL;
-  matrix_print(D);
+  matrix_print(D); NL;
+  matrix_destroy(D);
+
+  printf("Beginning matrix_transpose() test...\n");
+  matrix_print(A); NL;
+  D = matrix_transpose(A);
+  matrix_print(D); NL;
+  matrix_destroy(C);
+  matrix_destroy(D);
+  C = matrix_random(2, 4);
+  D = matrix_transpose(C);
+  matrix_print(C); NL; 
+  matrix_print(D); NL;
 
   matrix_destroy(A);
   matrix_destroy(B);

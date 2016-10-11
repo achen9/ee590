@@ -103,7 +103,7 @@ Matrix * matrix_identity(int n)
 Matrix * matrix_scale(Matrix *M, double s)
 {
   ASSERT(NULL != M);
-  Matrix * sM = matrix_new(M->rows, M->columns);
+  Matrix *sM = matrix_new(M->rows, M->columns);
 
   for (int i = 0; i < sM->rows; i++) {
     for (int j = 0; j < sM->columns; j++) {
@@ -112,3 +112,16 @@ Matrix * matrix_scale(Matrix *M, double s)
   }
   return sM;
 }
+Matrix * matrix_transpose(Matrix *M)
+{
+  ASSERT(NULL != M);
+  Matrix *T = matrix_new(M->columns, M->rows);
+
+  for (int i = 0; i < M->rows; i++) {
+    for (int j = 0; j < M->columns; j++) {
+      T->value[j * T->columns + i] = M->value[i * M->columns + j];
+    }
+  }
+  return T;
+}
+

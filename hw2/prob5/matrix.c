@@ -143,7 +143,7 @@ Matrix * matrix_power(Matrix *M, int n)
 {
   ASSERT(0 <= n);
   ASSERT(M->rows == M->columns);
-  Matrix *P;
+  Matrix *P, *prev;
 
   if (0 == n) {
     P = matrix_identity(M->rows);
@@ -156,11 +156,9 @@ Matrix * matrix_power(Matrix *M, int n)
     }
   }  
   for (int i = 1; i < n; i++) {
-    for (int j = 0; j < P->rows; j++) {
-      for (int k = 0; k < P->columns; k++) {
-        P->value[j * P->columns + k] *= M->value[j * M->columns + k];
-      }
-    }
+    prev = P;
+    P = matrix_mult(P, M);
+    matrix_destroy(prev);
   }
   return P;
 }

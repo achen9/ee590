@@ -79,7 +79,7 @@ int main ( int argc, char * argv[] ) {
   printf("Beginning matrix_power() test...\n");
   matrix_destroy(B);
   matrix_print(A); NL;
-  B = matrix_power(A, 31);
+  B = matrix_power(A, 5);
   matrix_print(B); NL;
   matrix_destroy(B);
   B = matrix_power(A, 0);

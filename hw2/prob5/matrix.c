@@ -146,7 +146,7 @@ Matrix * matrix_power(Matrix *M, int n)
   Matrix *P;
 
   if (0 == n) {
-    P = matrix_identity();
+    P = matrix_identity(M->rows;);
   } else {
     P = matrix_new(M->rows, M->columns);
     for (int i = 0; i < M->rows; i++) {
@@ -157,7 +157,7 @@ Matrix * matrix_power(Matrix *M, int n)
   }  
   for (int i = 1; i < n; i++) {
     for (int j = 0; j < P->rows; j++) {
-      for (int k = 0; k < p->columns; k++) {
+      for (int k = 0; k < P->columns; k++) {
         P->value[j * P->columns + k] *= M->value[j * M->columns + k];
       }
     }

@@ -7,7 +7,7 @@
 CC = gcc
 
 # Here we define the files that are the inputs to our project
-SOURCES = matrix.c matrix_operations.c matrix_file_io.o example.c
+SOURCES = matrix.c matrix_operations.c matrix_file_io.c example.c
 HEADERS = matrix.h
 
 # And here are the outputs. The second one is a substitution of the form

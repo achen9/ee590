@@ -83,5 +83,19 @@ int matrix_equal(Matrix *A, Matrix *B)
   }
   return 1;
 }
+Matrix * matrix_identity(int n)
+{ 
+  Matrix * M = matrix_new(n, n);
+
+  for (int i = 0; i < M->rows; i++) {
+    for (int j = 0; j < M->columns; j++) {
+      if (i == j) {
+        M->value[i * M->columns + j] = 1.0;
+      } else {
+        M->value[i * M->columns + j] = 0.0;
+      }
+    }
+  }
+  return M;
 
 }

@@ -42,6 +42,10 @@ int main ( int argc, char * argv[] ) {
   check = matrix_equal(A, A);
   printf("A == A? %d\n\n", check);
 
+  printf("Beginning matrix_identity() test...\n");
+  C = matrix_identity(4);
+  matrix_print(C);
+
 
   matrix_destroy(A);
   matrix_destroy(B);

@@ -71,6 +71,7 @@ Matrix * matrix_random(int rows, int columns)
 }
 int matrix_equal(Matrix *A, Matrix *B)
 {
+  ASSERT(NULL != A || NULL != B);
   if ((A->rows != B->rows) || (A->columns != B->columns)) {
     return 0;
   }
@@ -85,6 +86,7 @@ int matrix_equal(Matrix *A, Matrix *B)
 }
 Matrix * matrix_identity(int n)
 { 
+  ASSERT(n > 0);
   Matrix * M = matrix_new(n, n);
 
   for (int i = 0; i < M->rows; i++) {
@@ -97,5 +99,16 @@ Matrix * matrix_identity(int n)
     }
   }
   return M;
+}
+Matrix * matrix_scale(Matrix *M, double s)
+{
+  ASSERT(NULL != M);
+  Matrix * sM = matrix_new(M->rows, M->columns);
 
+  for (int i = 0; i < sM->rows; i++) {
+    for (int j = 0; j < sM->columns; j++) {
+      sM->value[i * sM->columns + j] = M->value[i * M->columns + j] * s;
+    }
+  }
+  return sM;
 }

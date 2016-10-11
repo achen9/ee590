@@ -25,9 +25,10 @@
 
 int main ( int argc, char * argv[] ) {
 
-  Matrix * A = matrix_new ( 2, 2 ),
-         * B = matrix_random ( 4, 4 ),
-         * C;
+  Matrix * A = matrix_new(2, 2),
+    *B = matrix_random(4, 4),
+    *C,
+    *D;
   int check;
 
   matrix_set ( A, 0, 0, 1 ); matrix_set ( A, 0, 1, 2 );
@@ -46,10 +47,18 @@ int main ( int argc, char * argv[] ) {
   C = matrix_identity(4);
   matrix_print(C);
 
+  printf("Beginning matrix_scale() test...\n");
+  D = matrix_scale(A, 2.5);
+  matrix_print(A); NL;
+  matrix_print(D); NL;
+  D = matrix_scale(C, 0.0);
+  matrix_print(C); NL;
+  matrix_print(D);
 
   matrix_destroy(A);
   matrix_destroy(B);
   matrix_destroy(C);
+  matrix_destroy(D);
 
   return 0;
 

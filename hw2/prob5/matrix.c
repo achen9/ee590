@@ -77,7 +77,7 @@ int matrix_equal(Matrix *A, Matrix *B)
   }
   for (int i = 0; i < A->rows; i++) {
     for (int j = 0; j < A->columns; j++) {
-      if (A->value[i * A->columns + j] != B->value[i * B->columns + j]) {
+      if (matrix_get(A, i, j) != matrix_get(B, i, j)) {
         return 0;
       }
     }
@@ -92,9 +92,9 @@ Matrix * matrix_identity(int n)
   for (int i = 0; i < M->rows; i++) {
     for (int j = 0; j < M->columns; j++) {
       if (i == j) {
-        M->value[i * M->columns + j] = 1.0;
+        matrix_set(M, i, j, 1.0);
       } else {
-        M->value[i * M->columns + j] = 0.0;
+        matrix_set(M, i, j, 0.0);
       }
     }
   }
@@ -107,7 +107,7 @@ Matrix * matrix_scale(Matrix *M, double s)
 
   for (int i = 0; i < sM->rows; i++) {
     for (int j = 0; j < sM->columns; j++) {
-      sM->value[i * sM->columns + j] = M->value[i * M->columns + j] * s;
+      matrix_set(sM, i, j, matrix_get(M, i, j)*s);
     }
   }
   return sM;
@@ -119,7 +119,7 @@ Matrix * matrix_transpose(Matrix *M)
 
   for (int i = 0; i < M->rows; i++) {
     for (int j = 0; j < M->columns; j++) {
-      T->value[j * T->columns + i] = M->value[i * M->columns + j];
+      matrix_set(T, i, j) = matrix_get(M, j, i);
     }
   }
   return T;
@@ -131,9 +131,9 @@ Matrix * matrix_mult(Matrix *A, Matrix *B)
 
   for (int i = 0; i < M->rows; i++) {
     for (int j = 0; j < M->columns; j++) {
-      M->value[i * M->columns + j] = 0.0;
+      matrix_set(M, i, j, 0.0);
       for (int k = 0; k < A->columns; k++) {
-        M->value[i * M->columns + j] += A->value[i * A->columns + k] * B->value[k * B->columns + j];
+        matrix_set(M, i, j, matrix_get(M, i, j) + (matrix_get(A, i, k) * matrix_get(B, k, j)));
       }
     }
   }
@@ -151,7 +151,7 @@ Matrix * matrix_power(Matrix *M, int n)
     P = matrix_new(M->rows, M->columns);
     for (int i = 0; i < M->rows; i++) {
       for (int j = 0; j < M->columns; j++) {
-        P->value[i * P->columns + j] = M->value[i * M->columns + j];
+        matrix_set(P, i, j, matrix_get(M, i, j));
       }
     }
   }  

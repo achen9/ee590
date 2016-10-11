@@ -119,7 +119,7 @@ Matrix * matrix_transpose(Matrix *M)
 
   for (int i = 0; i < M->rows; i++) {
     for (int j = 0; j < M->columns; j++) {
-      matrix_set(T, i, j, matrix_get(M, j, i));
+      matrix_set(T, j, i, matrix_get(M, i, j));
     }
   }
   return T;

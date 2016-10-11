@@ -124,4 +124,18 @@ Matrix * matrix_transpose(Matrix *M)
   }
   return T;
 }
+Matrix * matrix_mult(Matrix *A, Matrix *B)
+{
+  ASSERT(A->columns == B->rows);
+  Matrix *M = matrix_new(A->rows, B->columns);
 
+  for (int i = 0; i < M->rows; i++) {
+    for (int j = 0; j < M->columns; j++) {
+      M->value[i * M->columns + j] = 0.0;
+      for (int k = 0; k < A->columns; k++) {
+        M->value[i * M->columns + j] += A->value[i * A->columns + k] * B->value[k * B->columns + j];
+      }
+    }
+  }
+  return M;
+}

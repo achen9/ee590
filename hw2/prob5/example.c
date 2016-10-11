@@ -66,6 +66,15 @@ int main ( int argc, char * argv[] ) {
   D = matrix_transpose(C);
   matrix_print(C); NL; 
   matrix_print(D); NL;
+  matrix_destroy(B);
+  matrix_destroy(D);
+
+  printf("Beginning matrix_mult() test...\n");
+  B = matrix_random(4, 1);
+  D = matrix_mult(C, B);
+  matrix_print(C); NL;
+  matrix_print(B); NL;
+  matrix_print(D); NL;
 
   matrix_destroy(A);
   matrix_destroy(B);

@@ -139,3 +139,28 @@ Matrix * matrix_mult(Matrix *A, Matrix *B)
   }
   return M;
 }
+Matrix * matrix_power(Matrix *M, int n)
+{
+  ASSERT(0 <= n);
+  ASSERT(M->rows == M->columns);
+  Matrix *P;
+
+  if (0 == n) {
+    P = matrix_identity();
+  } else {
+    P = matrix_new(M->rows, M->columns);
+    for (int i = 0; i < M->rows; i++) {
+      for (int j = 0; j < M->columns; j++) {
+        P->value[i * P->columns + j] = M->value[i * M->columns + j];
+      }
+    }
+  }  
+  for (int i = 1; i < n; i++) {
+    for (int j = 0; j < P->rows; j++) {
+      for (int k = 0; k < p->columns; k++) {
+        P->value[j * P->columns + k] *= M->value[j * M->columns + k];
+      }
+    }
+  }
+  return P;
+}

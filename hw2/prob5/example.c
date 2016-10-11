@@ -85,7 +85,8 @@ int main ( int argc, char * argv[] ) {
   B = matrix_power(A, 0);
   matrix_print(B); NL;
   matrix_destroy(B);
-  B = matrix_power(A, 1); NL;
+  B = matrix_power(A, 1); 
+  matrix_print(B);  NL;
 
 
   matrix_destroy(A);

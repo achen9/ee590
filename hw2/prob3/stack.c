@@ -147,6 +147,7 @@ int swap_top(char *filename)
   }
   fgets_check = fgets(buffer, BUF_SIZE, fp);
   if (NULL == fgets_check) {
+    printf("%s", stack_top);
     return 0; // Stack only has one element in it.
   }
   // Store modified stack in temp file

@@ -68,5 +68,20 @@ Matrix * matrix_random(int rows, int columns)
     }
   }
   return M;
+}
+int matrix_equal(Matrix *A, Matrix *B)
+{
+  if ((A->rows != B->rows) || (A->columns != B->columns)) {
+    return 0;
+  }
+  for (int i = 0; i < A->rows; i++) {
+    for (int j = 0; j < A->columns; j++) {
+      if (A->value[i * A->columns + j] != B->value[i * B->columns + j]) {
+        return 0;
+      }
+    }
+  }
+  return 1;
+}
 
 }

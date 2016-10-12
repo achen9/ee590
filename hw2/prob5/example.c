@@ -87,6 +87,16 @@ int main ( int argc, char * argv[] ) {
   matrix_destroy(B);
   B = matrix_power(A, 1); 
   matrix_print(B);  NL;
+  matrix_destroy(B);
+  matrix_destroy(C);
+
+  printf("Beginning matrix_inverse() test...\n");
+  B = matrix_random(5, 5);
+  C = matrix_inverse(A);
+  matrix_print(C); NL;
+  matrix_destroy(C);
+  C = matrix_inverse(B);
+  matrix_print(C);
 
 
   matrix_destroy(A);

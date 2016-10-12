@@ -162,3 +162,103 @@ Matrix * matrix_power(Matrix *M, int n)
   }
   return P;
 }
+Matrix * matrix_inverse(Matrix *M)
+{
+  ASSERT(NULL != M);
+  ASSERT(M->rows == M->columns);
+  Matrix *P, *Pnext, *invA, *B, *C, *D, *DCAB, *tmp, *prev;
+  double det;
+
+  det = matrix_det(M);
+  if (0.0 == det) {
+    printf("Matrix is singular. Determinant is zero.\n");
+    exit(-1);
+  } else if (1 == M->rows) {
+    P = matrix_new(M->rows, M->columns);
+    matrix_set(P, 0, 0, 1.0 / matrix_get(M, 0, 0));
+  } else {
+    Pnext = matrix_new(M->rows - 1, M->columns - 1);
+    for (int i = 0; i < Pnext->rows; i++) {
+      for (int j = 0; j < Pnext->columns; j++) {
+        matrix_set(Pnext, i, j, matrix_get(M, i, j));
+      }
+    }
+    invA = matrix_inverse(Pnext);
+    matrix_destroy(Pnext);
+    B = matrix_new(M->rows - 1, 1);
+    C = matrix_new(1, M->columns - 1);
+    D = matrix_new(1, 1);
+    for (int i = 0; i < M->rows - 1; i++) {
+      matrix_set(B, i, 0, matrix_get(M, i, M->columns - 1));
+      matrix_set(C, 0, i, matrix_get(M, M->rows - 1, i));
+    }
+    matrix_set(D, 0, 0, matrix_get(M, M->rows - 1, M->columns - 1));
+    P = matrix_new(M->rows, M->columns);
+    // Compute DCAB = inv(D - C*inv(A)*B)
+    DCAB = matrix_mult(invA, B);
+    prev = DCAB;
+    DCAB = matrix_mult(C, prev);
+    matrix_destroy(prev);
+    prev = DCAB;
+    DCAB = matrix_scale(prev, -1.0);
+    matrix_destroy(prev);
+    prev = DCAB;
+    DCAB = matrix_add(D, prev);
+    matrix_destroy(prev);
+    prev = DCAB;
+    matrix_set(DCAB, 0, 0, 1.0 / matrix_get(prev, 0, 0));
+    matrix_destroy(prev);
+    // Compute top left term: inv(A) + inv(A)*B*DCAB*C*inv(A)
+    tmp = matrix_mult(DCAB, C);
+    prev = tmp;
+    tmp = matrix_mult(prev, invA);
+    matrix_destroy(prev);
+    prev = tmp;
+    tmp = matrix_mult(B, prev);
+    matrix_destroy(prev);
+    prev = tmp;
+    tmp = matrix_mult(invA, prev);
+    matrix_destroy(prev);
+    prev = tmp;
+    tmp = matrix_add(invA, prev);
+    matrix_destroy(prev);
+    for (int i = 0; i < tmp->rows; i++) {
+      for (int j = 0; j < tmp->columns; j++) {
+        matrix_set(P, i, j, matrix_get(tmp, i, j));
+      }
+    }
+    matrix_destroy(tmp);
+    // Compute top right term: -inv(A)*B*DCAB
+    tmp = matrix_mult(B, DCAB);
+    prev = tmp;
+    tmp = matrix_mult(invA, prev);
+    matrix_destroy(prev);
+    prev = tmp;
+    tmp = matrix_scale(prev, -1.0);
+    matrix_destroy(prev);
+    for (int i = 0; i < tmp->rows; i++) {
+      matrix_set(P, i, P->columns - 1, matrix_get(tmp, i, 0));
+    }
+    matrix_destroy(tmp);
+    // Compute bottom left term: -DCAB*C*inv(A)
+    tmp = matrix_mult(DCAB, C);
+    prev = tmp;
+    tmp = matrix_mult(prev, invA);
+    matrix_destroy(prev);
+    prev = tmp;
+    tmp = matrix_scale(prev, -1.0);
+    matrix_destroy(prev);
+    for (int i = 0; i < tmp->columns; i++) {
+      matrix_set(P, P->rows - 1, i, matrix_get(tmp, 0, i));
+    }
+    matrix_destroy(tmp);
+    // Compute bottom right term: DCAB
+    matrix_set(P, P->rows - 1, P->columns - 1, matrix_get(DCAB, 0, 0));
+    matrix_destoy(DCAB);
+    matrix_destroy(invA);
+    matrix_destroy(B);
+    matrix_destroy(C);
+    matrix_destroy(D);
+  }
+  return P;
+}

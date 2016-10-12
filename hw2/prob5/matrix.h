@@ -29,6 +29,7 @@ Matrix * matrix_scale(Matrix *M, double s); // return s * M, multiplying each el
 Matrix * matrix_transpose(Matrix *M);       // return the transpose of M
 Matrix * matrix_mult(Matrix *A, Matrix *B); // return A*B using matrix multiplication
 Matrix * matrix_power(Matrix *M, int n);    // return M^n = M * M * ... * M (n times)
+Matrix * matrix_inverse(Matrix *M);         // returns the inverse of M
 
 /* utilities */
 #define ASSERT(_cond_) {                                                          \

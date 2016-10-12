@@ -205,9 +205,7 @@ Matrix * matrix_inverse(Matrix *M)
     prev = DCAB;
     DCAB = matrix_add(D, prev);
     matrix_destroy(prev);
-    prev = DCAB;
-    matrix_set(DCAB, 0, 0, 1.0 / matrix_get(prev, 0, 0));
-    matrix_destroy(prev);
+    matrix_set(DCAB, 0, 0, 1.0 / matrix_get(DCAB, 0, 0));
     // Compute top left term: inv(A) + inv(A)*B*DCAB*C*inv(A)
     tmp = matrix_mult(DCAB, C);
     prev = tmp;

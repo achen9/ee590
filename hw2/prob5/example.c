@@ -96,7 +96,7 @@ int main ( int argc, char * argv[] ) {
   matrix_print(C); NL;
   matrix_destroy(C);
   C = matrix_inverse(B);
-  matrix_print(C);
+  matrix_print(C); NL;
 
   matrix_destroy(A);
   matrix_destroy(B);

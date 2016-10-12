@@ -117,7 +117,7 @@ int main ( int argc, char * argv[] ) {
   matrix_print(D); NL;
   matrix_destroy(D);
   D = matrix_mult(B, C);
-  printf("B*C == I? %n", matrix_equal(D, I));
+  printf("B*C == I? %d\n", matrix_equal(D, I));
   matrix_print(D); NL;
 
   matrix_destroy(A);

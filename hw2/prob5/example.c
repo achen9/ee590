@@ -93,9 +93,11 @@ int main ( int argc, char * argv[] ) {
   printf("Beginning matrix_inverse() test...\n");
   B = matrix_random(5, 5);
   C = matrix_inverse(A);
+  matrix_print(A); NL;
   matrix_print(C); NL;
   matrix_destroy(C);
   C = matrix_inverse(B);
+  matrix_print(B); NL;
   matrix_print(C); NL;
 
   matrix_destroy(A);

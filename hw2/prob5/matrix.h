@@ -24,7 +24,6 @@ void matrix_print ( Matrix * M );
 Matrix * matrix_add ( Matrix * A, Matrix * B );
 Matrix * matrix_minor ( Matrix * M, int n );
 double matrix_det(Matrix * M);
-int matrix_equal(Matrix *A, Matrix *B);     // return 1 if A == B (element wise) and 0 otherwise
 Matrix * matrix_scale(Matrix *M, double s); // return s * M, multiplying each element of M by s
 Matrix * matrix_transpose(Matrix *M);       // return the transpose of M
 Matrix * matrix_mult(Matrix *A, Matrix *B); // return A*B using matrix multiplication
@@ -40,6 +39,7 @@ Matrix * matrix_inverse(Matrix *M);         // returns the inverse of M
   }                                                                               \
 }
 Matrix * matrix_identity(int n);  // return the nxn identity matrix
+int matrix_equal(Matrix *A, Matrix *B);     // return 1 if A == B (element wise) and 0 otherwise
 
 #define NL printf ( "\n" );
 

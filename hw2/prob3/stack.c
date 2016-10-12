@@ -231,19 +231,16 @@ int main(int argc, char *argv[])
     check = pop(argv[1]);
     if (0 != check) {
       printf("Pop failed. See error message from pop above.\n");
-      exit(-2);
     }
   } else if (strcmp(argv[2], "print_top") == 0) {
     check = print_top(argv[1]);
     if (0 != check) {
       printf("print_top failed. See error message from print_top above.\n");
-      exit(-2);
     }
   } else if (strcmp(argv[2], "swap_top") == 0) {
     check = swap_top(argv[1]);
     if (0 != check) {
       printf("swap_top failed. See error message from swap_top above.\n");
-      exit(-2);
     }
   } else {
     printf("Incorrect command entered.\n");

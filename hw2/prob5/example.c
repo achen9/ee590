@@ -113,11 +113,11 @@ int main ( int argc, char * argv[] ) {
   D = matrix_mult(C, B);
   matrix_print(B); NL;
   matrix_print(C); NL;
-  printf("C*B == I? %d", matrix_equal(D, I));
+  printf("C*B == I? %d\n", matrix_equal(D, I));
   matrix_print(D); NL;
   matrix_destroy(D);
   D = matrix_mult(B, C);
-  printf("B*C == I? %d", matrix_equal(D, I));
+  printf("B*C == I? %n", matrix_equal(D, I));
   matrix_print(D); NL;
 
   matrix_destroy(A);

@@ -12,4 +12,5 @@ All programs perform some basic input error checking and will recommend a fix if
 ###Test notes
 * All code has been tested on a Raspberry Pi 3 Model B running Raspbian.
 * gcc version 4.9.2 was used to compile the code.
+* Valgrind version 3.7.0 was used to check for memory leaks.
 

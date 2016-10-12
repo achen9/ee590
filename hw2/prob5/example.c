@@ -27,7 +27,8 @@ int main ( int argc, char * argv[] ) {
   Matrix * A = matrix_new(2, 2),
     *B = matrix_random(4, 4),
     *C,
-    *D;
+    *D,
+    *I;
   int check;
 
   matrix_set ( A, 0, 0, 1 ); matrix_set ( A, 0, 1, 2 );
@@ -75,6 +76,7 @@ int main ( int argc, char * argv[] ) {
   matrix_print(C); NL;
   matrix_print(B); NL;
   matrix_print(D); NL;
+  matrix_destroy(D);
 
   printf("Beginning matrix_power() test...\n");
   matrix_destroy(B);
@@ -91,19 +93,38 @@ int main ( int argc, char * argv[] ) {
   matrix_destroy(C);
 
   printf("Beginning matrix_inverse() test...\n");
-  B = matrix_random(5, 5);
+  I = matrix_identity(A->rows);
   C = matrix_inverse(A);
+  D = matrix_mult(C, A);
   matrix_print(A); NL;
   matrix_print(C); NL;
+  printf("C*A == I? %d\n", matrix_equal(D, I));
+  matrix_print(D); NL;
+  matrix_destroy(D);
+  D = matrix_mult(A, C);
+  printf("A*C == I? %d\n", matrix_equal(D, I));
+  matrix_print(D); NL;
   matrix_destroy(C);
+  matrix_destroy(D);
+  matrix_destroy(I);
+  B = matrix_from_file("data/m1.mat");
+  I = matrix_identity(B->rows);
   C = matrix_inverse(B);
+  D = matrix_mult(C, B);
   matrix_print(B); NL;
   matrix_print(C); NL;
+  printf("C*B == I? %d", matrix_equal(D, I));
+  matrix_print(D); NL;
+  matrix_destroy(D);
+  D = matrix_mult(B, C);
+  printf("B*C == I? %d", matrix_equal(D, I));
+  matrix_print(D); NL;
 
   matrix_destroy(A);
   matrix_destroy(B);
   matrix_destroy(C);
   matrix_destroy(D);
+  matrix_destroy(I);
 
   return 0;
 

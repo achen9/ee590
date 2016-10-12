@@ -254,7 +254,7 @@ Matrix * matrix_inverse(Matrix *M)
     matrix_destroy(tmp);
     // Compute bottom right term: DCAB
     matrix_set(P, P->rows - 1, P->columns - 1, matrix_get(DCAB, 0, 0));
-    matrix_destoy(DCAB);
+    matrix_destroy(DCAB);
     matrix_destroy(invA);
     matrix_destroy(B);
     matrix_destroy(C);

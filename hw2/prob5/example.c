@@ -98,7 +98,6 @@ int main ( int argc, char * argv[] ) {
   C = matrix_inverse(B);
   matrix_print(C);
 
-
   matrix_destroy(A);
   matrix_destroy(B);
   matrix_destroy(C);

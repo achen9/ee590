@@ -36,7 +36,7 @@ all: $(SOURCES) $(TARGET)
 # the target from the objects. $@ refers to whatever is before the ":". the
 # -o flag tells gcc the name of the binary (so it isn't a.out).
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@ -Wall
+	$(CC) $(OBJECTS) -o $@
 
 # Here we define a rule schema. It says how to make any object file from its
 # source. Here % is a stem wildcard that matches any target name. Because of

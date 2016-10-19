@@ -33,11 +33,13 @@ public:
   fraction sub(const fraction &f) const;
   fraction mult(const fraction &f) const;
   fraction div(const fraction &f) const;
+  fraction negate(void) const;
   
   inline fraction operator+(const fraction &f) { return add(f); }
   inline fraction operator-(const fraction &f) { return sub(f); }
   inline fraction operator*(const fraction &f) { return mult(f); }
   inline fraction operator/(const fraction &f) { return div(f); }
+  inline fraction operator-(void) { return negate(); }
 
 private:
   int numerator;

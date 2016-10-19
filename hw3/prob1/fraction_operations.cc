@@ -75,3 +75,14 @@ fraction fraction::div(const fraction &f) const {
   quotient.set_den(den() * f.num());
   return quotient.reduce();
 }
+fraction fraction::negate(void) const {
+  fraction negative = 1;
+  if (0 > den()) {
+    negative.set_num(num());
+    negative.set_den(-den());
+  } else {
+    negative.set_num(-num());
+    negative.set_den(den());
+  }
+  return negative;
+}

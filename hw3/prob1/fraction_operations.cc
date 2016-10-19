@@ -48,3 +48,30 @@ fraction fraction::reduce(void) const {
   fr.set_den(den() / gcd);
   return fr;
 }
+fraction fraction::add(const fraction &f) const {
+  fraction sum = 1;
+  sum.set_num(f.den() * num() + den() * f.num());
+  sum.set_den(den() * f.den());
+  return sum.reduce();
+}
+fraction fraction::sub(const fraction &f) const {
+  fraction difference = 1;
+  difference.set_num(f.den() * num() - den() * f.num());
+  difference.set_den(den() * f.den());
+  return difference.reduce();
+}
+fraction fraction::mult(const fraction &f) const {
+  fraction product = 1;
+  product.set_num(num() * f.num());
+  product.set_den(den() * f.den());
+  return product.reduce();
+}
+fraction fraction::div(const fraction &f) const {
+  fraction quotient = 1;
+  if (0 == f.num()) {
+    throw fraction_exception("Attempted to divide by zero.");
+  }
+  quotient.set_num(num() * f.den());
+  quotient.set_den(den() * f.num());
+  return quotient.reduce();
+}

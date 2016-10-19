@@ -29,6 +29,15 @@ public:
 
   // Fraction Operations
   fraction reduce(void) const;
+  fraction add(const fraction &f) const;
+  fraction sub(const fraction &f) const;
+  fraction mult(const fraction &f) const;
+  fraction div(const fraction &f) const;
+  
+  inline fraction operator+(const fraction &f) { return add(f); }
+  inline fraction operator-(const fraction &f) { return sub(f); }
+  inline fraction operator*(const fraction &f) { return mult(f); }
+  inline fraction operator/(const fraction &f) { return div(f); }
 
 private:
   int numerator;

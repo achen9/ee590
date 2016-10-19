@@ -16,6 +16,7 @@ public:
 
   // Copy constructor
   fraction(const fraction &f);
+  fraction& operator=(const fraction &other);
 
   // Getters
   inline int numerator(void) const { return num; }

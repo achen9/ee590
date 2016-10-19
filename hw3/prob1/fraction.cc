@@ -33,3 +33,10 @@ fraction::fraction(const fraction &f) {
   num = f.num;
   den = f.den;
 }
+fraction &fraction::operator=(const fraction &other) {
+  if (this != &other) {
+    num = other.num;
+    den = other.den;
+  }
+  return *this;
+}

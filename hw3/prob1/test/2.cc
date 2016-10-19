@@ -12,10 +12,18 @@ int main ( int argc, char * argv[] ) {
   fraction x2(x1);
   ASSERT(3 == x2.numerator() && 4 == x2.denominator());
 
-  // TEST 2: Check if both numerator and denominator are negative, they become positive
+  // Test 2: Check if '=' operator overload works on positive values
+  fraction x3 = x1;
+  ASSERT(3 == x3.numerator() && 4 == x3.denominator());
+
+  // TEST 3: Check if -2/-30 can be assigned to the fraction
   fraction y1(-2, -30);
   fraction y2(y1);
   ASSERT(-2 == y2.numerator() && -30 == y2.denominator());
+
+  // TEST 4: Check if '=' operator overload works on negative values
+  fraction y3 = y1;
+  ASSERT(-2 == y3.numerator() && -30 == y3.denominator());
   
   SUCCEED;
 }

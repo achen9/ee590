@@ -23,20 +23,20 @@
 #include <math.h>
 #include "fraction.hh"
 
-fraction::fraction(int n, int d) : num(n), den(d) {
+fraction::fraction(int n, int d) : numerator(n), denominator(d) {
   if (0 == d) {
     throw fraction_exception("Attempted to assign 0 to the denominator.");
   } 
 }
 fraction::~fraction() {}
 fraction::fraction(const fraction &f) {
-  num = f.num;
-  den = f.den;
+  numerator = f.numerator;
+  denominator = f.denominator;
 }
 fraction &fraction::operator=(const fraction &other) {
   if (this != &other) {
-    num = other.num;
-    den = other.den;
+    numerator = other.numerator;
+    denominator = other.denominator;
   }
   return *this;
 }

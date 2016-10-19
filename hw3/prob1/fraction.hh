@@ -12,6 +12,7 @@ class fraction {
 public:
   // Constructors and destructors
   fraction(int n, int d);
+  fraction(int w) : fraction(w, 1) {}
   ~fraction();
 
   // Copy constructor
@@ -19,10 +20,10 @@ public:
   fraction& operator=(const fraction &other);
 
   // Getters
-  inline int numerator(void) const { return num; }
-  inline int denominator(void) const { return den; }
+  inline int num(void) const { return numerator; }
+  inline int den(void) const { return denominator; }
 
 private:
-  int num;
-  int den;
+  int numerator;
+  int denominator;
 };

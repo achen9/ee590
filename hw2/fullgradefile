@@ -1,0 +1,192 @@
+
+
+################ STUDENT IS: wk2_repos_for_grade/achen9 ###############
+
+
+######## PROBLEM 3a STACK #######
+INPUT : ./stack q3a.csv print_top
+OUTPUT:  4
+
+ANSWER:  4
+Q3a stack SCORE:  2
+
+
+######## PROBLEM 3b STACK #######
+INPUT : ./stack q3a.csv pop
+OUTPUT:  4
+
+ANSWER:  4
+Q3b stack SCORE:  2
+
+
+######## PROBLEM 3c STACK #######
+INPUT : ./stack q3a.csv swap_top
+OUTPUT:  abc
+
+123
+blabla
+
+ANSWER:  abc
+
+123
+blabla
+Q3c stack SCORE:  2
+
+
+######## PROBLEM 3d STACK #######
+INPUT : ./stack q3a.csv pop
+OUTPUT:  abc
+
+ANSWER:  abc
+Q3d stack SCORE:  2
+
+
+######## PROBLEM 4a DAY #######
+INPUT : ./day 1972 45
+OUTPUT:  2 14
+ANSWER:  2 14
+Q4a day SCORE:  2
+
+
+######## PROBLEM 4b DAY #######
+INPUT : ./day 2005 140
+OUTPUT:  5 20
+ANSWER:  5 20
+Q4b day SCORE:  2
+
+
+######## PROBLEM 4c DAY #######
+INPUT : ./day 1954 10 31
+OUTPUT:  304
+ANSWER:  304
+Q4c day SCORE:  2
+
+
+######## PROBLEM 4d DAY #######
+INPUT : ./day 1930 7 1
+OUTPUT:  182
+ANSWER:  182
+Q4d day SCORE:  2
+
+
+######## PROBLEM 5a Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 2
+OUTPUT:  
+53.000000	24.000000	40.000000	
+52.000000	25.000000	36.000000	
+124.000000	60.000000	85.000000	
+
+
+ANSWER:  
+53	24	40
+52	25	36
+124	60	85
+Q5a matrix SCORE:  2
+
+
+######## PROBLEM 5b Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 1
+OUTPUT:  
+1.000000	0.000000	0.000000	
+0.000000	1.000000	0.000000	
+0.000000	0.000000	1.000000	
+
+
+ANSWER:  
+1	0	0
+0	1	0
+0	0	1
+Q5b matrix SCORE:  2
+
+
+######## PROBLEM 5c Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 3
+OUTPUT:  
+5.000000	
+10.000000	
+
+
+ANSWER:  
+5
+10
+Q5c matrix SCORE:  2
+
+
+######## PROBLEM 5d Matrix #######
+ERROR: copy example test file to prob6
+ERROR: Couldn't RUN matrix
+
+
+INPUT : ./example 4
+OUTPUT:  ERROR
+ANSWER:  Incompatible matrices
+Q5d matrix SCORE:  2
+
+
+######## PROBLEM 6a Matrix #######
+ERROR: copy example test file to prob6
+ERROR: Couldn't RUN matrix
+Problem 6a: 
+Matrix is singular. Determinant is zero.
+
+INPUT : ./example 5
+OUTPUT:  ERROR
+ANSWER:  Det=0 No Inverse
+Q6a matrix SCORE:  2
+
+
+######## PROBLEM 6b Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 6
+OUTPUT:  Problem 6b: 
+0.529412	-0.117647	
+-0.294118	0.176471	
+
+
+ANSWER:  
+0.529412	-0.117647
+-0.294118	0.176471
+Q6b matrix SCORE:  2
+
+
+######## PROBLEM 6c Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 7
+OUTPUT:  Problem 6c: 
+-0.636364	0.545455	0.250000	
+-0.000000	0.000000	0.250000	
+0.272727	-0.090909	-0.250000	
+
+
+ANSWER:  
+-0.636364	0.545455	0.250000
+-0.000000	0.000000	0.250000
+0.272727	-0.090909	-0.250000
+Q6c matrix SCORE:  2
+
+
+######## PROBLEM 6d Matrix #######
+ERROR: copy example test file to prob6
+INPUT : ./example 8
+OUTPUT:  Problem 6d: 
+-0.238095	0.333333	-0.000000	-0.000000	0.000000	0.095238	
+0.761905	-2.000000	-0.333333	1.000000	0.333333	-0.238095	
+-0.666667	2.000000	0.666667	-1.000000	-0.666667	0.333333	
+-0.071429	0.666667	-0.333333	-0.000000	-0.166667	0.095238	
+0.142857	-1.000000	-0.000000	-1.000000	1.000000	0.142857	
+0.214286	-0.000000	0.000000	1.000000	-0.500000	-0.285714	
+
+
+ANSWER:  
+-0.238095	0.333333	-0.000000	0.000000	-0.000000	0.095238
+0.761905	-2.000000	-0.333333	1.000000	0.333333	-0.238095
+-0.666667	2.000000	0.666667	-1.000000	-0.666667	0.333333
+ ... 
+Q6d matrix SCORE:  2
+
+###########################
+
+TOTAL SCORE =  32 /32

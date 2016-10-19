@@ -36,6 +36,7 @@ public:
   fraction negate(void) const;
   inline bool equals(const fraction &f) const { return num() * f.den() == f.num() * den(); }
   bool less_than(const fraction &f) const;
+  fraction power(int exp) const;
   
   inline fraction operator+(const fraction &f) { return add(f); }
   inline fraction operator-(const fraction &f) { return sub(f); }

@@ -95,3 +95,15 @@ bool fraction::less_than(const fraction &f) const {
     return num() * f.den() < f.num() * den();
   }
 }
+fraction fraction::power(int exp) const {
+  fraction f = 1;
+  if (0 > exp) {
+    // Negative exponents flip the fraction
+    f.set_num(pow(den(), -exp));
+    f.set_den(pow(num(), -exp));
+  } else {
+    f.set_num(pow(num(), exp));
+    f.set_den(pow(den(), exp));
+  }
+  return f.reduce();
+}

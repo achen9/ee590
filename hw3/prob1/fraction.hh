@@ -23,6 +23,13 @@ public:
   inline int num(void) const { return numerator; }
   inline int den(void) const { return denominator; }
 
+  // Setters
+  inline void set_num(int n) { numerator = n; }
+  void set_den(int d);
+
+  // Fraction Operations
+  fraction reduce(void) const;
+
 private:
   int numerator;
   int denominator;

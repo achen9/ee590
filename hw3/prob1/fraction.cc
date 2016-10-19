@@ -40,3 +40,9 @@ fraction &fraction::operator=(const fraction &other) {
   }
   return *this;
 }
+void fraction::set_den(int d) {
+  if (0 == d) {
+    throw fraction_exception("Attempted to assign 0 to the denominator.");
+  }
+  denominator = d;
+}

@@ -1,6 +1,6 @@
 CXX = g++ -std=c++11 -O3
 
-SOURCES = fraction.cc
+SOURCES = fraction.cc fraction_operations.cc
 HEADERS = fraction.hh
 
 OBJECTS=$(SOURCES:.cc=.o)
@@ -13,7 +13,7 @@ all: $(LIB_FRACTION)
 $(LIB_FRACTION): $(OBJECTS) $(HEADERS)
 	ar cr $(LIB_FRACTION) $(OBJECTS)
 
-%.o: %.c $(HEADERS)
+%.o: %.cc $(HEADERS)
 	$(CXX) -c $<
 
 clean:

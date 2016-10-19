@@ -14,6 +14,9 @@ public:
   fraction(int n, int d);
   ~fraction();
 
+  // Copy constructor
+  fraction(const fraction &f);
+
   // Getters
   inline int numerator(void) const { return num; }
   inline int denominator(void) const { return den; }

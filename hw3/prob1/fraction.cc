@@ -26,9 +26,10 @@
 fraction::fraction(int n, int d) : num(n), den(d) {
   if (0 == d) {
     throw fraction_exception("Attempted to assign 0 to the denominator.");
-  } else if (0 > n && 0 > d) {
-    num *= -1;
-    den *= -1;
-  }
+  } 
 }
 fraction::~fraction() {}
+fraction::fraction(const fraction &f) {
+  num = f.num;
+  den = f.den;
+}

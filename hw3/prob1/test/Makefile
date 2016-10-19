@@ -3,7 +3,7 @@ LIBS = -lm -lfraction
 INCLUDE_DIRS = -I..
 LIBDIRS = -L..
 
-SOURCES = 1.cc
+SOURCES = 1.cc 2.cc
 TARGETS = $(SOURCES:%.cc=%.x)
 
 all: $(TARGETS)

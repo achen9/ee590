@@ -34,8 +34,8 @@ public:
   fraction mult(const fraction &f) const;
   fraction div(const fraction &f) const;
   fraction negate(void) const;
-  inline bool equals(const fraction&f) const { return num() * f.den() == f.num() * den(); }
-  bool less_than(const fraction&f) const;
+  inline bool equals(const fraction &f) const { return num() * f.den() == f.num() * den(); }
+  bool less_than(const fraction &f) const;
   
   inline fraction operator+(const fraction &f) { return add(f); }
   inline fraction operator-(const fraction &f) { return sub(f); }

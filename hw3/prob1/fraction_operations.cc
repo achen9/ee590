@@ -86,3 +86,12 @@ fraction fraction::negate(void) const {
   }
   return negative;
 }
+bool fraction::less_than(const fraction &f) const {
+  if (0 > den() || 0 > f.den()) {
+    // Need to add negative sign to num() and f.num() because 
+    // negative in denominator causes comparison to be flipped
+    return -num() * f.den() < -f.num() * den(); 
+  } else {
+    return num() * f.den() < f.num() * den();
+  }
+}

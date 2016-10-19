@@ -46,3 +46,7 @@ void fraction::set_den(int d) {
   }
   denominator = d;
 }
+std::ostream& operator<<(std::ostream& os, const fraction &f) {
+  os << f.num() << '/' << f.den();
+  return os;
+}

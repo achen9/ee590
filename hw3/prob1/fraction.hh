@@ -54,3 +54,6 @@ private:
   int numerator;
   int denominator;
 };
+
+// Interface with ostreams
+std::ostream& operator<<(std::ostream& os, const fraction &f);

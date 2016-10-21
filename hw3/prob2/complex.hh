@@ -12,7 +12,7 @@ class complex {
 public:
   // Constructors and destructors
   inline complex(double r, double i) : real(r), imaginary(i) {}
-  //complex(double w) : complex(w, 0) {}
+  complex(double r) : complex(r, 0.0) {}
   inline ~complex() {}
 
   // Copy constructor

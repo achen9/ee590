@@ -35,12 +35,6 @@ complex &complex::operator=(const complex &other) {
   return *this;
 }
 /*
-void complex::set_den(int d) {
-  if (0 == d) {
-    throw fraction_exception("Attempted to assign 0 to the denominator.");
-  }
-  imaginary = d;
-}
 std::ostream& operator<<(std::ostream& os, const complex &f) {
   os << f.re() << '/' << f.im();
   return os;

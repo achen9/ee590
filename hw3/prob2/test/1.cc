@@ -4,8 +4,9 @@
 int main ( int argc, char * argv[] ) {
 
   // CONSTRUCTOR TESTS
-  // This file tests all constructors by building a fraction with each and then
-  // testing that the fraction is correct using the getters.
+  // This file tests all constructors by building a complex number
+  // with each and then testing that the complex number is correct 
+  // using the getters.
 
   // TEST 1: Check if 3+4j can be initialized
   complex x(3, 4);

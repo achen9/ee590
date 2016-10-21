@@ -23,17 +23,18 @@
 #include <math.h>
 #include "complex.hh"
 
-/*complex::complex(const complex &c) {
-  real = c.real;
-  imaginary = c.imaginary;
+complex::complex(const complex &c) {
+  real = c.re();
+  imaginary = c.im();
 }
 complex &complex::operator=(const complex &other) {
   if (this != &other) {
-    real = other.real;
-    imaginary = other.imaginary;
+    real = other.re();
+    imaginary = other.im();
   }
   return *this;
 }
+/*
 void complex::set_den(int d) {
   if (0 == d) {
     throw fraction_exception("Attempted to assign 0 to the denominator.");

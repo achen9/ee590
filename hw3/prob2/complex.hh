@@ -16,17 +16,17 @@ public:
   inline ~complex() {}
 
   // Copy constructor
-  //complex(const complex &c);
-  //complex& operator=(const complex &other);
+  complex(const complex &c);
+  complex& operator=(const complex &other);
 
   // Getters
   inline double re(void) const { return real; }
   inline double im(void) const { return imaginary; }
 
   // Setters
-  /*inline void set_num(int n) { real = n; }
-  void set_den(int d);
-
+  inline void set_real(int r) { real = r; }
+  inline void set_imag(int i) { imaginary = i; }
+  /*
   // Fraction Operations
   complex reduce(void) const;
   complex add(const complex &f) const;

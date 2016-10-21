@@ -1,6 +1,6 @@
 CXX = g++ -std=c++11 -O3
 
-SOURCES = complex.cc
+SOURCES = complex.cc complex_operations.cc
 HEADERS = complex.hh
 
 OBJECTS=$(SOURCES:.cc=.o)

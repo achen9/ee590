@@ -24,12 +24,12 @@ public:
   inline double im(void) const { return imaginary; }
 
   // Setters
-  inline void set_real(int r) { real = r; }
-  inline void set_imag(int i) { imaginary = i; }
-  /*
-  // Fraction Operations
-  complex reduce(void) const;
-  complex add(const complex &f) const;
+  inline void set_real(double r) { real = r; }
+  inline void set_imag(double i) { imaginary = i; }
+  
+  // Complex Number Operations
+  complex conjugate(void) const;
+  /*complex add(const complex &f) const;
   complex sub(const complex &f) const;
   complex mult(const complex &f) const;
   complex div(const complex &f) const;

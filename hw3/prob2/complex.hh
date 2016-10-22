@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
-#include <math.h>
+#include <cmath>
 
 class complex_exception : public std::runtime_error {
 public:
@@ -38,9 +38,10 @@ public:
   complex mult(const complex &c) const;
   complex div(const complex &c) const;
   complex negate(void) const;
-  inline double mag(void) const { return sqrt(pow(re(), 2) + pow(im(), 2)); }
-  inline double angle(void) const { return atan2(im(), re()); }
-  complex power(int exp) const;
+  inline double mag(void) const { return sqrt(std::pow(re(), 2) + std::pow(im(), 2)); }
+  inline double angle(void) const { return std::atan2(im(), re()); }
+  complex pow(int e) const;
+  complex exp(void) const;
 
   inline complex operator+(const complex &c) const { return add(c); }
   inline complex operator-(const complex &c) const { return sub(c); }

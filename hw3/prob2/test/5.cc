@@ -1,6 +1,6 @@
 #include "test.hh"
 #include "complex.hh"
-#include <math.h>
+#include <cmath>
 
 #define TOLERANCE 0.00001
 
@@ -14,25 +14,25 @@ int main ( int argc, char * argv[] ) {
   complex x1(3.22, 4.11);
   complex x2(-2.99, -3.03);
   complex x = x1 + x2;
-  ASSERT(TOLERANCE > abs(x.re() - 0.23) && TOLERANCE > abs(x.im() - 1.08));
+  ASSERT(TOLERANCE > std::abs(x.re() - 0.23) && TOLERANCE > std::abs(x.im() - 1.08));
 
   // TEST 2: Check 4.25-9.28j - -3.21+6.56j ~= 7.46-15.84j
   complex y1(4.25, -9.28);
   complex y2(-3.21, 6.56);
   complex y = y1 - y2;
-  ASSERT(TOLERANCE > abs(y.re() - 7.46) && TOLERANCE > abs(y.im() - -15.84));
+  ASSERT(TOLERANCE > std::abs(y.re() - 7.46) && TOLERANCE > std::abs(y.im() - -15.84));
 
   // Test 3: Check 2.34-0.0j * 0.0+6.22j ~= 0.0+14.5548
   complex z1(2.34, -0.0);
   complex z2(0.0, 6.22);
   complex z = z1 * z2;
-  ASSERT(TOLERANCE > abs(z.re() - 0.0) && TOLERANCE > abs(z.im() - 14.5548));
+  ASSERT(TOLERANCE > std::abs(z.re() - 0.0) && TOLERANCE > std::abs(z.im() - 14.5548));
 
   // TEST 4: Check 2.5+3.5j / 1-2j ~= -0.9+1.7j
   complex w1(2.5, 3.5);
   complex w2(1, -2);
   complex w = w1 / w2;
-  ASSERT(TOLERANCE > abs(w.re() - -0.9) && TOLERANCE > abs(w.im() - 1.7));
+  ASSERT(TOLERANCE > std::abs(w.re() - -0.9) && TOLERANCE > std::abs(w.im() - 1.7));
 
   // TEST 5: Check 2.5+3.5j / -0-0j => error
   complex w3(-0, -0);

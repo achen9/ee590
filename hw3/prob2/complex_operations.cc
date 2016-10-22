@@ -20,7 +20,7 @@
  * alexac9@uw.edu
  */
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "complex.hh"
 
 #define TOLERANCE 0.00000001
@@ -84,8 +84,13 @@ complex complex::negate(void) const {
   complex negative(-re(), -im());
   return negative.delnegzero();
 }
-complex complex::power(int exp) const {
-  // Apply de Moivre's Formula: (r(cos(x)+isin(x)))^n = r^n(cos(nx)+isin(nx))
-  complex c(pow(mag(), exp)*cos(exp*angle()), pow(mag(), exp)*sin(exp*angle()));
+complex complex::pow(int e) const {
+  // Apply de Moivre's Formula: (r(cos(x) + isin(x)))^n = r^n(cos(nx) + isin(nx))
+  complex c(std::pow(mag(), e)*std::cos(e*angle()), std::pow(mag(), e)*std::sin(e*angle()));
+  return c.delnegzero();
+}
+complex complex::exp(void) const {
+  // Apply Euler's formula re^(it) = r(cos(t) + isin(t))
+  complex c(std::exp(re())*std::cos(im()), std::exp(re())*std::sin(im()));
   return c.delnegzero();
 }

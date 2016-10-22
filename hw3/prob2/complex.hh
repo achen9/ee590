@@ -36,7 +36,8 @@ public:
   complex sub(const complex &c) const;
   complex mult(const complex &c) const;
   complex div(const complex &c) const;
-  /*complex negate(void) const;
+  complex negate(void) const;
+  /*
   inline bool equals(const complex &f) const { return re() * f.im() == f.re() * im(); }
   bool less_than(const complex &f) const;
   complex power(int exp) const;
@@ -45,8 +46,8 @@ public:
   inline complex operator-(const complex &c) const { return sub(c); }
   inline complex operator*(const complex &c) const { return mult(c); }
   inline complex operator/(const complex &c) const { return div(c); }
-  /*
   inline complex operator-(void) { return negate(); }
+  /*
   inline bool operator==(const complex &f) { return equals(f); }
   inline bool operator!=(const complex &f) { return !equals(f); }
   inline bool operator<(const complex &f) { return less_than(f); }

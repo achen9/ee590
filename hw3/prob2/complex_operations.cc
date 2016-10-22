@@ -80,18 +80,11 @@ complex complex::div(const complex &c) const {
   quotient.set_imag(num.im() / den.re());
   return quotient.delnegzero();
 }
-/*
 complex complex::negate(void) const {
-  complex negative = 1;
-  if (0 > den()) {
-    negative.set_num(num());
-    negative.set_den(-den());
-  } else {
-    negative.set_num(-num());
-    negative.set_den(den());
-  }
-  return negative;
+  complex negative(-re(), -im());
+  return negative.delnegzero();
 }
+/*
 bool complex::less_than(const fraction &f) const {
   if (0 > den() || 0 > f.den()) {
     // Need to add negative sign to num() and f.num() because 

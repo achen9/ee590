@@ -38,17 +38,17 @@ public:
   bool less_than(const fraction &f) const;
   fraction power(int exp) const;
   
-  inline fraction operator+(const fraction &f) { return add(f); }
-  inline fraction operator-(const fraction &f) { return sub(f); }
-  inline fraction operator*(const fraction &f) { return mult(f); }
-  inline fraction operator/(const fraction &f) { return div(f); }
-  inline fraction operator-(void) { return negate(); }
-  inline bool operator==(const fraction &f) { return equals(f); }
-  inline bool operator!=(const fraction &f) { return !equals(f); }
-  inline bool operator<(const fraction &f) { return less_than(f); }
-  inline bool operator>(const fraction &f) { return !less_than(f); }
-  inline bool operator<=(const fraction &f) { return less_than(f) || equals(f); }
-  inline bool operator>=(const fraction &f) { return !less_than(f) || equals(f); }
+  inline fraction operator+(const fraction &f) const { return add(f); }
+  inline fraction operator-(const fraction &f) const { return sub(f); }
+  inline fraction operator*(const fraction &f) const { return mult(f); }
+  inline fraction operator/(const fraction &f) const { return div(f); }
+  inline fraction operator-(void) const { return negate(); }
+  inline bool operator==(const fraction &f) const { return equals(f); }
+  inline bool operator!=(const fraction &f) const { return !equals(f); }
+  inline bool operator<(const fraction &f) const { return less_than(f); }
+  inline bool operator>(const fraction &f) const { return !less_than(f); }
+  inline bool operator<=(const fraction &f) const { return less_than(f) || equals(f); }
+  inline bool operator>=(const fraction &f) const { return !less_than(f) || equals(f); }
 
 private:
   int numerator;

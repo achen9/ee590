@@ -42,7 +42,7 @@ int main ( int argc, char * argv[] ) {
   fraction r2(0, 2);
   try {
     fraction r = r1 / r2;
-  } catch (fraction_exception) {
+  } catch(fraction_exception &e) {
     SUCCEED;
   }
   FAIL;

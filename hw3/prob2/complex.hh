@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
+#include <math.h>
 
 class complex_exception : public std::runtime_error {
 public:
@@ -37,16 +38,15 @@ public:
   complex mult(const complex &c) const;
   complex div(const complex &c) const;
   complex negate(void) const;
-  /*
-  inline bool equals(const complex &f) const { return re() * f.im() == f.re() * im(); }
-  bool less_than(const complex &f) const;
-  complex power(int exp) const;
-  */
+  inline double mag(void) const { return sqrt(pow(re(), 2) + pow(im(), 2)); }
+  inline double angle(void) const { return atan2(re(), im()); }
+  // complex power(int exp) const;
+
   inline complex operator+(const complex &c) const { return add(c); }
   inline complex operator-(const complex &c) const { return sub(c); }
   inline complex operator*(const complex &c) const { return mult(c); }
   inline complex operator/(const complex &c) const { return div(c); }
-  inline complex operator-(void) { return negate(); }
+  inline complex operator-(void) const { return negate(); }
   /*
   inline bool operator==(const complex &f) { return equals(f); }
   inline bool operator!=(const complex &f) { return !equals(f); }

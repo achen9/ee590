@@ -39,8 +39,8 @@ public:
   complex div(const complex &c) const;
   complex negate(void) const;
   inline double mag(void) const { return sqrt(pow(re(), 2) + pow(im(), 2)); }
-  inline double angle(void) const { return atan2(re(), im()); }
-  // complex power(int exp) const;
+  inline double angle(void) const { return atan2(im(), re()); }
+  complex power(int exp) const;
 
   inline complex operator+(const complex &c) const { return add(c); }
   inline complex operator-(const complex &c) const { return sub(c); }

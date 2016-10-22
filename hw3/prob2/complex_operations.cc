@@ -84,17 +84,8 @@ complex complex::negate(void) const {
   complex negative(-re(), -im());
   return negative.delnegzero();
 }
-/*
 complex complex::power(int exp) const {
-  complex f = 1;
-  if (0 > exp) {
-    // Negative exponents flip the fraction
-    f.set_num(pow(den(), -exp));
-    f.set_den(pow(num(), -exp));
-  } else {
-    f.set_num(pow(num(), exp));
-    f.set_den(pow(den(), exp));
-  }
-  return f.reduce();
+  // Apply de Moivre's Formula: (r(cos(x)+isin(x)))^n = r^n(cos(nx)+isin(nx))
+  complex c(pow(mag(), exp)*cos(exp*angle()), pow(mag(), exp)*sin(exp*angle()));
+  return c.delnegzero();
 }
-*/

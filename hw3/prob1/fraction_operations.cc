@@ -20,14 +20,14 @@
  * alexac9@uw.edu
  */
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "fraction.hh"
 
 fraction fraction::reduce(void) const {
   
   fraction fr = 1;
-  int abs_num = abs(num());
-  int abs_den = abs(den());
+  int abs_num = std::abs(num());
+  int abs_den = std::abs(den());
   int gcd = 1;
 
   // Modified Euclidean algorithm to find greatest common divisor (GCD)
@@ -95,15 +95,15 @@ bool fraction::less_than(const fraction &f) const {
     return num() * f.den() < f.num() * den();
   }
 }
-fraction fraction::power(int exp) const {
+fraction fraction::pow(int e) const {
   fraction f = 1;
-  if (0 > exp) {
+  if (0 > e) {
     // Negative exponents flip the fraction
-    f.set_num(pow(den(), -exp));
-    f.set_den(pow(num(), -exp));
+    f.set_num(std::pow(den(), -e));
+    f.set_den(std::pow(num(), -e));
   } else {
-    f.set_num(pow(num(), exp));
-    f.set_den(pow(den(), exp));
+    f.set_num(std::pow(num(), e));
+    f.set_den(std::pow(den(), e));
   }
   return f.reduce();
 }

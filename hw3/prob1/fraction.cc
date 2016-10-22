@@ -20,7 +20,6 @@
  * alexac9@uw.edu
  */
 #include <iostream>
-#include <math.h>
 #include "fraction.hh"
 
 fraction::fraction(int n, int d) : numerator(n), denominator(d) {

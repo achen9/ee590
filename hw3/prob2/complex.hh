@@ -48,18 +48,11 @@ public:
   inline complex operator*(const complex &c) const { return mult(c); }
   inline complex operator/(const complex &c) const { return div(c); }
   inline complex operator-(void) const { return negate(); }
-  /*
-  inline bool operator==(const complex &f) { return equals(f); }
-  inline bool operator!=(const complex &f) { return !equals(f); }
-  inline bool operator<(const complex &f) { return less_than(f); }
-  inline bool operator>(const complex &f) { return !less_than(f); }
-  inline bool operator<=(const complex &f) { return less_than(f) || equals(f); }
-  inline bool operator>=(const complex &f) { return !less_than(f) || equals(f); }
-  */
+
 private:
   double real;
   double imaginary;
 };
 
 // Interface with ostreams
-//std::ostream& operator<<(std::ostream& os, const complex &f);
+std::ostream& operator<<(std::ostream& os, const complex &c);

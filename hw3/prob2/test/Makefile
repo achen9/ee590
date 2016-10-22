@@ -3,7 +3,7 @@ LIBS = -lm -lcomplex
 INCLUDE_DIRS = -I..
 LIBDIRS = -L..
 
-SOURCES = 1.cc 2.cc 3.cc 4.cc 5.cc 6.cc 7.cc 8.cc 9.cc
+SOURCES = 01.cc 02.cc 03.cc 04.cc 05.cc 06.cc 07.cc 08.cc 09.cc 10.cc
 TARGETS = $(SOURCES:%.cc=%.x)
 
 all: $(TARGETS)

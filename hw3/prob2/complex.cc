@@ -34,9 +34,12 @@ complex &complex::operator=(const complex &other) {
   }
   return *this;
 }
-/*
-std::ostream& operator<<(std::ostream& os, const complex &f) {
-  os << f.re() << '/' << f.im();
+std::ostream& operator<<(std::ostream& os, const complex &c) {
+  os << c.re();
+  if (0 < c.im()) {
+    os << '+';
+  } 
+  os << c.im() << 'j';
   return os;
 }
-*/
+

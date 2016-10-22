@@ -23,44 +23,64 @@
 #include <math.h>
 #include "complex.hh"
 
-complex complex::conjugate(void) const {
-  complex c = re();
-  if (0.0 == im()) {
-    // Prevent negative zero from being stored as imaginary part
-    c.set_imag(0.0); 
+#define TOLERANCE 0.00000001
+
+bool complex::isreal(void) const {
+  if (TOLERANCE > abs(im())) {
+    return true;
   } else {
-    c.set_imag(-im());
+    return false;
   }
-  return c;
+}
+bool complex::isimag(void) const {
+  if (TOLERANCE > abs(re())) {
+    return true;
+  } else {
+    return false;
+  }
+}
+complex complex::delnegzero(void) const {
+  complex nozero(re(), im());
+  if (-0.0 == nozero.re()) {
+    nozero.set_real(0.0);
+  }
+  if (-0.0 == nozero.im()) {
+    nozero.set_imag(0.0);
+  }
+  return nozero;
+}
+complex complex::conjugate(void) const {
+  complex c(re(), -im());
+  return c.delnegzero();
+}
+complex complex::add(const complex &c) const {
+  complex sum(re() + c.re(), im() + c.im());
+  return sum.delnegzero();
+}
+complex complex::sub(const complex &c) const {
+  complex difference(re() - c.re(), im() - c.im());
+  return difference.delnegzero();
+}
+complex complex::mult(const complex &c) const {
+  complex product(re()*c.re() - im()*c.im(), im()*c.re() + re()*c.im());
+  return product.delnegzero();
+}
+complex complex::div(const complex &c) const {
+  complex quotient = 0.0;
+  complex num = *this * c.conjugate();
+  complex den = c * c.conjugate();
+  num = num.delnegzero();
+  den = den.delnegzero();
+  if (0.0 == den.re()) {
+    throw complex_exception("Attempted to divide by zero.");
+  } else if (!den.isreal()) {
+    throw complex_exception("Complex conjugate did not produce real number in denominator.");
+  }
+  quotient.set_real(num.re() / den.re());
+  quotient.set_imag(num.im() / den.re());
+  return quotient.delnegzero();
 }
 /*
-complex complex::add(const complex &f) const {
-  complex sum = 1;
-  sum.set_num(f.den() * num() + den() * f.num());
-  sum.set_den(den() * f.den());
-  return sum.reduce();
-}
-complex complex::sub(const complex &f) const {
-  complex difference = 1;
-  difference.set_num(f.den() * num() - den() * f.num());
-  difference.set_den(den() * f.den());
-  return difference.reduce();
-}
-complex complex::mult(const complex &f) const {
-  complex product = 1;
-  product.set_num(num() * f.num());
-  product.set_den(den() * f.den());
-  return product.reduce();
-}
-complex complex::div(const complex &f) const {
-  complex quotient = 1;
-  if (0 == f.num()) {
-    throw complex_exception("Attempted to divide by zero.");
-  }
-  quotient.set_num(num() * f.den());
-  quotient.set_den(den() * f.num());
-  return quotient.reduce();
-}
 complex complex::negate(void) const {
   complex negative = 1;
   if (0 > den()) {

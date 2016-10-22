@@ -28,20 +28,24 @@ public:
   inline void set_imag(double i) { imaginary = i; }
   
   // Complex Number Operations
+  bool isreal(void) const; // check if complex number is real only
+  bool isimag(void) const; // check if complex number is imaginary only
+  complex delnegzero(void) const; // remove negative zeros from real or imaginary parts
   complex conjugate(void) const;
-  /*complex add(const complex &f) const;
-  complex sub(const complex &f) const;
-  complex mult(const complex &f) const;
-  complex div(const complex &f) const;
-  complex negate(void) const;
+  complex add(const complex &c) const;
+  complex sub(const complex &c) const;
+  complex mult(const complex &c) const;
+  complex div(const complex &c) const;
+  /*complex negate(void) const;
   inline bool equals(const complex &f) const { return re() * f.im() == f.re() * im(); }
   bool less_than(const complex &f) const;
   complex power(int exp) const;
-  
-  inline complex operator+(const complex &f) { return add(f); }
-  inline complex operator-(const complex &f) { return sub(f); }
-  inline complex operator*(const complex &f) { return mult(f); }
-  inline complex operator/(const complex &f) { return div(f); }
+  */
+  inline complex operator+(const complex &c) const { return add(c); }
+  inline complex operator-(const complex &c) const { return sub(c); }
+  inline complex operator*(const complex &c) const { return mult(c); }
+  inline complex operator/(const complex &c) const { return div(c); }
+  /*
   inline complex operator-(void) { return negate(); }
   inline bool operator==(const complex &f) { return equals(f); }
   inline bool operator!=(const complex &f) { return !equals(f); }

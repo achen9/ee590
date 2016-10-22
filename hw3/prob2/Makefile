@@ -14,7 +14,7 @@ $(LIB_COMPLEX): $(OBJECTS) $(HEADERS)
 	ar cr $(LIB_COMPLEX) $(OBJECTS)
 
 %.o: %.cc $(HEADERS)
-	$(CXX) -c $<
+	$(CXX) -c $< -g
 
 clean:
 	rm -f $(OBJECTS) $(LIB_COMPLEX)

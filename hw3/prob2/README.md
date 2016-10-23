@@ -3,7 +3,7 @@ Make sure you have navigated to the /hw3/prob2/ folder as the current directory.
 * Type "make" to compile the complex class library functions.
 * Type "make clean" to delete all compiled code.
 
-### To run hw3 prob1 code
+### To run hw3 prob2 code
 Make sure the program you want to run has been compiled first. 
 If an error message pops up, try the suggested fix if one is mentioned. 
 All programs perform some basic input error checking and will recommend a fix if the input error is detected.

@@ -13,6 +13,7 @@ public:
   // Constructors and destructors
   fraction(int n, int d);
   fraction(int w) : fraction(w, 1) {}
+  fraction(void) : fraction(0, 1) {}
   ~fraction();
 
   // Copy constructor

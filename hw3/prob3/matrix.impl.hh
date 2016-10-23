@@ -63,6 +63,30 @@ matrix<T> &matrix<T>::operator=(const matrix &other) {
 }
 
 template <class T>
+T matrix<T>::get(int r, int c) const {
+
+  if (!in_range(r, c)) {
+    throw matrix_exception("Indices out of range in matrix::get");
+  }
+
+  return value[r * columns() + c];
+
+}
+
+template <class T>
+void matrix<T>::set(int r, int c, T x) {
+  if (!in_range(r, c)) {
+    throw matrix_exception("Indices out of range in matrix::set");
+  }
+  value[r * columns() + c] = x;
+}
+
+template <class T>
+bool matrix<T>::in_range(int r, int c) const {
+  return 0 <= r && r < rows() && 0 <= c && c < columns();
+}
+
+template <class T>
 matrix<T> matrix<T>::add ( const matrix &m ) const {
 
   if ( rows() != m.rows() || columns() != m.columns() ) {
@@ -82,28 +106,20 @@ matrix<T> matrix<T>::add ( const matrix &m ) const {
 }
 
 template <class T>
-T matrix<T>::get(int r, int c) const {
-
-  if ( !in_range(r,c) ) {
-    throw matrix_exception("Indices out of range in matrix::get");
+bool matrix<T>::equals(const matrix &m) const {
+  if (rows() != m.rows() || columns() != m.columns()) {
+    throw matrix_exception("Attemped to compare matrices with incompatible sizes");
   }
-
-  return value[r * columns() + c];
-
-}
-
-template <class T>
-void matrix<T>::set(int r, int c, T x) {
-  if ( !in_range(r,c) ) {
-    throw matrix_exception("Indices out of range in matrix::set");
+  for (int i = 0; i<rows(); i++) {
+    for (int j = 0; j<columns(); j++) {
+      if (get(i, j) != m.get(i, j)) {
+        return false;
+      }
+    }
   }
-  value[r * columns() + c] = x;
+  return true;
 }
 
-template <class T>
-bool matrix<T>::in_range(int r, int c) const {
-  return 0 <= r && r < rows() && 0 <= c && c < columns();
-}
 
 template <class T>
 std::ostream& operator<<(std::ostream& os, const matrix<T> &m) {

@@ -32,6 +32,5 @@ int main ( int argc, char * argv[] ) {
   matrix<double> B = A;
   ASSERT(B == A);
 
-  std::cout << "  ";
   SUCCEED;
 }

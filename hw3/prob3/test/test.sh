@@ -2,7 +2,7 @@
 
 for test in *.x
 do
-  printf "%-12s" "$test"
+  printf "%-13s" "$test"
   if ./$test; then
     printf "\e[32m ... ok\n\e[39m"
   else

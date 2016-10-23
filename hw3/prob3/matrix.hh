@@ -35,12 +35,12 @@ public:
   // Operations
   matrix add ( const matrix &m ) const;
   matrix mult(const matrix &m) const;
-  void scale(T d);
+  matrix scale(T d) const;
   bool equals(const matrix &m) const;
   bool less_than(const matrix &m) const;
 
   inline matrix operator+(const matrix &m) { return add(m); }
-  inline matrix operator-(const matrix &m) { return sub(m); }
+  inline matrix operator-(const matrix &m) { return add(m.scale(-1)); }
   inline matrix operator*(const matrix &m) { return mult(m); }
   inline bool operator==(const matrix &m) { return equals(m); }
   inline bool operator!=(const matrix &m) { return !equals(m); }
@@ -50,8 +50,8 @@ public:
   inline bool operator>=(const matrix &m) { return m.less_than(*this) || m.equals(*this); }
 
   matrix m_minor(int r, int c);
-  matrix inverse(void);
   T det(void);
+  matrix inverse(void);
 
 private:
   int num_rows, num_columns;

@@ -3,7 +3,7 @@ LIBS = -lm -lfraction -lcomplex
 INCLUDE_DIRS = -I.. -I../../prob1/ -I../../prob2/
 LIBDIRS = -L..
 
-SOURCES = 1_double.cc 2_int.cc 3_bool.cc 4_fraction.cc 5_complex.cc
+SOURCES = P3_double.cc P3_int.cc P3_bool.cc P3_fraction.cc P3_complex.cc
 TARGETS = $(SOURCES:%.cc=%.x)
 
 all: $(TARGETS)

@@ -106,6 +106,39 @@ matrix<T> matrix<T>::add ( const matrix &m ) const {
 }
 
 template <class T>
+matrix<T> matrix<T>::mult(const matrix &m) const {
+
+  if (columns() != m.rows()) {
+    throw matrix_exception("Attemped to multiply matrices with incompatible sizes");
+  }
+
+  matrix M(rows(), columns());
+
+  for (int i = 0; i<rows(); i++) {
+    for (int j = 0; j<m.columns(); j++) {
+      M.set(i, j, 0);
+      for (int k = 0; k<columns(); k++) {
+        M.set(i, j, M.get(i, j) + get(i, k) * m.get(k, j));
+      }
+    }
+  }
+
+  return M;
+
+}
+
+template <class T>
+matrix<T> matrix<T>::scale(T d) const {
+  matrix S(rows(), columns());
+  for (int i = 0; i<rows(); i++) {
+    for (int j = 0; j<columns(); j++) {
+      S.set(i, j, d*get(i, j));
+    }
+  }
+  return S;
+}
+
+template <class T>
 bool matrix<T>::equals(const matrix &m) const {
   if (rows() != m.rows() || columns() != m.columns()) {
     throw matrix_exception("Attemped to compare matrices with incompatible sizes");

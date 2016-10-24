@@ -1,18 +1,24 @@
 CXX = g++ -std=c++11
-LIBS = -lm -lfraction -lcomplex
+LIBS = -lm -lfraction -lcomplex -lDFT
 INCLUDE_DIRS = -I.. -I../../prob1/ -I../../prob2/
 LIBDIRS = -L..
 
-SOURCES = P3_double.cc P3_int.cc P3_bool.cc P3_fraction.cc P3_complex.cc
-TARGETS = $(SOURCES:%.cc=%.x)
+P3_SOURCES = P3_double.cc P3_int.cc P3_bool.cc P3_fraction.cc P3_complex.cc
+P4_SOURCES = P4_i.cc
+P3_TARGETS = $(P3_SOURCES:%.cc=%.x)
+P4_TARGETS = $(P4_SOURCES:%.cc=%.x)
 
-all: $(TARGETS)
+all: $(P3_TARGETS) $(P4_TARGETS)
 
-%.x: %.cc ../*.hh ../libfraction.a ../libcomplex.a
+P3: $(P3_TARGETS)
+
+P4: $(P4_TARGETS)
+
+%.x: %.cc ../*.hh ../libfraction.a ../libcomplex.a ../libDFT.a
 	$(CXX)  $(INCLUDE_DIRS) $(LIBDIRS) $< $(LIBS) -o $@
 
 test: $(TARGETS)
 	./test.sh
 
 clean:
-	rm -rf $(TARGETS)
+	rm -rf $(P3_TARGETS) $(P4_TARGETS)

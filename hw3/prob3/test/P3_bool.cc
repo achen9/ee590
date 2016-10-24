@@ -8,7 +8,7 @@ int main ( int argc, char * argv[] ) {
   // implemented in matrix.impl.hh
 
   // Test set 1: Constructor & matrix dimension getter tests
-  // Check a 3x3 matrix with entries of type bool can be created
+  // Check a 2x2 matrix with entries of type bool can be created
   // Check matrix dimensions are correct
   matrix<bool> A(2, 2);
   ASSERT(2 == A.rows());

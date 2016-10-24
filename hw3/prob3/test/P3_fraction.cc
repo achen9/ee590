@@ -9,7 +9,7 @@ int main ( int argc, char * argv[] ) {
   // implemented in matrix.impl.hh
 
   // Test set 1: Constructor & matrix dimension getter tests
-  // Check a 3x3 matrix with entries of type fraction can be created
+  // Check a 2x2 matrix with entries of type fraction can be created
   // Check matrix dimensions are correct
   matrix<fraction> A(2, 2);
   ASSERT(2 == A.rows());
@@ -73,6 +73,35 @@ int main ( int argc, char * argv[] ) {
   ASSERT(B < F);
   ASSERT(D <= A);
   ASSERT(B >= A);
+
+  // Test set 6: Matrix operations tests
+  // Check matrix minor, determinant, and inverse methods
+  matrix<fraction> G(3,3);
+  G.set(0, 0, 5); G.set(0, 1, 3); G.set(0, 2, -4);
+  G.set(1, 0, 2); G.set(1, 1, 0); G.set(1, 2, -2);
+  G.set(2, 0, 2); G.set(2, 1, 5); G.set(2, 2, -1);
+  matrix<fraction> H = G.m_minor(0, 0);
+  ASSERT((fraction)0 == H.get(0, 0));
+  ASSERT((fraction)-2 == H.get(0, 1));
+  ASSERT((fraction)5 == H.get(1, 0));
+  ASSERT((fraction)-1 == H.get(1, 1));
+  ASSERT((fraction)4 == G.det());
+  // inverse(G) = [2.5  -4.25 -1.5
+  //               -0.5 0.75  0.5
+  //               2.5  -4.75 -1.5]
+  matrix<fraction> K = G.inverse();
+  fraction G1(5, 2); fraction G2(-17, 4); fraction G3(-3, 2);
+  fraction G4(-1, 2); fraction G5(3, 4); fraction G6(1, 2);
+  fraction G7(5, 2); fraction G8(-19, 4); fraction G9(-3, 2);
+  ASSERT(G1 == K.get(0, 0));
+  ASSERT(G2 == K.get(0, 1));
+  ASSERT(G3 == K.get(0, 2));
+  ASSERT(G4 == K.get(1, 0));
+  ASSERT(G5 == K.get(1, 1));
+  ASSERT(G6 == K.get(1, 2));
+  ASSERT(G7 == K.get(2, 0));
+  ASSERT(G8 == K.get(2, 1));
+  ASSERT(G9 == K.get(2, 2));
 
   SUCCEED;
 }

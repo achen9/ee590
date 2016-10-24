@@ -8,7 +8,7 @@ int main ( int argc, char * argv[] ) {
   // implemented in matrix.impl.hh
 
   // Test set 1: Constructor & matrix dimension getter tests
-  // Check a 3x3 matrix with entries of type int can be created
+  // Check a 2x2 matrix with entries of type int can be created
   // Check matrix dimensions are correct
   matrix<int> A(2, 2);
   ASSERT(2 == A.rows());
@@ -65,6 +65,20 @@ int main ( int argc, char * argv[] ) {
   ASSERT(B < F);
   ASSERT(D <= A);
   ASSERT(B >= A);
+
+  // Test set 6: Matrix operations tests
+  // Check matrix minor, determinant, and inverse methods
+  matrix<int> G(3,3);
+  G.set(0, 0, 5); G.set(0, 1, 3); G.set(0, 2, -4);
+  G.set(1, 0, 2); G.set(1, 1, 0); G.set(1, 2, -2);
+  G.set(2, 0, 2); G.set(2, 1, 5); G.set(2, 2, -1);
+  matrix<int> H = G.m_minor(0, 0);
+  ASSERT(0 == H.get(0, 0));
+  ASSERT(-2 == H.get(0, 1));
+  ASSERT(5 == H.get(1, 0));
+  ASSERT(-1 == H.get(1, 1));
+  ASSERT(4 == G.det());
+  
 
   SUCCEED;
 }

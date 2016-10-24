@@ -10,7 +10,7 @@ int main ( int argc, char * argv[] ) {
   // implemented in matrix.impl.hh
 
   // Test set 1: Constructor & matrix dimension getter tests
-  // Check a 3x3 matrix with entries of type double can be created
+  // Check a 2x2 matrix with entries of type double can be created
   // Check matrix dimensions are correct
   matrix<double> A(2,2);
   ASSERT(2 == A.rows());
@@ -75,6 +75,32 @@ int main ( int argc, char * argv[] ) {
   ASSERT(B < F);
   ASSERT(D <= C);
   ASSERT(F >= B);
+
+  // Test set 6: Matrix operations tests
+  // Check matrix minor, determinant, and inverse methods
+  matrix<double> G(3,3);
+  G.set(0, 0, 5); G.set(0, 1, 3); G.set(0, 2, -4);
+  G.set(1, 0, 2); G.set(1, 1, 0); G.set(1, 2, -2);
+  G.set(2, 0, 2); G.set(2, 1, 5); G.set(2, 2, -1);
+  matrix<double> H = G.m_minor(0, 0);
+  ASSERT(TOLERANCE > H.get(0, 0) - 0.0);
+  ASSERT(TOLERANCE > H.get(0, 1) + 2.0);
+  ASSERT(TOLERANCE > H.get(1, 0) - 5.0);
+  ASSERT(TOLERANCE > H.get(1, 1) + 1.0);
+  ASSERT(TOLERANCE > G.det() - 4.0);
+  // inverse(G) = [2.5  -4.25 -1.5
+  //               -0.5 0.75  0.5
+  //               2.5  -4.75 -1.5]
+  matrix<double> K = G.inverse();
+  ASSERT(TOLERANCE > K.get(0, 0) - 2.5);
+  ASSERT(TOLERANCE > K.get(0, 1) + 4.25);
+  ASSERT(TOLERANCE > K.get(0, 2) + 1.5);
+  ASSERT(TOLERANCE > K.get(1, 0) + 0.5);
+  ASSERT(TOLERANCE > K.get(1, 1) - 0.75);
+  ASSERT(TOLERANCE > K.get(1, 2) - 0.5);
+  ASSERT(TOLERANCE > K.get(2, 0) - 2.5);
+  ASSERT(TOLERANCE > K.get(2, 1) + 4.75);
+  ASSERT(TOLERANCE > K.get(2, 2) + 1.5);
 
   SUCCEED;
 }

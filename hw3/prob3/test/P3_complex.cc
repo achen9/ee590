@@ -101,5 +101,25 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > K.get(2, 1).re() + 4.75 && TOLERANCE > K.get(0, 0).im() - 0.0);
   ASSERT(TOLERANCE > K.get(2, 2).re() + 1.5 && TOLERANCE > K.get(0, 0).im() - 0.0);
 
+  // Test set 7: Named constructor tests
+  // Test the named constructors identity, and ones
+  int size = 4;
+  matrix<complex> I = matrix<complex>::identity(size);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if (i == j) {
+        ASSERT(TOLERANCE > I.get(i, j).re() - 1.0 && TOLERANCE > I.get(i, j).im() - 0.0);
+      } else {
+        ASSERT(TOLERANCE > I.get(i, j).re() - 0.0 && TOLERANCE > I.get(i, j).im() - 0.0);
+      }
+    }
+  }
+  matrix<complex> O = matrix<complex>::ones(size, size - 1);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      ASSERT(TOLERANCE > O.get(i, j).re() - 1.0 && TOLERANCE > I.get(i, j).im() - 0.0);
+    }
+  }
+
   SUCCEED;
 }

@@ -103,5 +103,25 @@ int main ( int argc, char * argv[] ) {
   ASSERT(G8 == K.get(2, 1));
   ASSERT(G9 == K.get(2, 2));
 
+  // Test set 7: Named constructor tests
+  // Test the named constructors identity, and ones
+  int size = 4;
+  matrix<fraction> I = matrix<fraction>::identity(size);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if (i == j) {
+        ASSERT((fraction)1 == I.get(i, j));
+      } else {
+        ASSERT((fraction)0 == I.get(i, j));
+      }
+    }
+  }
+  matrix<fraction> O = matrix<fraction>::ones(size, size - 1);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      ASSERT((fraction)1 == O.get(i, j));
+    }
+  }
+
   SUCCEED;
 }

@@ -68,5 +68,25 @@ int main ( int argc, char * argv[] ) {
   ASSERT(B >= A);
   */
 
+  // Test set 7: Named constructor tests
+  // Test the named constructors identity, and ones
+  int size = 4;
+  matrix<bool> I = matrix<bool>::identity(size);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if (i == j) {
+        ASSERT(true == I.get(i, j));
+      } else {
+        ASSERT(false == I.get(i, j));
+      }
+    }
+  }
+  matrix<bool> O = matrix<bool>::ones(size, size - 1);
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      ASSERT(true == O.get(i, j));
+    }
+  }
+
   SUCCEED;
 }

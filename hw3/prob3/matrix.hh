@@ -12,6 +12,7 @@ class matrix {
 public:
   // Constructors and destructors
   matrix(int r, int c);
+  matrix(int s) : matrix(s, s) {};
   ~matrix();
 
   // Named constructors

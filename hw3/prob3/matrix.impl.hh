@@ -63,6 +63,36 @@ matrix<T> &matrix<T>::operator=(const matrix &other) {
 }
 
 template <class T>
+matrix<T> matrix<T>::identity(int s) {
+
+  matrix m(s);
+  T one = 1;
+
+  for (int i = 0; i<s; i++) {
+    m.set(i, i, one);
+  }
+
+  return m;
+
+}
+
+template <class T>
+matrix<T> matrix<T>::ones(int r, int c) {
+
+  matrix m(r, c);
+  T one = 1;
+
+  for (int i = 0; i<r; i++) {
+    for (int j = 0; j<c; j++) {
+      m.set(i, j, one);
+    }
+  }
+
+  return m;
+
+}
+
+template <class T>
 T matrix<T>::get(int r, int c) const {
 
   if (!in_range(r, c)) {

@@ -38,7 +38,7 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > B.get(1, 0).re() - 3.6 && TOLERANCE > B.get(1, 0).im() - 4.0);
   ASSERT(TOLERANCE > B.get(1, 1).re() + 9.7 && TOLERANCE > B.get(1, 1).im() - 5.4);
 
-  //Test set 4: Arithmetic operations tests
+  // Test set 4: Arithmetic operations tests
   // Check if matrices can be added, multiplied, subtracted,
   // and scaled using the overloaded operators
   // C = [2.4+6.2j -4.8+7.8j
@@ -66,6 +66,14 @@ int main ( int argc, char * argv[] ) {
   complex S = 2;
   matrix<complex> F = A.scale(S);
   //ASSERT(F == C);
+
+  // Test Set 5: Relational operation tests
+  // Check if matrices can be compared using the overloaded
+  // relational operators: '==','!=','>','<','>=','<='
+  // Note: '>','<','>=','<=' do not make sense for comparing
+  // complex numbers
+  //ASSERT(D == B);
+  //ASSERT(D != C);
 
   SUCCEED;
 }

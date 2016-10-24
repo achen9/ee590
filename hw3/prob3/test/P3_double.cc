@@ -32,7 +32,7 @@ int main ( int argc, char * argv[] ) {
   matrix<double> B = A;
   ASSERT(B == A);
 
-  //Test set 4: Arithmetic operations tests
+  // Test set 4: Arithmetic operations tests
   // Check if matrices can be added, multiplied, subtracted,
   // and scaled using the overloaded operators
   // C = [3.2 4.6
@@ -63,6 +63,18 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > F.get(0, 1) - 4.6);
   ASSERT(TOLERANCE > F.get(1, 0) - 6.4);
   ASSERT(TOLERANCE > F.get(1, 1) - 8.2);
+
+  // Test Set 5: Relational operation tests
+  // Check if matrices can be compared using the overloaded
+  // relational operators: '==','!=','>','<','>=','<='
+  // Note: due to rounding errors, '==', '<=','>=' can cause
+  // erroneous results and have been commented out
+  //ASSERT(D == B);
+  ASSERT(D != C);
+  ASSERT(C > A);
+  ASSERT(B < F);
+  ASSERT(D <= C);
+  ASSERT(F >= B);
 
   SUCCEED;
 }

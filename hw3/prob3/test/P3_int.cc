@@ -30,7 +30,7 @@ int main ( int argc, char * argv[] ) {
   matrix<int> B = A;
   ASSERT(B == A);
 
-  //Test set 4: Arithmetic operations tests
+  // Test set 4: Arithmetic operations tests
   // Check if matrices can be added, multiplied, subtracted,
   // and scaled using the overloaded operators
   // C = [2 4
@@ -55,6 +55,16 @@ int main ( int argc, char * argv[] ) {
   //              6 8]
   matrix<int> F = A.scale(2);
   ASSERT(F == C);
+
+  // Test Set 5: Relational operation tests
+  // Check if matrices can be compared using the overloaded
+  // relational operators: '==','!=','>','<','>=','<='
+  ASSERT(D == B);
+  ASSERT(D != C);
+  ASSERT(C > A);
+  ASSERT(B < F);
+  ASSERT(D <= A);
+  ASSERT(B >= A);
 
   SUCCEED;
 }

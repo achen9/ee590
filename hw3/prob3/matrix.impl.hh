@@ -167,3 +167,18 @@ std::ostream& operator<<(std::ostream& os, const matrix<T> &m) {
   return os;
 
 }
+
+template <class T>
+bool matrix<T>::less_than(const matrix & m) const {
+  if (rows() != m.rows() || columns() != m.columns()) {
+    throw matrix_exception("Attemped to compare matrices with incompatible sizes");
+  }
+  for (int i = 0; i<rows(); i++) {
+    for (int j = 0; j<columns(); j++) {
+      if (get(i, j) >= m.get(i, j)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}

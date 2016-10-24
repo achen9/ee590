@@ -56,5 +56,17 @@ int main ( int argc, char * argv[] ) {
   matrix<bool> F = A.scale(2);
   ASSERT(F == C);
   */
+
+  // Test Set 5: Relational operation tests
+  // Check if matrices can be compared using the overloaded
+  // relational operators: '==','!=','>','<','>=','<='
+  /*ASSERT(D == B);
+  ASSERT(D != C);
+  ASSERT(C > A);
+  ASSERT(B < F);
+  ASSERT(D <= A);
+  ASSERT(B >= A);
+  */
+
   SUCCEED;
 }

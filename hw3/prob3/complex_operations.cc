@@ -23,17 +23,17 @@
 #include <cmath>
 #include "complex.hh"
 
-#define TOLERANCE 0.00001
+#define COMPLEX_TOL 0.00001
 
 bool complex::isreal(void) const {
-  if (TOLERANCE > abs(im())) {
+  if (COMPLEX_TOL > abs(im())) {
     return true;
   } else {
     return false;
   }
 }
 bool complex::isimag(void) const {
-  if (TOLERANCE > abs(re())) {
+  if (COMPLEX_TOL > abs(re())) {
     return true;
   } else {
     return false;
@@ -85,7 +85,7 @@ complex complex::negate(void) const {
   return negative.delnegzero();
 }
 bool complex::equals(const complex &c) const {
-  if (TOLERANCE > std::abs(re() - c.re()) && TOLERANCE > std::abs(im() - c.im())) {
+  if (COMPLEX_TOL > std::abs(re() - c.re()) && COMPLEX_TOL > std::abs(im() - c.im())) {
     return true;
   } else {
     return false;

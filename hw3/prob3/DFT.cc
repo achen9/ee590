@@ -30,11 +30,10 @@
 std::map<int, matrix<complex>> DFT::dft_matrices;
 std::map<int, matrix<complex>>::iterator DFT::it;
 
-DFT::DFT(int n) {
+DFT::DFT(int n) : num_pts(n) {
   if (n <= 0) {
     throw DFT_exception("Negative or 0 number of points in sequence.");
   }
-  num_pts = n;
   points = new complex[n];
 }
 DFT::~DFT() {

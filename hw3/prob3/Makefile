@@ -2,10 +2,10 @@ CXX = g++ -std=c++11
 
 HEADERS = matrix.hh matrix.impl.hh
 
-FRACTION_SOURCES = ../prob1/fraction.cc ../prob1/fraction_operations.cc
-FRACTION_HEADERS = ../prob1/fraction.hh
-COMPLEX_SOURCES = ../prob2/complex.cc ../prob2/complex_operations.cc
-COMPLEX_HEADERS = ../prob2/complex.hh
+FRACTION_SOURCES = fraction.cc fraction_operations.cc
+FRACTION_HEADERS = fraction.hh
+COMPLEX_SOURCES = complex.cc complex_operations.cc
+COMPLEX_HEADERS = complex.hh
 DFT_SOURCES = DFT.cc
 DFT_HEADERS = DFT.hh
 
@@ -33,17 +33,11 @@ $(LIB_COMPLEX): $(COMPLEX_OBJECTS) $(COMPLEX_HEADERS)
 	ar cr $(LIB_COMPLEX) complex.o complex_operations.o
 
 $(LIB_DFT): $(DFT_OBJECTS) $(DFT_HEADERS)
-	ar cr $(LIB_DFT) DFT.o
+	ar cr $(LIB_DFT) DFT.o complex.o complex_operations.o
 
-%.o: %.cc $(FRACTION_HEADERS)
-	$(CXX) -c $<
-%.o: %.cc $(COMPLEX_HEADERS)
-	$(CXX) -c $<
-%.o: %.cc $(DFT_HEADERS) 
-	$(CXX) -c $<
-%.o: %.cc $(HEADERS) 
+%.o: %.cc $(HEADERS) $(FRACTION_HEADERS) $(COMPLEX_HEADERS) $(DFT_HEADERS)
 	$(CXX) -c $<
 
 clean:
-	rm -f fraction.o fraction_operations.o complex.o complex_operations.o $(LIB_FRACTION) $(LIB_COMPLEX) $(DFT_OBJECTS) $(LIB_DFT)
+	rm -f $(FRACTION_OBJECTS) $(LIB_FRACTION) $(COMPLEX_OBJECTS) $(LIB_COMPLEX) $(DFT_OBJECTS) $(LIB_DFT)
 	make -C test clean

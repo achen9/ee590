@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
+#include <map>
 #include "complex.hh"
+#include "matrix.hh"
 
 class DFT_exception : public std::runtime_error {
 public:
@@ -22,13 +24,20 @@ public:
   complex get(int n) const;
 
   // Setters
-  //inline void set_real(double r) { real = r; }
-  //inline void set_imag(double i) { imaginary = i; }
+  void set(int n, complex c);
+
+  //Discrete Fourier Transform Operations
+  matrix<complex> transform_matrix(void);
+  matrix<complex> unitary_matrix(void);
+  matrix<complex> inverse_matrix(void);
+
+  static std::map<int, matrix<complex>> dft_matrices;
+  static std::map<int, matrix<complex>>::iterator it;
 
 private:
   complex *points;
-  int numPoints;
+  int num_pts;
+  
 };
-
 // Interface with ostreams
 //std::ostream& operator<<(std::ostream& os, const DFT &c);

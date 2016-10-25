@@ -1,3 +1,4 @@
+#pragma once
 template <class T>
 matrix<T>::matrix ( int r, int c ) : num_rows(r), num_columns(c) {
 

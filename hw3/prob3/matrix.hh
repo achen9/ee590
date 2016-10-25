@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <stdexcept>
 
@@ -13,6 +14,7 @@ public:
   // Constructors and destructors
   matrix(int r, int c);
   matrix(int s) : matrix(s, s) {};
+  matrix(void) : matrix(1) {};
   ~matrix();
 
   // Named constructors

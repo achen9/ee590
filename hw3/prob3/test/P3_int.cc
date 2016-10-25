@@ -94,10 +94,12 @@ int main ( int argc, char * argv[] ) {
   }
   matrix<int> O = matrix<int>::ones(size, size-1);
   for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
+    for (int j = 0; j < size - 1; j++) {
       ASSERT(1 == O.get(i, j));
     }
   }
+
+  std::cout << std::endl << F ;
   
   SUCCEED;
 }

@@ -20,6 +20,7 @@
  * alexac9@uw.edu
  */
 #include <iostream>
+#include <iomanip>
 #include <math.h>
 #include "complex.hh"
 

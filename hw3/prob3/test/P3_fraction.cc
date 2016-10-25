@@ -69,8 +69,8 @@ int main ( int argc, char * argv[] ) {
   // relational operators: '==','!=','>','<','>=','<='
   ASSERT(D == B);
   ASSERT(D != C);
-  ASSERT(C > A);
-  ASSERT(B < F);
+  ASSERT(!(C > A));
+  ASSERT(!(B < F));
   ASSERT(D <= A);
   ASSERT(B >= A);
 
@@ -118,10 +118,12 @@ int main ( int argc, char * argv[] ) {
   }
   matrix<fraction> O = matrix<fraction>::ones(size, size - 1);
   for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
+    for (int j = 0; j < size - 1; j++) {
       ASSERT((fraction)1 == O.get(i, j));
     }
   }
+
+  std::cout << std::endl << F;
 
   SUCCEED;
 }

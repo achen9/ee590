@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "test.hh"
 #include "matrix.hh"
 
@@ -22,10 +23,10 @@ int main ( int argc, char * argv[] ) {
   // Check entries in matrix can be set and retrieved
   A.set(0, 0, 1.6); A.set(0, 1, 2.3);
   A.set(1, 0, 3.2); A.set(1, 1, 4.1);
-  ASSERT(TOLERANCE > A.get(0, 0) - 1.6);
-  ASSERT(TOLERANCE > A.get(0, 1) - 2.3);
-  ASSERT(TOLERANCE > A.get(1, 0) - 3.2);
-  ASSERT(TOLERANCE > A.get(1, 1) - 4.1);
+  ASSERT(TOLERANCE > std::abs(A.get(0, 0) - 1.6));
+  ASSERT(TOLERANCE > std::abs(A.get(0, 1) - 2.3));
+  ASSERT(TOLERANCE > std::abs(A.get(1, 0) - 3.2));
+  ASSERT(TOLERANCE > std::abs(A.get(1, 1) - 4.1));
 
   // Test set 3: Copy constructor tests
   // Check matrix A can be copied using the '=' overloaded operator
@@ -38,38 +39,38 @@ int main ( int argc, char * argv[] ) {
   // C = [3.2 4.6
   //      6.4 8.2]
   matrix<double> C = A + B;
-  ASSERT(TOLERANCE > C.get(0, 0) - 3.2);
-  ASSERT(TOLERANCE > C.get(0, 1) - 4.6);
-  ASSERT(TOLERANCE > C.get(1, 0) - 6.4);
-  ASSERT(TOLERANCE > C.get(1, 1) - 8.2);
+  ASSERT(TOLERANCE > std::abs(C.get(0, 0) - 3.2));
+  ASSERT(TOLERANCE > std::abs(C.get(0, 1) - 4.6));
+  ASSERT(TOLERANCE > std::abs(C.get(1, 0) - 6.4));
+  ASSERT(TOLERANCE > std::abs(C.get(1, 1) - 8.2));
   // D = [1.6 2.3
   //      3.2 4.1]
   matrix<double> D = C - A;
-  ASSERT(TOLERANCE > D.get(0, 0) - 1.6);
-  ASSERT(TOLERANCE > D.get(0, 1) - 2.3);
-  ASSERT(TOLERANCE > D.get(1, 0) - 3.2);
-  ASSERT(TOLERANCE > D.get(1, 1) - 4.1);
+  ASSERT(TOLERANCE > std::abs(D.get(0, 0) - 1.6));
+  ASSERT(TOLERANCE > std::abs(D.get(0, 1) - 2.3));
+  ASSERT(TOLERANCE > std::abs(D.get(1, 0) - 3.2));
+  ASSERT(TOLERANCE > std::abs(D.get(1, 1) - 4.1));
   // E = [19.84 26.22
   //      36.48 48.34]
   matrix<double> E = A * C;
-  ASSERT(TOLERANCE > E.get(0, 0) - 19.84);
-  ASSERT(TOLERANCE > E.get(0, 1) - 26.22);
-  ASSERT(TOLERANCE > E.get(1, 0) - 36.48);
-  ASSERT(TOLERANCE > E.get(1, 1) - 48.34);
+  ASSERT(TOLERANCE > std::abs(E.get(0, 0) - 19.84));
+  ASSERT(TOLERANCE > std::abs(E.get(0, 1) - 26.22));
+  ASSERT(TOLERANCE > std::abs(E.get(1, 0) - 36.48));
+  ASSERT(TOLERANCE > std::abs(E.get(1, 1) - 48.34));
   // F = 2 * A = [3.2 4.6
   //              6.4 8.2]
   matrix<double> F = A.scale(2.0);
-  ASSERT(TOLERANCE > F.get(0, 0) - 3.2);
-  ASSERT(TOLERANCE > F.get(0, 1) - 4.6);
-  ASSERT(TOLERANCE > F.get(1, 0) - 6.4);
-  ASSERT(TOLERANCE > F.get(1, 1) - 8.2);
+  ASSERT(TOLERANCE > std::abs(F.get(0, 0) - 3.2));
+  ASSERT(TOLERANCE > std::abs(F.get(0, 1) - 4.6));
+  ASSERT(TOLERANCE > std::abs(F.get(1, 0) - 6.4));
+  ASSERT(TOLERANCE > std::abs(F.get(1, 1) - 8.2));
 
   // Test Set 5: Relational operation tests
   // Check if matrices can be compared using the overloaded
   // relational operators: '==','!=','>','<','>=','<='
   // Note: due to rounding errors, '==', '<=','>=' can cause
   // erroneous results and have been commented out
-  //ASSERT(D == B);
+  ASSERT(D == B);
   ASSERT(D != C);
   ASSERT(C > A);
   ASSERT(B < F);
@@ -83,24 +84,24 @@ int main ( int argc, char * argv[] ) {
   G.set(1, 0, 2); G.set(1, 1, 0); G.set(1, 2, -2);
   G.set(2, 0, 2); G.set(2, 1, 5); G.set(2, 2, -1);
   matrix<double> H = G.m_minor(0, 0);
-  ASSERT(TOLERANCE > H.get(0, 0) - 0.0);
-  ASSERT(TOLERANCE > H.get(0, 1) + 2.0);
-  ASSERT(TOLERANCE > H.get(1, 0) - 5.0);
-  ASSERT(TOLERANCE > H.get(1, 1) + 1.0);
-  ASSERT(TOLERANCE > G.det() - 4.0);
+  ASSERT(TOLERANCE > std::abs(H.get(0, 0) - 0.0));
+  ASSERT(TOLERANCE > std::abs(H.get(0, 1) + 2.0));
+  ASSERT(TOLERANCE > std::abs(H.get(1, 0) - 5.0));
+  ASSERT(TOLERANCE > std::abs(H.get(1, 1) + 1.0));
+  ASSERT(TOLERANCE > std::abs(G.det() - 4.0));
   // inverse(G) = [2.5  -4.25 -1.5
   //               -0.5 0.75  0.5
   //               2.5  -4.75 -1.5]
   matrix<double> K = G.inverse();
-  ASSERT(TOLERANCE > K.get(0, 0) - 2.5);
-  ASSERT(TOLERANCE > K.get(0, 1) + 4.25);
-  ASSERT(TOLERANCE > K.get(0, 2) + 1.5);
-  ASSERT(TOLERANCE > K.get(1, 0) + 0.5);
-  ASSERT(TOLERANCE > K.get(1, 1) - 0.75);
-  ASSERT(TOLERANCE > K.get(1, 2) - 0.5);
-  ASSERT(TOLERANCE > K.get(2, 0) - 2.5);
-  ASSERT(TOLERANCE > K.get(2, 1) + 4.75);
-  ASSERT(TOLERANCE > K.get(2, 2) + 1.5);
+  ASSERT(TOLERANCE > std::abs(K.get(0, 0) - 2.5));
+  ASSERT(TOLERANCE > std::abs(K.get(0, 1) + 4.25));
+  ASSERT(TOLERANCE > std::abs(K.get(0, 2) + 1.5));
+  ASSERT(TOLERANCE > std::abs(K.get(1, 0) + 0.5));
+  ASSERT(TOLERANCE > std::abs(K.get(1, 1) - 0.75));
+  ASSERT(TOLERANCE > std::abs(K.get(1, 2) - 0.5));
+  ASSERT(TOLERANCE > std::abs(K.get(2, 0) - 2.5));
+  ASSERT(TOLERANCE > std::abs(K.get(2, 1) + 4.75));
+  ASSERT(TOLERANCE > std::abs(K.get(2, 2) + 1.5));
 
   // Test set 7: Named constructor tests
   // Test the named constructors identity, and ones
@@ -109,18 +110,20 @@ int main ( int argc, char * argv[] ) {
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
       if (i == j) {
-        ASSERT(TOLERANCE > I.get(i, j) - 1.0);
+        ASSERT(TOLERANCE > std::abs(I.get(i, j) - 1.0));
       } else {
-        ASSERT(TOLERANCE > I.get(i, j) - 0.0);
+        ASSERT(TOLERANCE > std::abs(I.get(i, j) - 0.0));
       }
     }
   }
   matrix<double> O = matrix<double>::ones(size, size - 1);
   for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
-      ASSERT(TOLERANCE > O.get(i, j) - 1.0);
+    for (int j = 0; j < size - 1; j++) {
+      ASSERT(TOLERANCE > std::abs(O.get(i, j) - 1.0));
     }
   }
+
+  std::cout << std::endl << F;
 
   SUCCEED;
 }

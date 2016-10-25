@@ -25,18 +25,15 @@ int main ( int argc, char * argv[] ) {
   complex A3(3.6, 4.0); complex A4(-9.7, 5.4);
   A.set(0, 0, A1); A.set(0, 1, A2);
   A.set(1, 0, A3); A.set(1, 1, A4);
-  ASSERT(TOLERANCE > A.get(0, 0).re() - 1.2 && TOLERANCE > A.get(0, 0).im() - 3.1);
-  ASSERT(TOLERANCE > A.get(0, 1).re() + 2.4 && TOLERANCE > A.get(0, 1).im() - 3.9);
-  ASSERT(TOLERANCE > A.get(1, 0).re() - 3.6 && TOLERANCE > A.get(1, 0).im() - 4.0);
-  ASSERT(TOLERANCE > A.get(1, 1).re() + 9.7 && TOLERANCE > A.get(1, 1).im() - 5.4);
+  ASSERT(TOLERANCE > std::abs(A.get(0, 0).re() - 1.2) && TOLERANCE > std::abs(A.get(0, 0).im() - 3.1));
+  ASSERT(TOLERANCE > std::abs(A.get(0, 1).re() + 2.4) && TOLERANCE > std::abs(A.get(0, 1).im() - 3.9));
+  ASSERT(TOLERANCE > std::abs(A.get(1, 0).re() - 3.6) && TOLERANCE > std::abs(A.get(1, 0).im() - 4.0));
+  ASSERT(TOLERANCE > std::abs(A.get(1, 1).re() + 9.7) && TOLERANCE > std::abs(A.get(1, 1).im() - 5.4));
 
   // Test set 3: Copy constructor tests
   // Check matrix A can be copied using the '=' overloaded operator
   matrix<complex> B = A;
-  ASSERT(TOLERANCE > B.get(0, 0).re() - 1.2 && TOLERANCE > B.get(0, 0).im() - 3.1);
-  ASSERT(TOLERANCE > B.get(0, 1).re() + 2.4 && TOLERANCE > B.get(0, 1).im() - 3.9);
-  ASSERT(TOLERANCE > B.get(1, 0).re() - 3.6 && TOLERANCE > B.get(1, 0).im() - 4.0);
-  ASSERT(TOLERANCE > B.get(1, 1).re() + 9.7 && TOLERANCE > B.get(1, 1).im() - 5.4);
+  ASSERT(B == A);
 
   // Test set 4: Arithmetic operations tests
   // Check if matrices can be added, multiplied, subtracted,
@@ -46,34 +43,34 @@ int main ( int argc, char * argv[] ) {
   matrix<complex> C = A + B;
   complex C1(2.4, 6.2); complex C2(-4.8, 7.8);
   complex C3(7.2, 8.0); complex C4(-19.4, 10.8);
-  //ASSERT(C1 == C.get(0, 0));
-  //ASSERT(C2 == C.get(0, 1));
-  //ASSERT(C3 == C.get(1, 0));
-  //ASSERT(C4 == C.get(1, 1));
+  ASSERT(TOLERANCE > std::abs(C.get(0, 0).re() - 2.4) && TOLERANCE > std::abs(C.get(0, 0).im() - 6.2));
+  ASSERT(TOLERANCE > std::abs(C.get(0, 1).re() + 4.8) && TOLERANCE > std::abs(C.get(0, 1).im() - 7.8));
+  ASSERT(TOLERANCE > std::abs(C.get(1, 0).re() - 7.2) && TOLERANCE > std::abs(C.get(1, 0).im() - 8.0));
+  ASSERT(TOLERANCE > std::abs(C.get(1, 1).re() + 19.4) && TOLERANCE > std::abs(C.get(1, 1).im() - 10.8));
   // D = [1.2+3.1j -2.4+3.9j
   //      3.6+4j   -9.7+5.4j]
   matrix<complex> D = C - A;
-  //ASSERT(D == B);
+  ASSERT(D == B);
   // E = [-64.82+23.76j -25.5-107.1j
   //      -129.2-6.8j   81.38-200.64j]
   matrix<complex> E = A * C;
-  //ASSERT(14 == E.get(0, 0));
-  //ASSERT(20 == E.get(0, 1));
-  //ASSERT(30 == E.get(1, 0));
-  //ASSERT(44 == E.get(1, 1));
-  // F = 2 * A = [2/3 -4/3
-  //              3/2 -18/5]
+  ASSERT(TOLERANCE > std::abs(E.get(0, 0).re() + 64.82) && TOLERANCE > std::abs(E.get(0, 0).im() - 23.76));
+  ASSERT(TOLERANCE > std::abs(E.get(0, 1).re() + 25.5) && TOLERANCE > std::abs(E.get(0, 1).im() + 107.1));
+  ASSERT(TOLERANCE > std::abs(E.get(1, 0).re() + 129.2) && TOLERANCE > std::abs(E.get(1, 0).im() + 6.8));
+  ASSERT(TOLERANCE > std::abs(E.get(1, 1).re() - 81.38) && TOLERANCE > std::abs(E.get(1, 1).im() + 200.64));
+  // F = 2 * A = [2.4+6.2j -4.8+7.8j
+  //              7.2+8j   -19.4+10.8j]
   complex S = 2;
   matrix<complex> F = A.scale(S);
-  //ASSERT(F == C);
+  ASSERT(F == C);
 
   // Test Set 5: Relational operation tests
   // Check if matrices can be compared using the overloaded
   // relational operators: '==','!=','>','<','>=','<='
   // Note: '>','<','>=','<=' do not make sense for comparing
   // complex numbers
-  //ASSERT(D == B);
-  //ASSERT(D != C);
+  ASSERT(D == B);
+  ASSERT(D != C);
 
   // Test set 6: Matrix operations tests
   // Check matrix minor, determinant, and inverse methods
@@ -116,10 +113,12 @@ int main ( int argc, char * argv[] ) {
   }
   matrix<complex> O = matrix<complex>::ones(size, size - 1);
   for (int i = 0; i < size; i++) {
-    for (int j = 0; j < size; j++) {
+    for (int j = 0; j < size - 1; j++) {
       ASSERT(TOLERANCE > O.get(i, j).re() - 1.0 && TOLERANCE > I.get(i, j).im() - 0.0);
     }
   }
+
+  std::cout << std::endl << F;
 
   SUCCEED;
 }

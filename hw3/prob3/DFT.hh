@@ -28,7 +28,7 @@ public:
   matrix<complex> unitary_matrix(void);
   matrix<complex> inverse_matrix(void);
   matrix<complex> conjugate_transpose(const matrix<complex> &m) const;
-  matrix<complex> dft(const matrix<complex> &m) const;
+  matrix<complex> dft(const matrix<complex> &m);
 
   static std::map<int, matrix<complex>> dft_matrices;
   static std::map<int, matrix<complex>>::iterator it;

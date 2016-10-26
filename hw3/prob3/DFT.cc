@@ -79,6 +79,13 @@ matrix<complex> DFT::conjugate_transpose(const matrix<complex> &m) const {
   }
   return ct;
 }
+matrix<complex> DFT::dft(const matrix<complex> &m) {
+  if (num_pts != m.rows() || 1 != m.columns()) {
+    throw DFT_exception("Incompatible input vector provided.");
+  }
+  matrix<complex> u = unitary_matrix();
+  return u * m;
+}
 /*
 DFT &DFT::operator=(const complex &other) {
   if (this != &other) {

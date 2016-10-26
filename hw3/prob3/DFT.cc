@@ -86,20 +86,10 @@ matrix<complex> DFT::dft(const matrix<complex> &m) {
   matrix<complex> u = unitary_matrix();
   return u * m;
 }
-/*
-DFT &DFT::operator=(const complex &other) {
-  if (this != &other) {
-    real = other.re();
-    imaginary = other.im();
+matrix<complex> DFT::dft_inv(const matrix<complex> &m) {
+  if (num_pts != m.rows() || 1 != m.columns()) {
+    throw DFT_exception("Incompatible input vectory provided.");
   }
-  return *this;
+  matrix<complex> inv = inverse_matrix();
+  return inv * m;
 }
-std::ostream& operator<<(std::ostream& os, const complex &c) {
-  os << c.re();
-  if (0 < c.im()) {
-    os << '+';
-  } 
-  os << c.im() << 'j';
-  return os;
-}
-*/

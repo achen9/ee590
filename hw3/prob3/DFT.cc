@@ -54,7 +54,7 @@ void DFT::set(int n, complex c) {
 }
 matrix<complex> DFT::transform_matrix(void) {
   it = dft_matrices.find(1);
-  if (it == dft_matrices.end()) {
+  if (it == dft_matrices.end()) { // map is empty
     complex exponent(0, -2 * PI / num_pts);
     complex w = exponent.exp();
     matrix<complex> m(num_pts);
@@ -66,6 +66,15 @@ matrix<complex> DFT::transform_matrix(void) {
     dft_matrices[1] = m;
   }
   return dft_matrices[1];
+}
+matrix<complex> DFT::unitary_matrix(void) {
+  it = dft_matrices.find(2);
+  if (it == dft_matrices.end()) { // map does not contain unitary matrix
+    matrix<complex> m = transform_matrix();
+    matrix<complex> u = m.scale((complex)(1.0 / std::sqrt(num_pts)));
+    dft_matrices[2] = u;
+  }
+  return dft_matrices[2];
 }
 /*
 DFT &DFT::operator=(const complex &other) {

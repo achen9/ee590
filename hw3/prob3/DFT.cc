@@ -34,23 +34,6 @@ DFT::DFT(int n) : num_pts(n) {
   if (n <= 0) {
     throw DFT_exception("Negative or 0 number of points in sequence.");
   }
-  points = new complex[n];
-}
-DFT::~DFT() {
-  delete []points;
-}
-complex DFT::get(int n) const {
-  if (num_pts < n || 0 > n) {
-    throw DFT_exception("Attempted to access point in sequence that is out of range.");
-  }
-  complex elem = points[n];
-  return elem;
-}
-void DFT::set(int n, complex c) {
-  if (num_pts < n || 0 > n) {
-    throw DFT_exception("Attempted to set point in sequence that is out of range.");
-  }
-  points[n] = c;
 }
 matrix<complex> DFT::transform_matrix(void) {
   it = dft_matrices.find(1);
@@ -75,6 +58,26 @@ matrix<complex> DFT::unitary_matrix(void) {
     dft_matrices[2] = u;
   }
   return dft_matrices[2];
+}
+matrix<complex> DFT::inverse_matrix(void) {
+  it = dft_matrices.find(3);
+  if (it == dft_matrices.end()) { // map does not contain inverse matrix
+    matrix<complex> u = unitary_matrix();
+    matrix<complex> inv = conjugate_transpose(u);
+    inv = inv.scale((complex)(1.0 / num_pts));
+    dft_matrices[3] = inv;
+  }
+  return dft_matrices[3];
+}
+matrix<complex> DFT::conjugate_transpose(const matrix<complex> &m) const {
+  matrix<complex> t = m.transpose();
+  matrix<complex> ct(t.rows(), t.columns());
+  for (int i = 0; i < ct.rows(); i++) {
+    for (int j = 0; j < ct.columns(); j++) {
+      ct.set(i, j, t.get(i, j).conjugate());
+    }
+  }
+  return ct;
 }
 /*
 DFT &DFT::operator=(const complex &other) {

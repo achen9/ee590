@@ -214,6 +214,17 @@ bool matrix<T>::less_than(const matrix & m) const {
 }
 
 template <class T>
+matrix<T> matrix<T>::transpose(void) const {
+  matrix m(columns(), rows());
+  for (int i = 0; i < m.rows(); i++) {
+    for (int j = 0; j < m.columns(); j++) {
+      m.set(i, j, get(j, i));
+    }
+  }
+  return m;
+}
+
+template <class T>
 matrix<T> matrix<T>::m_minor(int r, int c) {
 
   if (!in_range(r, c)) {

@@ -12,10 +12,6 @@ int main ( int argc, char * argv[] ) {
 
   // Test 1: Check DFT unitary matrix can be computed
   DFT d(4);
-  complex d_elem = 1;
-  for (int i = 0; i < 4; i++) {
-    d.set(0, d_elem);
-  }
   d.unitary_matrix();
   ASSERT((complex)0.5 == DFT::dft_matrices[2].get(0, 0));
   ASSERT((complex)0.5 == DFT::dft_matrices[2].get(2, 0));

@@ -14,28 +14,26 @@ class DFT {
 public:
   // Constructors and destructors
   DFT(int n);
-  ~DFT();
+  inline ~DFT() {}
 
   // Copy constructor
   //DFT(const DFT &c);
   //DFT& operator=(const DFT &other);
 
   // Getters
-  complex get(int n) const;
-
-  // Setters
-  void set(int n, complex c);
+  inline int npts(void) { return num_pts; }
 
   //Discrete Fourier Transform Operations
   matrix<complex> transform_matrix(void);
   matrix<complex> unitary_matrix(void);
   matrix<complex> inverse_matrix(void);
+  matrix<complex> conjugate_transpose(const matrix<complex> &m) const;
+  matrix<complex> dft(const matrix<complex> &m) const;
 
   static std::map<int, matrix<complex>> dft_matrices;
   static std::map<int, matrix<complex>>::iterator it;
 
 private:
-  complex *points;
   int num_pts;
   
 };

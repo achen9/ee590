@@ -41,6 +41,7 @@ public:
   matrix scale(T d) const;
   bool equals(const matrix &m) const;
   bool less_than(const matrix &m) const;
+  matrix transpose(void) const;
 
   inline matrix operator+(const matrix &m) { return add(m); }
   inline matrix operator-(const matrix &m) { return add(m.scale(-1)); }

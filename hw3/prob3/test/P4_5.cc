@@ -6,11 +6,11 @@
 #define TOLERANCE 0.001
 
 int main ( int argc, char * argv[] ) {
-  // DFT UNITARY MATRIX TESTS
-  // This file tests the unitary_matrix() method to create a 
-  // nxn DFT unitary matrix for the transform
+  // DFT TESTS
+  // This file tests the dft() method to compute
+  // the DFT of an input vector
 
-  // Test 1: Check DFT inverse matrix can be computed
+  // Test 1: Check DFT can be computed
   DFT d(4);
   matrix<complex> input(4, 1);
   input.set(0, 0, (complex)1);

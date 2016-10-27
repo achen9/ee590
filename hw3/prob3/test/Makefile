@@ -15,7 +15,7 @@ P3: $(P3_TARGETS)
 P4: $(P4_TARGETS)
 
 %.x: %.cc ../*.hh ../libfraction.a ../libcomplex.a ../libDFT.a
-	$(CXX)  $(INCLUDE_DIRS) $(LIBDIRS) $< $(LIBS) -o $@ -g
+	$(CXX)  $(INCLUDE_DIRS) $(LIBDIRS) $< $(LIBS) -o $@
 
 test: $(P3_TARGETS) $(P4_TARGETS)
 	./test.sh

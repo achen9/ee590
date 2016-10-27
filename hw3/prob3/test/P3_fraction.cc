@@ -104,7 +104,7 @@ int main ( int argc, char * argv[] ) {
   ASSERT(G9 == K.get(2, 2));
 
   // Test set 7: Named constructor tests
-  // Test the named constructors identity, and ones
+  // Test the named constructors identity and ones
   int size = 4;
   matrix<fraction> I = matrix<fraction>::identity(size);
   for (int i = 0; i < size; i++) {
@@ -123,6 +123,8 @@ int main ( int argc, char * argv[] ) {
     }
   }
 
+  // Test set 8: Interface with ostreams tests
+  // Test the printing of the matrix to std output
   std::cout << std::endl << F;
 
   SUCCEED;

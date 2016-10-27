@@ -11,6 +11,8 @@ int main ( int argc, char * argv[] ) {
   // nxn DFT unitary matrix for the transform
 
   // Test 1: Check DFT unitary matrix can be computed
+  // The cached matrix should be stored in the map dft_matrices
+  // with key = 2
   DFT d(4);
   d.unitary_matrix();
   ASSERT((complex)0.5 == DFT::dft_matrices[2].get(0, 0));

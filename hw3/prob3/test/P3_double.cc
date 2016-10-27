@@ -104,7 +104,7 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > std::abs(K.get(2, 2) + 1.5));
 
   // Test set 7: Named constructor tests
-  // Test the named constructors identity, and ones
+  // Test the named constructors identity and ones
   int size = 4;
   matrix<double> I = matrix<double>::identity(size);
   for (int i = 0; i < size; i++) {
@@ -123,6 +123,8 @@ int main ( int argc, char * argv[] ) {
     }
   }
 
+  // Test set 8: Interface with ostreams tests
+  // Test the printing of the matrix to std output
   std::cout << std::endl << F;
 
   SUCCEED;

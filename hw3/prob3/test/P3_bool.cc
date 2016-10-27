@@ -30,46 +30,23 @@ int main ( int argc, char * argv[] ) {
   matrix<bool> B = A;
   ASSERT(B == A);
 
-  /*//Test set 4: Arithmetic operations tests
-  // Check if matrices can be added, multiplied, subtracted,
-  // and scaled using the overloaded operators
-  // C = [2 4
-  //      6 8]
-  matrix<bool> C = A + B;
-  ASSERT(2 == C.get(0, 0));
-  ASSERT(4 == C.get(0, 1));
-  ASSERT(6 == C.get(1, 0));
-  ASSERT(8 == C.get(1, 1));
-  // D = [1 2
-  //      3 4]
-  matrix<bool> D = C - A;
-  ASSERT(D == B);
-  // E = [14 20
-  //      30 44]
-  matrix<bool> E = A * C;
-  ASSERT(14 == E.get(0, 0));
-  ASSERT(20 == E.get(0, 1));
-  ASSERT(30 == E.get(1, 0));
-  ASSERT(44 == E.get(1, 1));
-  // F = 2 * A = [2 4
-  //              6 8]
-  matrix<bool> F = A.scale(2);
-  ASSERT(F == C);
-  */
+  //Test set 4: Arithmetic operations tests - N/A to boolean types
 
   // Test Set 5: Relational operation tests
   // Check if matrices can be compared using the overloaded
   // relational operators: '==','!=','>','<','>=','<='
-  /*ASSERT(D == B);
-  ASSERT(D != C);
-  ASSERT(C > A);
-  ASSERT(B < F);
-  ASSERT(D <= A);
+  matrix<bool> C(2, 2);
+  C.set(0, 0, false); C.set(0, 1, true);
+  C.set(1, 0, false); C.set(1, 1, true);
+  ASSERT(A == B);
+  ASSERT(A != C);
+  ASSERT(B <= A);
   ASSERT(B >= A);
-  */
+
+  // Test set 6: Matrix operations tests - N/A to boolean types
 
   // Test set 7: Named constructor tests
-  // Test the named constructors identity, and ones
+  // Test the named constructors identity and ones
   int size = 4;
   matrix<bool> I = matrix<bool>::identity(size);
   for (int i = 0; i < size; i++) {
@@ -88,6 +65,8 @@ int main ( int argc, char * argv[] ) {
     }
   }
 
+  // Test set 8: Interface with ostreams tests
+  // Test the printing of the matrix to std output
   std::cout << std::boolalpha;
   std::cout << std::endl << I;
 

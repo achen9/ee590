@@ -118,6 +118,8 @@ int main ( int argc, char * argv[] ) {
     }
   }
 
+  // Test set 8: Interface with ostreams tests
+  // Test the printing of the matrix to std output
   std::cout << std::endl << F;
 
   SUCCEED;

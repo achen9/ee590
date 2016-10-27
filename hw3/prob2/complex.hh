@@ -17,6 +17,9 @@ public:
   complex(void) : complex(0, 0) {}
   inline ~complex() {}
 
+  // Named constructor
+  static complex random(double min, double max);
+
   // Copy constructor
   complex(const complex &c);
   complex& operator=(const complex &other);
@@ -39,6 +42,7 @@ public:
   complex mult(const complex &c) const;
   complex div(const complex &c) const;
   complex negate(void) const;
+  bool equals(const complex &c) const;
   inline double mag(void) const { return sqrt(std::pow(re(), 2) + std::pow(im(), 2)); }
   inline double angle(void) const { return std::atan2(im(), re()); }
   complex pow(int e) const;
@@ -49,6 +53,8 @@ public:
   inline complex operator*(const complex &c) const { return mult(c); }
   inline complex operator/(const complex &c) const { return div(c); }
   inline complex operator-(void) const { return negate(); }
+  inline bool operator==(const complex &c) const { return equals(c); }
+  inline bool operator!=(const complex &c) const { return !equals(c); }
 
 private:
   double real;

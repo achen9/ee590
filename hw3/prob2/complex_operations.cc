@@ -23,17 +23,17 @@
 #include <cmath>
 #include "complex.hh"
 
-#define TOLERANCE 0.00000001
+#define COMPLEX_TOL 0.0001
 
 bool complex::isreal(void) const {
-  if (TOLERANCE > abs(im())) {
+  if (COMPLEX_TOL > abs(im())) {
     return true;
   } else {
     return false;
   }
 }
 bool complex::isimag(void) const {
-  if (TOLERANCE > abs(re())) {
+  if (COMPLEX_TOL > abs(re())) {
     return true;
   } else {
     return false;
@@ -83,6 +83,13 @@ complex complex::div(const complex &c) const {
 complex complex::negate(void) const {
   complex negative(-re(), -im());
   return negative.delnegzero();
+}
+bool complex::equals(const complex &c) const {
+  if (COMPLEX_TOL > std::abs(re() - c.re()) && COMPLEX_TOL > std::abs(im() - c.im())) {
+    return true;
+  } else {
+    return false;
+  }
 }
 complex complex::pow(int e) const {
   // Apply de Moivre's Formula: (r(cos(x) + isin(x)))^n = r^n(cos(nx) + isin(nx))

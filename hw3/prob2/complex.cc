@@ -21,6 +21,7 @@
  */
 #include <iostream>
 #include <math.h>
+#include <random>
 #include "complex.hh"
 
 complex::complex(const complex &c) {
@@ -42,4 +43,12 @@ std::ostream& operator<<(std::ostream& os, const complex &c) {
   os << c.im() << 'j';
   return os;
 }
-
+complex complex::random(double min, double max) {
+  double r, i;
+  std::default_random_engine generator;
+  std::uniform_real_distribution<double> distribution(min, max);
+  r = distribution(generator);
+  i = distribution(generator);
+  complex rc(r, i);
+  return rc;
+}

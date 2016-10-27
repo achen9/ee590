@@ -23,7 +23,7 @@
 #include <cmath>
 #include "complex.hh"
 
-#define COMPLEX_TOL 0.00001
+#define COMPLEX_TOL 0.0001
 
 bool complex::isreal(void) const {
   if (COMPLEX_TOL > abs(im())) {

@@ -18,9 +18,9 @@ template <class T>
 matrix<T>::~matrix() {
   delete []value;
 }
-/*
-template <class T>
-matrix<T> matrix<T>::random(int r, int c, T min, T max) {
+
+/*template <class T>
+matrix<T> matrix<T>::random(int r, int c) {
 
   if (r <= 0 || c <= 0) {
     throw matrix_exception("Attempted to build a random matrix with non-positive number of rows and/or columns");
@@ -36,7 +36,7 @@ matrix<T> matrix<T>::random(int r, int c, T min, T max) {
 
   for (int i = 0; i<r; i++) {
     for (int j = 0; j<c; j++) {
-      m.set(i, j, rand() % d - h);
+      m.set(i, j, std::rand() % d - h);
     }
   }
 
@@ -157,7 +157,7 @@ matrix<T> matrix<T>::mult(const matrix &m) const {
     throw matrix_exception("Attemped to multiply matrices with incompatible sizes");
   }
 
-  matrix M(rows(), columns());
+  matrix M(rows(), m.columns());
 
   for (int i = 0; i<rows(); i++) {
     for (int j = 0; j<m.columns(); j++) {

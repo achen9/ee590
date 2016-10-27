@@ -17,6 +17,9 @@ public:
   complex(void) : complex(0, 0) {}
   inline ~complex() {}
 
+  // Named constructor
+  static complex random(double min, double max);
+
   // Copy constructor
   complex(const complex &c);
   complex& operator=(const complex &other);

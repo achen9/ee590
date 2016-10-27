@@ -18,7 +18,7 @@ public:
   ~matrix();
 
   // Named constructors
-  static matrix random(int r, int c, T min, T max);
+  //static matrix random(int r, int c, T min, T max);
   static matrix identity(int s);
   static matrix ones(int r, int c);
 

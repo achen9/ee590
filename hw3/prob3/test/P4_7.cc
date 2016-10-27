@@ -3,7 +3,6 @@
 #include "matrix.hh"
 #include "DFT.hh"
 
-#define TOLERANCE 0.001
 #define N_PTS 4
 
 int main ( int argc, char * argv[] ) {

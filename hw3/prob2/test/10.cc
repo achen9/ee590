@@ -1,7 +1,6 @@
 #include "test.hh"
 #include "complex.hh"
 
-#define TOLERANCE 0.0001
 #define PI 3.14159
 
 int main ( int argc, char * argv[] ) {

@@ -3,8 +3,6 @@
 #include "matrix.hh"
 #include "DFT.hh"
 
-#define TOLERANCE 0.001
-
 int main ( int argc, char * argv[] ) {
   // DFT UNITARY MATRIX TESTS
   // This file tests the unitary_matrix() method to create a 

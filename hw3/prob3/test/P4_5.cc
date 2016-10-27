@@ -11,10 +11,9 @@ int main ( int argc, char * argv[] ) {
   // Test 1: Check DFT can be computed
   DFT d(4);
   matrix<complex> input(4, 1);
-  input.set(0, 0, complex::random(-5.0, 5.0));
-  input.set(1, 0, complex::random(-5.0, 5.0));
-  input.set(2, 0, complex::random(-5.0, 5.0));
-  input.set(3, 0, complex::random(-5.0, 5.0));
+  for (int i = 0; i < 4; i++) {
+    input.set(i, 0, complex::random(-5.0, 5.0));
+  }
   matrix<complex> output = d.dft(input);
   std::cout << std::endl << output;
 

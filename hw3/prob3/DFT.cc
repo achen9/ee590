@@ -64,7 +64,6 @@ matrix<complex> DFT::inverse_matrix(void) {
   if (it == dft_matrices.end()) { // map does not contain inverse matrix
     matrix<complex> u = unitary_matrix();
     matrix<complex> inv = conjugate_transpose(u);
-    inv = inv.scale((complex)(1.0 / num_pts));
     dft_matrices[3] = inv;
   }
   return dft_matrices[3];

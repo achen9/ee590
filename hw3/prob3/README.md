@@ -1,6 +1,8 @@
 ### To compile hw3 prob3 and prob4 code
 Make sure you have navigated to the /hw3/prob3/ folder as the current directory.
 * Type "make" to compile the all code.
+* Type "make P3" to compile problem 3 tests
+* Type "make P4" to compile problem 4 tests
 * Type "make clean" to delete all compiled code.
 
 ### To run hw3 prob3 and prob4 code

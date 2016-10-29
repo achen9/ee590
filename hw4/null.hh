@@ -1,12 +1,13 @@
+#pragma once
 #include "object.hh"
 
 class Null : public Object {
-
 public:
+  // Constructors & destructors
+  inline Null(void) {}
+  inline ~Null(void) {}
 
-  Null() {}
-
-  Null * clone() { return new Null(*this); }
-  std::string stringify() { return std::string("null"); }
+  Null * clone(void) { return new Null(*this); }
+  std::string stringify(void) { return std::string("null"); }
 
 };

@@ -5,11 +5,11 @@
 #include <string>
 
 class Object {
-
 public:
-
-  Object();
+  // Constructors & destructors
+  Object(void);
   Object ( const Object &m ) {}
+  virtual ~Object(void) {}
 
   virtual Object * clone() = 0;
   virtual std::string stringify() = 0;

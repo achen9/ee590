@@ -1,7 +1,7 @@
 #include "hash.hh"
 #include "null.hh"
 
-Hash::Hash() {
+Hash::Hash(void) {
 
   for ( int i=0; i<num_shelves; i++ ) {
     shelves[i] = NULL;
@@ -20,6 +20,16 @@ Hash::Hash ( const Hash &hash ) {
   //             set(k,hash.get(k))
   //           }
 
+}
+Hash::~Hash(void) {
+  for (int i = 0; i < num_shelves; i++) {
+    while (shelves[i] != NULL) {
+      Bucket *tmp_next;
+      tmp_next = shelves[i]->next;
+      delete shelves[i];
+      shelves[i] = tmp_next;
+    }
+  }
 }
 
 void Hash::set ( std::string key, Object &value ) {
@@ -76,7 +86,7 @@ int Hash::hash ( std::string s ) {
 
 }
 
-std::string Hash::stringify() {
+std::string Hash::stringify(void) {
 
   std::string s = "{";
 

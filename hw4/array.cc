@@ -1,7 +1,7 @@
 #include "array.hh"
 #include "null.hh"
 
-Array::Array() {
+Array::Array(void) {
   max = 10;
   values = new Object *[max];
   for ( int i=0; i < max; i++ ) {
@@ -19,6 +19,17 @@ Array::Array ( const Array &array ) {
 
 }
 
+Array::~Array(void) {
+  /*
+  for (int i = 0; i < max; i++) {
+    if (NULL != values[i]) {
+      delete values[i];
+    }
+  }
+  */
+  delete []values;
+}
+
 void Array::set(int index, Object &object) {
   values[index] = object.clone();
 }
@@ -31,7 +42,7 @@ Object* Array::get(int index) {
   }
 }
 
-std::string Array::stringify() {
+std::string Array::stringify(void) {
 
   std::string s = "[";
 

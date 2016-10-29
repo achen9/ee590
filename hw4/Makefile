@@ -1,4 +1,4 @@
-CXX = g++ -std=c++11 -Wall
+CXX = g++ -std=c++11 -O0 -Wall
 
 SOURCES = object.cc number.cc array.cc hash.cc
 HEADERS = json.hh object.hh number.hh array.hh hash.hh
@@ -13,8 +13,8 @@ all: $(LIB_JSON)
 $(LIB_JSON): $(OBJECTS) $(HEADERS)
 	ar cr $(LIB_JSON) $(OBJECTS)
 
-%.o: %.c $(HEADERS)
-	$(CXX) -c $<
+%.o: %.cc $(HEADERS)
+	$(CXX) -c $< -g
 
 clean:
 	rm -f $(OBJECTS) $(LIB_JSON)

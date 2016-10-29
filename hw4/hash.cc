@@ -50,26 +50,26 @@ void Hash::set ( std::string key, Object &value ) {
 
 Object * Hash::get ( std::string key ) {
 
-  DEBUG("getting " + key);
+  //DEBUG("getting " + key);
 
   int i = hash(key);
 
   Bucket * ptr = shelves[i];
 
-  DEBUG("1");
+  //DEBUG("1");
 
   while ( ptr && ptr->key != key ) {
     ptr = ptr->next;
   }
 
-  DEBUG("2");
+  //DEBUG("2");
 
   if ( ptr ) {
-    DEBUG("3");
+    //DEBUG("3");
     return ptr->value;
   } else {
-    DEBUG("4");
-    throw "No value for key";
+    //DEBUG("4");
+    throw Object_Exception("No value for key");
   }
 
 }

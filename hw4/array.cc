@@ -31,14 +31,22 @@ Array::~Array(void) {
 }
 
 void Array::set(int index, Object &object) {
+ /*
+  if (index > max) {
+    new_max = max;
+    new_values = new Object *[index + 10];
+  }
+  */
   values[index] = object.clone();
 }
 
 Object* Array::get(int index) {
-  if ( 0 <= index && index < max && values[index] != NULL ) {
-    return values[index];
-  } else {
+  if ( 0 > index || max < index  ) {
+    throw Object_Exception("Attempted to get out of bounds array element.");
+  } else if (values[index] == NULL) {
     return new Null;
+  }  else {
+    return values[index];
   }
 }
 

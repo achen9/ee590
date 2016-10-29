@@ -1,3 +1,4 @@
+#pragma once
 #include "object.hh"
 #include "null.hh"
 #include "number.hh"

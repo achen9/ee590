@@ -7,6 +7,7 @@ public:
   inline Null(void) {}
   inline ~Null(void) {}
 
+  // Utility methods
   Null * clone(void) { return new Null(*this); }
   std::string stringify(void) { return std::string("null"); }
 

@@ -14,9 +14,12 @@ public:
   Hash(const Hash &hash);
   ~Hash(void);
 
+  // Getters & setters
+  Object * get(std::string key);
+  void set(std::string key, Object &value);
+
+  // Utility methods
   Hash * clone() { return new Hash(*this); }
-  void set ( std::string key, Object &value);
-  Object * get ( std::string key );
   std::string stringify(void);
 
 private:

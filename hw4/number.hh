@@ -8,9 +8,11 @@ public:
   Number ( const Number &number ) { value = number.value; }
   inline ~Number(void) {}
 
-
-  Number * clone() { return new Number(*this); }
+  // Getters & setters
   inline void set(double d) { value = d; }
+
+  // Utility methods
+  Number * clone() { return new Number(*this); }
   std::string stringify(void);
 
 private:

@@ -1,4 +1,5 @@
 #include "array.hh"
+#include "object.hh"
 #include "null.hh"
 
 Array::Array(void) {
@@ -31,12 +32,24 @@ Array::~Array(void) {
 }
 
 void Array::set(int index, Object &object) {
- /*
-  if (index > max) {
-    new_max = max;
-    new_values = new Object *[index + 10];
+  int new_max;
+  Object **new_values;
+
+  if (0 > index) {
+    throw Object_Exception("Attempted to set negative index in array.");
+  } else if (index > max) {
+    new_max = index + 10;
+    new_values = new Object *[new_max];
+    for (int i = 0; i < max; i++) {
+      new_values[i] = values[i];
+    }
+    for (int i = max; i < new_max; i++) {
+      new_values[i] = NULL;
+    }
+    delete values;
+    max = new_max;
+    values = new_values;
   }
-  */
   values[index] = object.clone();
 }
 
@@ -77,4 +90,13 @@ std::string Array::stringify(void) {
 
   return s;
 
+}
+
+int Array::length(void) {
+  int len, i = max;
+  do {
+    i--;
+    len = i + 1;
+  } while (values[i] == NULL);
+  return len;
 }

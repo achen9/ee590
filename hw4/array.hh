@@ -6,6 +6,7 @@ public:
   // Constructors & destructors
   Array(void);
   Array ( const Array &array );
+  Array& operator=(const Array &other);
   ~Array(void);
 
   // Getters & setters

@@ -16,9 +16,11 @@ public:
   virtual ~Object(void) {}
 
   // Getters & setters
-  virtual Object * get() { throw Object_Exception("Undefined getter: get()"); }
-  virtual Object * get(std::string s) { throw Object_Exception("Undefined getter: get(s)"); }
-  virtual Object * get(int i) { throw Object_Exception("Undefined getter: get(i)"); }
+  virtual Object * get() const { throw Object_Exception("Undefined getter: get()"); }
+  virtual Object * get(std::string s) const { throw Object_Exception("Undefined getter: get(s)"); }
+  virtual Object * get(int i) const  { throw Object_Exception("Undefined getter: get(i)"); }
+  virtual std::string get_str() const { throw Object_Exception("Undefined getter get_str()"); }
+  virtual double get_num() const { throw Object_Exception("Undefined getter get_num()"); }
 
   // Utility methods
   virtual Object * clone() = 0;

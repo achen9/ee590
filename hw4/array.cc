@@ -20,6 +20,15 @@ Array::Array ( const Array &array ) {
 
 }
 
+Array& Array::operator=(const Array &other) {
+  if (this != &other) {
+    for (int i = 0; i < max; i++) {
+      values[i] = other.values[i];
+    }
+  }
+  return *this;
+}
+
 Array::~Array(void) {
   /*
   for (int i = 0; i < max; i++) {

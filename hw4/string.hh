@@ -4,11 +4,13 @@
 class String : public Object {
 public:
   // Constructors & destructors
-  inline String(std::string s) : value(s) {}
-  inline String(const String &string) { value = string.value; }
-  inline ~String(void) {}
+  String(void) {}
+  String(std::string s) : value(s) {}
+  String(const String &string) { value = string.value; }
+  ~String(void) {}
 
   // Getters and setters
+  inline std::string get_str(void) const { return value; }
   inline void set(std::string s) { value = s; }
   
   // Utility methods

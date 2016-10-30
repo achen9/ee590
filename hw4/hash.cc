@@ -1,5 +1,6 @@
 #include "hash.hh"
 #include "null.hh"
+#include "string.hh"
 
 Hash::Hash(void) {
 
@@ -10,17 +11,17 @@ Hash::Hash(void) {
 }
 
 Hash::Hash ( const Hash &hash ) {
-
+  Array k;
   for ( int i=0; i<num_shelves; i++ ) {
     shelves[i] = NULL;
   }
-
-  // TODO: method keys() that returns an Array of keys
-  //           for ( k in keys() ) {
-  //             set(k,hash.get(k))
-  //           }
-
+  k = hash.keys();
+  for (int i = 0; i < k.length(); i++) {
+    std::string key = k.get(i)->get_str();
+    set(key, *hash.get(key));
+  }
 }
+
 Hash::~Hash(void) {
   for (int i = 0; i < num_shelves; i++) {
     while (shelves[i] != NULL) {
@@ -48,7 +49,7 @@ void Hash::set ( std::string key, Object &value ) {
 
 }
 
-Object * Hash::get ( std::string key ) {
+Object * Hash::get ( std::string key ) const {
 
   //DEBUG("getting " + key);
 
@@ -69,16 +70,16 @@ Object * Hash::get ( std::string key ) {
     return ptr->value;
   } else {
     //DEBUG("4");
-    throw Object_Exception("No value for key");
+    throw Object_Exception("No value for key.");
   }
 
 }
 
-int Hash::hash ( std::string s ) {
+int Hash::hash (std::string s ) const {
 
   int n = 0;
 
-  for ( int i=0; i<s.length(); i++ ) {
+  for ( int i=0; i < (int)s.length(); i++ ) {
     n += (int) s[i];
   }
 
@@ -93,7 +94,7 @@ std::string Hash::stringify(void) {
   for ( int i=0; i<num_shelves; i++ ) {
     Bucket * ptr = shelves[i];
     while ( ptr != NULL ) {
-      s += ptr->key + ":" + ptr->value->stringify() + ",";
+      s += "\"" + ptr->key + "\"" + ":" + ptr->value->stringify() + ",";
       ptr = ptr->next;
     }
   }
@@ -106,4 +107,20 @@ std::string Hash::stringify(void) {
 
   return s;
 
+}
+
+Array Hash::keys(void) const {
+  Array k;
+  int key_index = 0;
+  Bucket *next_bucket;
+  for (int i = 0; i < num_shelves; i++) {
+    next_bucket = shelves[i];
+    while (NULL != next_bucket) {
+      String str(next_bucket->key);
+      k.set(key_index, str);
+      key_index++;
+      next_bucket = next_bucket->next;
+    }
+  }
+  return k;
 }

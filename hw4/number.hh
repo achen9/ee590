@@ -9,6 +9,7 @@ public:
   inline ~Number(void) {}
 
   // Getters & setters
+  inline double get_num(void) const { return value; }
   inline void set(double d) { value = d; }
 
   // Utility methods

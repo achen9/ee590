@@ -1,7 +1,7 @@
 CXX = g++ -std=c++11 -O0 -Wall
 
-SOURCES = object.cc number.cc array.cc hash.cc string.cc
-HEADERS = json.hh object.hh number.hh array.hh hash.hh string.hh
+SOURCES = object.cc number.cc array.cc hash.cc string.cc boolean.cc
+HEADERS = json.hh object.hh number.hh array.hh hash.hh string.hh boolean.hh
 
 OBJECTS=$(SOURCES:.cc=.o)
 

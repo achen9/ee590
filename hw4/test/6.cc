@@ -3,8 +3,6 @@
 #include "json.hh"
 #include "test.hh"
 
-#define TOLERANCE 0.0001
-
 int main ( int argc, char * argv[] ) {
   // STRING CLASS METHODS TESTS
   // This file tests the methods defined in the String class

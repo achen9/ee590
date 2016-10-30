@@ -1,5 +1,4 @@
 #include "string.hh"
-#include "null.hh"
 
 String& String::operator=(const String &other) {
   if (this != &other) {

@@ -34,19 +34,23 @@ Hash::~Hash(void) {
 }
 
 void Hash::set ( std::string key, Object &value ) {
-
-  // TODO: Homework: Use delete if key exists to avoid duplicate keys
-  //       or reset the value in place (make sure to delete old value!)
-
   int i = hash(key);
-
-  Bucket * ptr = new Bucket;
-
-  ptr->key = key;
-  ptr->value = value.clone();
-  ptr->next = shelves[i];
-  shelves[i] = ptr;
-
+  Bucket * ptr = shelves[i];
+  while (NULL != ptr) {
+    if (key == ptr->key) {
+      delete ptr->value;
+      ptr->value = value.clone();
+      break;
+    }
+    ptr = ptr->next;
+  }
+  if (NULL == ptr) {
+    Bucket *new_ptr = new Bucket;
+    new_ptr->key = key;
+    new_ptr->value = value.clone();
+    new_ptr->next = shelves[i];
+    shelves[i] = new_ptr;
+  }
 }
 
 Object * Hash::get ( std::string key ) const {

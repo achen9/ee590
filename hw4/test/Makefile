@@ -3,7 +3,7 @@ LIBS = -ljson
 INCLUDE_DIRS = -I..
 LIBDIRS = -L..
 
-SOURCES = 1.cc 2.cc 3.cc 5.cc
+SOURCES = 1.cc 2.cc 3.cc 4.cc 5.cc
 TARGETS = $(SOURCES:%.cc=%.x)
 
 all: $(TARGETS)
@@ -19,6 +19,12 @@ memtest1: $(TARGETS)
 
 memtest2: $(TARGETS)
 	valgrind --leak-check=yes ./2.x
+
+memtest3: $(TARGETS)
+	valgrind --leak-check=yes ./3.x
+
+memtest4: $(TARGETS)
+	valgrind --leak-check=yes ./4.x
 
 memtest5: $(TARGETS)
 	valgrind --leak-check=yes ./5.x

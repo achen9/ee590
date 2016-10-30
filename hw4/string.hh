@@ -4,9 +4,10 @@
 class String : public Object {
 public:
   // Constructors & destructors
-  String(void) {}
+  String(void) : value("") {}
   String(std::string s) : value(s) {}
   String(const String &string) { value = string.value; }
+  String& operator=(const String &other);
   ~String(void) {}
 
   // Getters and setters

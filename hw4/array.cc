@@ -46,7 +46,7 @@ void Array::set(int index, Object &object) {
 
   if (0 > index) {
     throw Object_Exception("Attempted to set negative index in array.");
-  } else if (index > max) {
+  } else if (index >= max) {
     new_max = index + 10;
     new_values = new Object *[new_max];
     for (int i = 0; i < max; i++) {

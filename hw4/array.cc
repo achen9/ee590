@@ -30,13 +30,6 @@ Array& Array::operator=(const Array &other) {
 }
 
 Array::~Array(void) {
-  /*
-  for (int i = 0; i < max; i++) {
-    if (NULL != values[i]) {
-      delete values[i];
-    }
-  }
-  */
   delete []values;
 }
 

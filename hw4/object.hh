@@ -20,7 +20,7 @@ public:
   // For Hash class only
   virtual Object * get(std::string s) const { throw Object_Exception("Undefined getter: get(s)"); }
   // For Array class only
-  virtual Object * get(int i) const  { throw Object_Exception("Undefined getter: get(i)"); }
+  virtual Object * get(int i) const { throw Object_Exception("Undefined getter: get(i)"); }
   // For String class only
   virtual std::string get_str() const { throw Object_Exception("Undefined getter get_str()"); }
   // For Number class only

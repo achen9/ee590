@@ -11,7 +11,7 @@ int main ( int argc, char * argv[] ) {
   // and the keys() method which returns an Array of keys
   // of type String
 
-  // Test 1: Check if all keys in hash are returned by keys()
+  // Test 1: Check if all keys in hash are returned by keys() method
   Hash h;
   Array key;
   Number n1(1);
@@ -38,7 +38,7 @@ int main ( int argc, char * argv[] ) {
   // Test 2: Check a hash is copied successfully
   Hash h1(h);
   std::cout << "Original hash:" << h.stringify() << std::endl;
-  std::cout << "Copied hash:" << h.stringify() << std::endl;
+  std::cout << "Copied hash:" << h1.stringify() << std::endl;
   try {
     // Using '==' with doubles can return wrong results
     // due to rounding errors. Checking the doubles are close

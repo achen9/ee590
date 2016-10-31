@@ -21,7 +21,7 @@ public:
   void set(std::string key, Object &value);
 
   // Utility methods
-  Hash * clone() { return new Hash(*this); }
+  inline Hash * clone(void) { return new Hash(*this); }
   std::string stringify(void);
   Array keys(void) const;
 

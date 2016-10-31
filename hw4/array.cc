@@ -62,7 +62,7 @@ void Array::set(int index, Object &object) {
   values[index] = object.clone();
 }
 
-Object* Array::get(int index) {
+Object* Array::get(int index) const {
   if ( 0 > index || max < index  ) {
     throw Object_Exception("Attempted to get out of bounds array element.");
   } else if (values[index] == NULL) {

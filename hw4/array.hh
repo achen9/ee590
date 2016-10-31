@@ -11,11 +11,11 @@ public:
 
   // Getters & setters
   void set(int index, Object &object);
-  Object * get(int index);
+  Object * get(int index) const;
   inline int get_max(void) { return max; }
 
   // Utility methods
-  Array * clone(void) { return new Array(*this); }
+  inline Array * clone(void) { return new Array(*this); }
   std::string stringify(void);
   int length(void);
 

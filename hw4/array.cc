@@ -15,9 +15,10 @@ Array::Array ( const Array &array ) {
   max = array.max;
   values = new Object *[max];
   for ( int i=0; i < max; i++ ) {
-    values[i] = array.values[i];
+    if (NULL != array.values[i]) {
+      values[i] = array.values[i]->clone();
+    }
   }
-
 }
 
 Array& Array::operator=(const Array &other) {
@@ -43,14 +44,20 @@ void Array::set(int index, Object &object) {
     new_max = index + 10;
     new_values = new Object *[new_max];
     for (int i = 0; i < max; i++) {
-      new_values[i] = values[i];
+      if (NULL != values[i]) {
+        new_values[i] = values[i]->clone();
+      } else {
+        new_values[i] = values[i];
+      }
     }
     for (int i = max; i < new_max; i++) {
       new_values[i] = NULL;
     }
-    delete values;
+    delete []values;
     max = new_max;
     values = new_values;
+  } else if (NULL != values[index]) {
+    delete values[index];
   }
   values[index] = object.clone();
 }

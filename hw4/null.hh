@@ -4,11 +4,11 @@
 class Null : public Object {
 public:
   // Constructors & destructors
-  inline Null(void) {}
-  inline ~Null(void) {}
+  Null(void) {}
+  ~Null(void) {}
 
   // Utility methods
-  Null * clone(void) { return new Null(*this); }
-  std::string stringify(void) { return std::string("null"); }
+  inline Null * clone(void) { return new Null(*this); }
+  inline std::string stringify(void) { return std::string("null"); }
 
 };

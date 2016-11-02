@@ -15,6 +15,7 @@ Array::Array ( const Array &array ) {
   max = array.max;
   values = new Object *[max];
   for ( int i=0; i < max; i++ ) {
+    values[i] = NULL;
     if (NULL != array.values[i]) {
       values[i] = array.values[i]->clone();
     }

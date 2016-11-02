@@ -15,9 +15,11 @@ Array::Array ( const Array &array ) {
   max = array.max;
   values = new Object *[max];
   for ( int i=0; i < max; i++ ) {
-    values[i] = NULL;
     if (NULL != array.values[i]) {
       values[i] = array.values[i]->clone();
+    } else {
+      // Copy null pointer to values array
+      values[i] = array.values[i];
     }
   }
 }
@@ -48,6 +50,7 @@ void Array::set(int index, Object &object) {
       if (NULL != values[i]) {
         new_values[i] = values[i]->clone();
       } else {
+        // Copy null pointer to new_values array
         new_values[i] = values[i];
       }
     }

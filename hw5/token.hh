@@ -28,6 +28,7 @@ public:
   inline std::string string_val() { return str; }
   inline double number_val() { return number; }
   inline bool bool_val() { return boolean; }
+  inline char punct_val() { return punctuation; }
 
   std::string to_s ( void );
 

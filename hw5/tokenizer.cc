@@ -86,9 +86,6 @@ Token Tokenizer::number() {
 
   std::string s("");
 
-  if ('-' == buffer[i]) {
-    s += buffer[i++];
-  }
   while ( is_num(buffer[i]) ) {
     s += buffer[i++];
   }
@@ -127,6 +124,13 @@ Token Tokenizer::next() {
   case ']':
   case ':':
   case ',':
+  case '+':
+  case '-':
+  case '*':
+  case '/':
+  case '%':
+  case '(':
+  case ')':
     return Token(buffer[i++]);
   case '"':
     return string();
@@ -140,7 +144,7 @@ Token Tokenizer::next() {
     eat_symbol("false");
     return Token(false);
   default:
-    if ( is_num(buffer[i]) || buffer[i] == '.' || '-' == buffer[i]) {
+    if ( is_num(buffer[i]) || buffer[i] == '.' ) {
       return number();
     } else {
       std::string err("Unexpected character: '");

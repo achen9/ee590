@@ -86,11 +86,8 @@ Token Tokenizer::number() {
 
   std::string s("");
 
-  if (buffer[i] == '-') {
+  if ('-' == buffer[i]) {
     s += buffer[i++];
-    while (is_num(buffer[i])) {
-      s += buffer[i++];
-    }
   }
   while ( is_num(buffer[i]) ) {
     s += buffer[i++];
@@ -101,7 +98,15 @@ Token Tokenizer::number() {
       s += buffer[i++];
     }
   } 
-
+  if ('e' == buffer[i] || 'E' == buffer[i]) {
+    s += buffer[i++];
+    if ('-' == buffer[i]) {
+      s += buffer[i++];
+    }
+    while (is_num(buffer[i])) {
+      s += buffer[i++];
+    }
+  }
   return Token(std::stod(s));
 
 }
@@ -138,7 +143,7 @@ Token Tokenizer::next() {
     if ( is_num(buffer[i]) || buffer[i] == '.' || '-' == buffer[i]) {
       return number();
     } else {
-      std::string err("Unexpcted character: '");
+      std::string err("Unexpected character: '");
       err += buffer[i];
       err += "'";
       throw TokenizerException(err.c_str());

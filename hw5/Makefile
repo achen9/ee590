@@ -13,8 +13,8 @@ all: $(LIB_JSON)
 $(LIB_JSON): $(OBJECTS) $(HEADERS)
 	ar cr $(LIB_JSON) $(OBJECTS)
 
-%.o: %.c $(HEADERS)
-	$(CXX) -c $<
+%.o: %.cc $(HEADERS)
+	$(CXX) -c $< -g
 
 clean:
 	rm -f $(OBJECTS) $(LIB_JSON)

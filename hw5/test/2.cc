@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "json.hh"
+#include "test.hh"
 
 int main ( int argc, char * argv[] ) {
 

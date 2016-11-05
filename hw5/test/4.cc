@@ -1,5 +1,6 @@
 #include <iostream>
 #include "json.hh"
+#include "test.hh"
 
 int main ( int argc, char * argv[] ) {
 

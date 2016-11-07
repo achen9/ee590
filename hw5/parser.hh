@@ -21,6 +21,12 @@ public:
   Object * null ( void );
   Object * boolean ( void );
   Object * string ( void );
+  // expression ::= ["-"] term {("+"|"-") term}
+  Object * expression(void);
+  // term ::= factor {("*"|"/"|"%") factor}
+  Object * term(int sign);
+  // factor ::= number | "(" expression ")"
+  Object * factor(void);
 
 private:
 

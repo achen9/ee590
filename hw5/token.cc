@@ -18,8 +18,10 @@ std::string Token::to_s ( void ) {
     return str;
   case BOOLEAN:
     return boolean ? std::string("true") : std::string("false");
-  case NUMBER:
-    return std::to_string(number);
+  case DOUBLE:
+    return std::to_string(dbl);
+  case INTEGER:
+    return std::to_string(integer);
   case NULLTOK:
     return std::string("null");
   default:
@@ -36,8 +38,12 @@ std::ostream& operator<<(std::ostream& os, const Token &tok) {
     os << std::setw(TOKEN_SET_WIDTH) << std::left << "NULLTOK: null";
     break;
 
-  case Token::NUMBER:
-    os << "NUMBER: " << std::setw(TOKEN_SET_WIDTH - 8) << std::left << tok.number;
+  case Token::DOUBLE:
+    os << "DOUBLE: " << std::setw(TOKEN_SET_WIDTH - 8) << std::left << tok.dbl;
+    break;
+
+  case Token::INTEGER:
+    os << "INTEGER: " << std::setw(TOKEN_SET_WIDTH - 9) << std::left << tok.integer;
     break;
 
   case Token::STRING:

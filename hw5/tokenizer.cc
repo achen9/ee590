@@ -81,21 +81,21 @@ Token Tokenizer::string() {
 }
 
 Token Tokenizer::number() {
-
-  // TODO: Accept negative numbers, and exponents like 10e3 or 16e-3.
-
   std::string s("");
+  bool is_int_flag = true;
 
   while ( is_num(buffer[i]) ) {
     s += buffer[i++];
   }
   if ( buffer[i] == '.' ) {
+    is_int_flag = false;
     s += buffer[i++];
     while ( is_num(buffer[i]) ) {
       s += buffer[i++];
     }
   } 
   if ('e' == buffer[i] || 'E' == buffer[i]) {
+    is_int_flag = false;
     s += buffer[i++];
     if ('-' == buffer[i]) {
       s += buffer[i++];
@@ -104,7 +104,11 @@ Token Tokenizer::number() {
       s += buffer[i++];
     }
   }
-  return Token(std::stod(s));
+  if (is_int_flag) {
+    return Token(std::stoi(s));
+  } else {
+    return Token(std::stod(s));
+  }
 
 }
 

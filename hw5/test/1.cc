@@ -31,10 +31,10 @@ int main ( int argc, char * argv[] ) {
         // due to rounding errors. Checking the doubles are close
         // to each other within some tolerance value is a better 
         // way to compare them
-        ASSERT(TOLERANCE > std::abs(T.number_val() - 5.2e-6));
+        ASSERT(TOLERANCE > std::abs(T.dbl_val() - 5.2e-6));
         break;
       case 8:
-        ASSERT(TOLERANCE > std::abs(T.number_val() - 5e8));
+        ASSERT(TOLERANCE > std::abs(T.dbl_val() - 5e8));
       default:
         break;
     }

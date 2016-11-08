@@ -92,6 +92,9 @@ Object * Parser::expression(void) {
   if (tok.current().matches('-')) {
     tok.eat();
     t1 = term(-1);
+  } else if (tok.current().matches('+')) {
+    tok.eat();
+    t1 = term(1);
   } else {
     t1 = term(1);
   }
@@ -160,19 +163,39 @@ Object * Parser::term(int sign) {
       tok.eat();
       Object * f2 = factor();
       if (f2->is_int() && n->is_int()) {
-        n->set_i(n->get_i() / f2->get_i());
+        if (0 != f2->get_i()) {
+          n->set_i(n->get_i() / f2->get_i());
+        } else {
+          throw ParserException("Attempted to divide by zero.");
+        }
       } else if (f2->is_int() && !n->is_int()) {
-        n->set_d(n->get_d() / (double)f2->get_i());
+        if (0 != f2->get_i()) {
+          n->set_d(n->get_d() / (double)f2->get_i());
+        } else {
+          throw ParserException("Attempted to divide by zero.");
+        }
       } else if (!f2->is_int() && n->is_int()) {
-        n->set_d((double)n->get_i() / f2->get_d());
+        if (0.0 != f2->get_d() && -0.0 != f2->get_d()) {
+          n->set_d((double)n->get_i() / f2->get_d());
+        } else {
+          throw ParserException("Attempted to divide by zero.");
+        }
       } else {
-        n->set_d(n->get_d() / f2->get_d());
+        if (0.0 != f2->get_d() && -0.0 != f2->get_d()) {
+          n->set_d(n->get_d() / f2->get_d());
+        } else {
+          throw ParserException("Attempted to divide by zero.");
+        }
       }
     } else if (tok.current().matches('%')) {
       tok.eat();
       Object * f2 = factor();
       if (f2->is_int() && n->is_int()) {
-        n->set_i(n->get_i() % f2->get_i());
+        if (0 != f2->get_i()) {
+          n->set_i(n->get_i() % f2->get_i());
+        } else {
+          throw ParserException("mod 0 undefined.");
+        }
       } else {
         throw ParserException("Tried to compute modulo between non-int values.");
       }
@@ -200,6 +223,8 @@ Object * Parser::factor(void) {
     }
     tok.eat();
     return n;
+  } else if (tok.current().matches('-') || tok.current().matches('+')) {
+    Object * n = expression();
   } else {
     throw ParserException("Non-valid factor token encounted.");
   }

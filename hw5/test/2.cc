@@ -7,6 +7,10 @@
 #define OUTPUT_PER_ROW 5
 
 int main ( int argc, char * argv[] ) {
+  // TOKENIZER NEXT() METHOD TESTS
+  // This file tests the Tokenizer next() method to 
+  // make sure it recognizes '+', '-', '*', '/', '%',
+  // '(', and ')' as punctuation
 
   std::ifstream inFile;
   // open the input file. data3.json contains the example
@@ -27,7 +31,7 @@ int main ( int argc, char * argv[] ) {
     if (0 == i % OUTPUT_PER_ROW) {
       std::cout << std::endl;
     }
-    // Spot check tokens
+    // Spot check tokens for punctuation
     switch (i) {
       case 5: 
         ASSERT('-' == T.punct_val());

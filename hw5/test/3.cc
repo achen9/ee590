@@ -8,7 +8,7 @@
 #define TOLERANCE 0.0001
 
 int main ( int argc, char * argv[] ) {
-  // PARSER METHOD TESTS
+  // PARSER CLASS METHOD TESTS
   // This file tests the Parser class methods 
 
   // Test set 1: Test '+' operator and associated exceptions

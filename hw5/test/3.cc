@@ -63,6 +63,7 @@ int main ( int argc, char * argv[] ) {
     std::cout << e.what() << std::endl;
   }
 
+  // Test set 6: Test parser on sample json
   std::ifstream inFile;
   // open the input file. data3.json contains the example
   // JSON shown in hw5 problem 3.

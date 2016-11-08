@@ -2,7 +2,7 @@
 
 for test in *.x
 do
-  echo $test
+  printf $test
   if ./$test; then
     printf "\e[32m ... ok\n\e[39m"
   else

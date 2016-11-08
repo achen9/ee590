@@ -24,16 +24,16 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > std::abs(p22.object()->get_d() - 2.7));
 
   // Test set 3: Test '*' operator and associated exceptions
-  Parser p31("3 * 2.5 * 2");
-  ASSERT(TOLERANCE > std::abs(p31.object()->get_d() - 15.0));
+  Parser p31("3 * 2.5 * -2");
+  ASSERT(TOLERANCE > std::abs(p31.object()->get_d() + 15.0));
   Parser p32("1 * 2 * 3");
   ASSERT(6 == p32.object()->get_i());
 
   // Test set 4: Test '/' operator and associated exceptions
   Parser p41("7.5 / 3 / 5");
   ASSERT(TOLERANCE > std::abs(p41.object()->get_d() - 0.5));
-  Parser p42("8 / 2 / 4");
-  ASSERT(1 == p42.object()->get_i());
+  Parser p42("8 / 2 / -4");
+  ASSERT(-1 == p42.object()->get_i());
   try {
     Parser p43("9 / 0");
     std::cout << p43.object()->get_i() << std::endl;

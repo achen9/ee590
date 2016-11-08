@@ -31,7 +31,7 @@ int main ( int argc, char * argv[] ) {
     if (0 == i % OUTPUT_PER_ROW) {
       std::cout << std::endl;
     }
-    // Spot check tokens for punctuation
+    // Test 1: Spot check tokens for punctuation
     switch (i) {
       case 5: 
         ASSERT('-' == T.punct_val());

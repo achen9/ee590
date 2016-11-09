@@ -226,7 +226,10 @@ Object * Parser::factor(void) {
   } else if (tok.current().matches('-') || tok.current().matches('+')) {
     Object * n = expression();
   } else {
-    throw ParserException("Non-valid factor token encounted.");
+    std::string s("Unexpected token: \"");
+    s += tok.current().to_s();
+    s += "\" encountered.";
+    throw ParserException(s.c_str());
   }
 }
 

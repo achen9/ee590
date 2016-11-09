@@ -5,7 +5,7 @@ Tokenizer::Tokenizer(std::string data) : buffer(data), i(0) {
 
 bool Tokenizer::eof() {
   whitespace();
-  return i >= buffer.length();
+  return i >= (int)buffer.length();
 }
 
 bool Tokenizer::is_ws(char c) {
@@ -19,7 +19,7 @@ bool Tokenizer::is_num(char c) {
 
 void Tokenizer::whitespace() {
 
-  while ( i < buffer.length() && is_ws(buffer[i]) ) {
+  while ( i < (int)buffer.length() && is_ws(buffer[i]) ) {
     i++;
   }
 }
@@ -29,7 +29,7 @@ Token Tokenizer::eat_symbol(const std::string s) {
   int j = 0;
   std::string read("");
 
-  while ( buffer[i] == s[j] && i < buffer.length() && s[j] != '\0' ) {
+  while ( buffer[i] == s[j] && i < (int)buffer.length() && s[j] != '\0' ) {
     read += buffer[i];
     i++;
     j++;

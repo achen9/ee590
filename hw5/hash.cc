@@ -106,7 +106,7 @@ int Hash::hash ( std::string s ) const {
 
   int n = 0;
 
-  for ( int i=0; i<s.length(); i++ ) {
+  for ( int i=0; i<(int)s.length(); i++ ) {
     n += (int) s[i];
   }
 

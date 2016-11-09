@@ -1,4 +1,4 @@
-CXX = g++ -std=c++11
+CXX = g++ -std=c++11 -Wall
 LIBS = -ljson
 INCLUDE_DIRS = -I..
 LIBDIRS = -L..
@@ -13,6 +13,18 @@ all: $(TARGETS)
 
 test: $(TARGETS)
 	./test.sh
+
+memtest1: $(TARGETS)
+	valgrind --leak-check=yes ./1.x
+
+memtest2: $(TARGETS)
+	valgrind --leak-check=yes ./2.x
+
+memtest3: $(TARGETS)
+	valgrind --leak-check=yes ./3.x
+
+memtest4: $(TARGETS)
+	valgrind --leak-check=yes ./4.x data3.json
 
 clean:
 	rm -rf $(TARGETS)

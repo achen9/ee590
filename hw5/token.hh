@@ -9,12 +9,12 @@ public:
 
   typedef enum { STRING, DOUBLE, INTEGER, BOOLEAN, PUNCTUATION, NULLTOK } TOKEN_TYPE;
 
-  Token(std::string s) : str(s), token_type(STRING) {}
-  Token(const char s[]) : str(s), token_type(STRING) {}
-  Token(double d) : dbl(d), token_type(DOUBLE) {}
-  Token(int i) : integer(i), token_type(INTEGER) {}
-  Token(bool b) : boolean(b), token_type(BOOLEAN) {}
-  Token(char c) : punctuation(c), token_type(PUNCTUATION) {}
+  Token(std::string s) : token_type(STRING), str(s) {}
+  Token(const char s[]) : token_type(STRING), str(s) {}
+  Token(double d) : token_type(DOUBLE), dbl(d) {}
+  Token(int i) : token_type(INTEGER), integer(i) {}
+  Token(bool b) : token_type(BOOLEAN), boolean(b) {}
+  Token(char c) : token_type(PUNCTUATION), punctuation(c) {}
   Token() : token_type(NULLTOK) {}
 
   TOKEN_TYPE type() const { return token_type; }

@@ -88,7 +88,7 @@ void Array::set(int index, Object * object) {
     delete values[index];
   }
 
-  values[index] = object;
+  values[index] = object->clone();
 
 }
 

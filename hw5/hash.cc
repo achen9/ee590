@@ -79,7 +79,7 @@ void Hash::set ( std::string key, Object * value ) {
   Bucket * ptr = new Bucket;
 
   ptr->key = key;
-  ptr->value = value;
+  ptr->value = value->clone();
   ptr->next = shelves[i];
   shelves[i] = ptr;
 

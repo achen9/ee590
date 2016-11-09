@@ -12,7 +12,9 @@ Object * Parser::array ( void ) {
   int i = 0;
 
   while ( !tok.current().matches(']') ) {
-    a->set(i++,object());
+    Object * o = object();
+    a->set(i++,o);
+    delete o;
     if ( tok.current().matches(',')) {
       tok.eat_punctuation(',');
       if ( tok.current().matches(']') ) {
@@ -33,25 +35,27 @@ Object * Parser::hash ( void ) {
 
   tok.eat_punctuation('{');
 
-  while ( !tok.current().matches('}') ) {
+  while (!tok.current().matches('}')) {
 
-    if ( tok.current().is_string() ) {
+    if (tok.current().is_string()) {
 
-std::string key = tok.current().string_val();
-tok.eat();
-tok.eat_punctuation(':');
-h->set(key, object());
+      std::string key = tok.current().string_val();
+      tok.eat();
+      tok.eat_punctuation(':');
+      Object * o = object();
+      h->set(key, o);
+      delete o;
 
-if (tok.current().matches(',')) {
-  tok.eat_punctuation(',');
-  if (tok.current().matches('}')) {
-    throw ParserException("Unexpected end of hash");
-  }
-}
+      if (tok.current().matches(',')) {
+        tok.eat_punctuation(',');
+        if (tok.current().matches('}')) {
+          throw ParserException("Unexpected end of hash");
+        }
+      }
 
     } else {
 
-    throw ParserException("Expected string");
+      throw ParserException("Expected string");
 
     }
 
@@ -62,12 +66,6 @@ if (tok.current().matches(',')) {
   return h;
 
 }
-
-/*Object * Parser::number(void) {
-  Number * n = new Number(tok.current().number_val());
-  tok.eat();
-  return n;
-}*/
 
 Object * Parser::null(void) {
   tok.eat();
@@ -100,12 +98,11 @@ Object * Parser::expression(void) {
   }
   // Apply negative sign to first term
   if (t1->is_int()) {
-   // n->set_i(n->get_i() * t1->get_i());
     n = new Number(t1->get_i());
   } else {
-    //n->set_d((double)n->get_i() * t1->get_d());
     n = new Number(t1->get_d());
   }
+  delete t1;
   // Find second term & apply operation as long as more '-' or '+'
   // tokens found
   while (tok.current().matches('-') || tok.current().matches('+')) {
@@ -121,6 +118,7 @@ Object * Parser::expression(void) {
       } else {
         n->set_d(n->get_d() - t2->get_d());
       }
+      delete t2;
     } else if (tok.current().matches('+')) {
       tok.eat();
       Object *t2 = term(1);
@@ -133,6 +131,7 @@ Object * Parser::expression(void) {
       } else {
         n->set_d(n->get_d() + t2->get_d());
       }
+      delete t2;
     } 
   }
   return n;
@@ -146,6 +145,7 @@ Object * Parser::term(int sign) {
   } else {
     n->set_d((double)sign * f1->get_d());
   }
+  delete f1;
   while (tok.current().matches('*') || tok.current().matches('/') || tok.current().matches('%')) {
     if (tok.current().matches('*')) {
       tok.eat();
@@ -159,6 +159,7 @@ Object * Parser::term(int sign) {
       } else {
         n->set_d(n->get_d() * f2->get_d());
       }
+      delete f2;
     } else if (tok.current().matches('/')) {
       tok.eat();
       Object * f2 = factor();
@@ -187,6 +188,7 @@ Object * Parser::term(int sign) {
           throw ParserException("Attempted to divide by zero.");
         }
       }
+      delete f2;
     } else if (tok.current().matches('%')) {
       tok.eat();
       Object * f2 = factor();
@@ -199,6 +201,7 @@ Object * Parser::term(int sign) {
       } else {
         throw ParserException("Tried to compute modulo between non-int values.");
       }
+      delete f2;
     }
   }
   return n;
@@ -225,6 +228,7 @@ Object * Parser::factor(void) {
     return n;
   } else if (tok.current().matches('-') || tok.current().matches('+')) {
     Object * n = expression();
+    return n;
   } else {
     std::string s("Unexpected token: \"");
     s += tok.current().to_s();

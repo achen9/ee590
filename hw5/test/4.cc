@@ -24,7 +24,9 @@ int main ( int argc, char * argv[] ) {
     std::string str = strStream.str(); //str holds the content of the file
 
     Parser p(str);
-    std::cout << p.object()->stringify() << std::endl;
+    Object * o = p.object();
+    std::cout << o->stringify() << std::endl;
+    delete o;
     inFile.close();
     SUCCEED;
   } else {

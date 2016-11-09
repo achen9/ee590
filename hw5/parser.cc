@@ -167,24 +167,28 @@ Object * Parser::term(int sign) {
         if (0 != f2->get_i()) {
           n->set_i(n->get_i() / f2->get_i());
         } else {
+          delete f2;
           throw ParserException("Attempted to divide by zero.");
         }
       } else if (f2->is_int() && !n->is_int()) {
         if (0 != f2->get_i()) {
           n->set_d(n->get_d() / (double)f2->get_i());
         } else {
+          delete f2;
           throw ParserException("Attempted to divide by zero.");
         }
       } else if (!f2->is_int() && n->is_int()) {
         if (0.0 != f2->get_d() && -0.0 != f2->get_d()) {
           n->set_d((double)n->get_i() / f2->get_d());
         } else {
+          delete f2;
           throw ParserException("Attempted to divide by zero.");
         }
       } else {
         if (0.0 != f2->get_d() && -0.0 != f2->get_d()) {
           n->set_d(n->get_d() / f2->get_d());
         } else {
+          delete f2;
           throw ParserException("Attempted to divide by zero.");
         }
       }
@@ -196,6 +200,7 @@ Object * Parser::term(int sign) {
         if (0 != f2->get_i()) {
           n->set_i(n->get_i() % f2->get_i());
         } else {
+          delete f2;
           throw ParserException("mod 0 undefined.");
         }
       } else {
@@ -215,6 +220,7 @@ Object * Parser::factor(void) {
       tok.eat();
       return n;
     } else {
+      delete n;
       throw ParserException("Expected ')' token at end of expression.");
     }
   } else if (tok.current().is_number()) {

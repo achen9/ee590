@@ -13,9 +13,13 @@ int main ( int argc, char * argv[] ) {
 
   // Test set 1: Test '+' operator and associated exceptions
   Parser p11("5.2 + 6 + 2.3");
-  ASSERT(TOLERANCE > std::abs(p11.object()->get_d() - 13.5));
+  Object * o11 = p11.object();
+  ASSERT(TOLERANCE > std::abs(o11->get_d() - 13.5));
+  delete o11;
   Parser p12("5 + 7 + 1");
-  ASSERT(13 == p12.object()->get_i());
+  Object * o12 = p12.object();
+  ASSERT(13 == o12->get_i());
+  delete o12;
   try {
     Parser p13("3.1415e0 + \"badvalue\"");
     std::cout << p13.object()->get_i() << std::endl;
@@ -25,9 +29,13 @@ int main ( int argc, char * argv[] ) {
 
   // Test set 2: Test '-' operator and associated exceptions
   Parser p21("-9 - 6 - 1");
-  ASSERT(-16 == p21.object()->get_i());
+  Object * o21 = p21.object();
+  ASSERT(-16 == o21->get_i());
+  delete o21;
   Parser p22("6 - 2.2 - 1.1");
-  ASSERT(TOLERANCE > std::abs(p22.object()->get_d() - 2.7));
+  Object * o22 = p22.object();
+  ASSERT(TOLERANCE > std::abs(o22->get_d() - 2.7));
+  delete o22;
   try {
     Parser p23("6 - [\"badvalue1\",\"badvalue2\"]");
     std::cout << p23.object()->get_i() << std::endl;
@@ -37,9 +45,13 @@ int main ( int argc, char * argv[] ) {
 
   // Test set 3: Test '*' operator and associated exceptions
   Parser p31("3 * 2.5 * -2");
-  ASSERT(TOLERANCE > std::abs(p31.object()->get_d() + 15.0));
+  Object * o31 = p31.object();
+  ASSERT(TOLERANCE > std::abs(o31->get_d() + 15.0));
+  delete o31;
   Parser p32("1 * 2 * 3");
-  ASSERT(6 == p32.object()->get_i());
+  Object * o32 = p32.object();
+  ASSERT(6 == o32->get_i());
+  delete o32;
   try {
     Parser p33("9.6 * {\"badkey\":\"badvalue\"}");
     std::cout << p33.object()->get_i() << std::endl;
@@ -49,9 +61,13 @@ int main ( int argc, char * argv[] ) {
 
   // Test set 4: Test '/' operator and associated exceptions
   Parser p41("7.5 / 3 / 5");
-  ASSERT(TOLERANCE > std::abs(p41.object()->get_d() - 0.5));
+  Object * o41 = p41.object();
+  ASSERT(TOLERANCE > std::abs(o41->get_d() - 0.5));
+  delete o41;
   Parser p42("8 / 2 / -4");
-  ASSERT(-1 == p42.object()->get_i());
+  Object * o42 = p42.object();
+  ASSERT(-1 == o42->get_i());
+  delete o42;
   try {
     Parser p43("9 / 0");
     std::cout << p43.object()->get_i() << std::endl;
@@ -73,7 +89,9 @@ int main ( int argc, char * argv[] ) {
 
   // Test set 5: Test '%' operator and associated exceptions
   Parser p51("-5 % 2");
-  ASSERT(-1 == p51.object()->get_i());
+  Object * o51 = p51.object();
+  ASSERT(-1 == o51->get_i());
+  delete o51;
   try {
     Parser p52("6.2 % 3");
     std::cout << p52.object()->get_d() << std::endl;
@@ -104,7 +122,9 @@ int main ( int argc, char * argv[] ) {
   std::string str = strStream.str(); //str holds the content of the file
 
   Parser p(str);
-  std::cout << p.object()->stringify() << std::endl;
+  Object * o = p.object();
+  std::cout << o->stringify() << std::endl;
+  delete o;
 
   SUCCEED;
 }

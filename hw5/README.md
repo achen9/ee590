@@ -15,5 +15,6 @@ Make sure the program you want to run has been compiled first.
 * gcc version 4.9.2 was used to compile the code.
 
 ### HW5 Notes
-* In c++, the sign of the answer for the '%' operator is implementation dependent. On my machine,
-the following code: "int i = -5 % 2; std::cout << i;" results in i = -1 **instead of** 1.
+* In C++11, the sign of the answer for the '%' operator matches the dividend 
+(See: https://en.wikipedia.org/wiki/Modulo_operation). On my machine,
+the following line of code: "int i = -5 % 2;" results in i = -1 **instead of** 1.

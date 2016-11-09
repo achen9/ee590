@@ -16,5 +16,5 @@ Make sure the program you want to run has been compiled first.
 
 ### HW5 Notes
 * In C++11, the sign of the answer for the '%' operator matches the dividend 
-(See: https://en.wikipedia.org/wiki/Modulo_operation). On my machine,
-the following line of code: "int i = -5 % 2;" results in i = -1 **instead of** 1.
+(See: https://en.wikipedia.org/wiki/Modulo_operation). 
+On my machine, the following line of code: "int i = -5 % 2;" results in i = -1 **instead of** 1.

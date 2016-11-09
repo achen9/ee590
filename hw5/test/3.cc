@@ -16,18 +16,36 @@ int main ( int argc, char * argv[] ) {
   ASSERT(TOLERANCE > std::abs(p11.object()->get_d() - 13.5));
   Parser p12("5 + 7 + 1");
   ASSERT(13 == p12.object()->get_i());
+  try {
+    Parser p13("3.1415e0 + \"badvalue\"");
+    std::cout << p13.object()->get_i() << std::endl;
+  } catch (ParserException &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   // Test set 2: Test '-' operator and associated exceptions
   Parser p21("-9 - 6 - 1");
   ASSERT(-16 == p21.object()->get_i());
   Parser p22("6 - 2.2 - 1.1");
   ASSERT(TOLERANCE > std::abs(p22.object()->get_d() - 2.7));
+  try {
+    Parser p23("6 - [\"badvalue1\",\"badvalue2\"]");
+    std::cout << p23.object()->get_i() << std::endl;
+  } catch (ParserException &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   // Test set 3: Test '*' operator and associated exceptions
   Parser p31("3 * 2.5 * -2");
   ASSERT(TOLERANCE > std::abs(p31.object()->get_d() + 15.0));
   Parser p32("1 * 2 * 3");
   ASSERT(6 == p32.object()->get_i());
+  try {
+    Parser p33("9.6 * {\"badkey\":\"badvalue\"}");
+    std::cout << p33.object()->get_i() << std::endl;
+  } catch (ParserException &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   // Test set 4: Test '/' operator and associated exceptions
   Parser p41("7.5 / 3 / 5");
@@ -46,6 +64,12 @@ int main ( int argc, char * argv[] ) {
   } catch (ParserException &e) {
     std::cout << e.what() << std::endl;
   }
+  try {
+    Parser p45("6.36e4 / true");
+    std::cout << p45.object()->get_i() << std::endl;
+  } catch (ParserException &e) {
+    std::cout << e.what() << std::endl;
+  }
 
   // Test set 5: Test '%' operator and associated exceptions
   Parser p51("-5 % 2");
@@ -59,6 +83,12 @@ int main ( int argc, char * argv[] ) {
   try {
     Parser p53("4 % 0");
     std::cout << p53.object()->get_i() << std::endl;
+  } catch (ParserException &e) {
+    std::cout << e.what() << std::endl;
+  }
+  try {
+    Parser p54("5 % null");
+    std::cout << p54.object()->get_i() << std::endl;
   } catch (ParserException &e) {
     std::cout << e.what() << std::endl;
   }

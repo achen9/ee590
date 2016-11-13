@@ -4,5 +4,11 @@
 //
 
 Parser = require('./parser.js')
-p = new Parser(process.argv[2])
-console.log(process.argv[2] + " evaluates to " + p.parse());
+//test_str = "-12. + 0.5 * (-1   + 2 / 3.0e+2 / -.9)"
+//test_str = "-12.+0.5*(-1+2/3.0e+2/-.9)"
+test_str = "-12.+0.5*(-1)"
+p = new Parser(test_str)
+for (var i = 0; i < p.tokenizer.tokens.length; i++) {
+  console.log(p.tokenizer.tokens[i]);
+}
+console.log(test_str + " evaluates to " + p.parse());

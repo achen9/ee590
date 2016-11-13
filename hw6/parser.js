@@ -7,8 +7,10 @@ function Parser(str) {
   this.tokenizer = new Tokenizer();
 
   this.tokenizer
-      .add(/\+/)
-      .add(/-/); // Add tokens here
+      .add(/(-?)\d*.\d*e(-?)\d+/) // Parse scientific notation
+      .add(/(-?)\d*\.\d*/)        // Parse  floating points
+      .add(/-?\d+/)               // Parse integers
+      .add(/\+|-|\*|\/|%|\(|\)/)  // Parse arithmetic operators and parenthesis
 
 }
 

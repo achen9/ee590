@@ -24,7 +24,23 @@ Tokenizer.prototype.add = function(regexp) {
 }
 
 Tokenizer.prototype.tokenize = function(str) {
+  var tmp = [];
+  var tmpstr;
   this.tokens = str.match(this.re);
+  // Removes empty elements in array produced by match()
+  for (var i = 0; i < this.tokens.length; i++) {
+    if('' != this.tokens[i]) {
+        tmp.push(this.tokens[i]);
+    }
+  }
+  this.tokens = tmp;
+  tmpstr = this.tokens.join('');
+  for(var i = 0; i < str.length; i++) {
+    if (str[i] !== tmpstr[i]) {
+      console.log("Unexpected token '" + str[i] +"' found at char " + i.toString() + " of input string.");
+      return this;
+    }
+  }
   return this;
 }
 
@@ -57,6 +73,22 @@ Tokenizer.prototype.eat = function () {
 
 Tokenizer.prototype.eof = function() {
   if (this.current_token_pos >= this.tokens.length) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+Tokenizer.prototype.eat_whitespace = function () {
+  while (this.is_whitespace(this.current())) {
+    this.eat();
+  }
+}
+
+Tokenizer.prototype.is_whitespace = function(token) {
+  var temp = token;
+  temp.trim();
+  if (0 == temp.length) {
     return true;
   } else {
     return false;

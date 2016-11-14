@@ -15,7 +15,7 @@ function Parser(str) {
 
 Parser.prototype.factor = function () {
   this.tokenizer.eat_whitespace();
-  var pf = parseFloat(this.tokenizer.current())
+  var pf = this.tokenizer.float_val();
   if(!isNaN(pf)) {
     this.tokenizer.eat();
     return pf;
@@ -27,7 +27,7 @@ Parser.prototype.factor = function () {
     if (')' == this.tokenizer.current()) {
       this.tokenizer.eat();
     } else {
-      console.log("Incurrect token");
+      throw new ParserException("Incorrect token " + this.tokenizer.current(), this.tokenizer.current_token_pos);
     }    
     return pf;
   }
@@ -80,4 +80,10 @@ Parser.prototype.parse = function() {
   return this.expr();
 }
 
-module.exports = Parser;
+function ParserException(errmsg, errpos) {
+  this.name = "ParserException";
+  this.msg = errmsg;
+  this.position = errpos;
+}
+
+module.exports = Parser, ParserException;

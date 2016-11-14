@@ -37,8 +37,7 @@ Tokenizer.prototype.tokenize = function(str) {
   tmpstr = this.tokens.join('');
   for(var i = 0; i < str.length; i++) {
     if (str[i] !== tmpstr[i]) {
-      console.log("Unexpected token '" + str[i] +"' found at char " + i.toString() + " of input string.");
-      return this;
+      throw new TokenizerException("Unexpected token '" + str[i] + "'", i + 1);
     }
   }
   return this;
@@ -46,7 +45,7 @@ Tokenizer.prototype.tokenize = function(str) {
 
 Tokenizer.prototype.current = function () {
   if (this.eof()) {
-    return "No more tokens."
+    throw new TokenizerException("No more tokens.", this.tokens.length - 1);
   } else {
     return this.tokens[this.current_token_pos];
   }
@@ -58,14 +57,14 @@ Tokenizer.prototype.float_val = function() {
   // method parseFloat)
   return parseFloat(this.current());
 }
-
+/*
 Tokenizer.prototype.next = function() {
   // TODO
-}
+}*/
 
 Tokenizer.prototype.eat = function () {
   if (this.eof()) {
-    return "No more tokens."
+    throw new TokenizerException("No more tokens to eat.", this.tokens.length - 1);
   } else {
     return this.tokens[this.current_token_pos++];
   }
@@ -93,4 +92,10 @@ Tokenizer.prototype.is_whitespace = function(token) {
   }
 }
 
-module.exports = Tokenizer;
+function TokenizerException(errmsg,errpos) {
+  this.name = "TokenizerException";
+  this.msg = errmsg;
+  this.position = errpos;
+}
+
+module.exports = Tokenizer, TokenizerException;

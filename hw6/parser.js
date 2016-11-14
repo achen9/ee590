@@ -13,16 +13,22 @@ function Parser(str) {
   this.tokenizer.tokenize(str);
 }
 
-Parser.prototype.factor = function() {
+Parser.prototype.factor = function () {
+  this.tokenizer.eat_whitespace();
   var pf = parseFloat(this.tokenizer.current())
-  debugger;
   if(!isNaN(pf)) {
     this.tokenizer.eat();
     return pf;
   } else if('(' == this.tokenizer.current()) {
     this.tokenizer.eat();
+    this.tokenizer.eat_whitespace();
     pf = this.expr();
-    this.tokenizer.eat();
+    this.tokenizer.eat_whitespace();
+    if (')' == this.tokenizer.current()) {
+      this.tokenizer.eat();
+    } else {
+      console.log("Incurrect token");
+    }    
     return pf;
   }
 }
@@ -30,10 +36,15 @@ Parser.prototype.factor = function() {
 Parser.prototype.term = function() {
   var f;
   var number;
+  this.tokenizer.eat_whitespace();
   number = this.factor();
+  debugger;
+  this.tokenizer.eat_whitespace();
   while('*' == this.tokenizer.current() | '/' == this.tokenizer.current() | '%' == this.tokenizer.current()) {
     var operator = this.tokenizer.eat();
+    this.tokenizer.eat_whitespace();
     f = this.factor();
+    this.tokenizer.eat_whitespace();
     if('*' == operator) {
       number *= f;
     } else if ('/' == operator) {
@@ -50,10 +61,12 @@ Parser.prototype.expr = function() {
   var number;
   this.tokenizer.eat_whitespace();
   number = this.term();
+  this.tokenizer.eat_whitespace();
   while('-' == this.tokenizer.current() | '+' == this.tokenizer.current()) {
     var operator = this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
     t = this.term();
+    this.tokenizer.eat_whitespace();
     if('-' == operator) {
       number -= t;
     } else {

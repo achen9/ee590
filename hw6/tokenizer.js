@@ -86,9 +86,7 @@ Tokenizer.prototype.eat_whitespace = function () {
 }
 
 Tokenizer.prototype.is_whitespace = function(token) {
-  var temp = token;
-  temp.trim();
-  if (0 == temp.length) {
+  if (0 == token.trim().length) {
     return true;
   } else {
     return false;

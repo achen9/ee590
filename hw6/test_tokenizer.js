@@ -20,5 +20,27 @@ t.eat();
 t.eat();
 assert('+' == t.current());
 
-// Test 3: eof() function
+// Test 3: Test eof() function
+assert(false == t.eof());
+for (var i = t.current_token_pos; i < t.tokens.length; i++) {
+  t.eat();
+}
+assert(true == t.eof());
 
+// Test 4: Test TokenizerException() function
+try {
+  t.eat()
+} catch (e) {
+  console.log(e.name + ": " + e.msg + " at position " + e.position);
+}
+try {
+  t.current()
+} catch (e) {
+  console.log(e.name + ": " + e.msg + " at position " + e.position);
+}
+try {
+  test_string = "-12.e + 0.5";
+  t.tokenize(test_string);
+} catch (e) {
+  console.log(e.name + ": " + e.msg + " at position " + e.position);
+}

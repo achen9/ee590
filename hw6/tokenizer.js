@@ -4,6 +4,7 @@ function Tokenizer(regexps) {
   this.re;
   this.tokens = [];
   this.current_token_pos = 0;
+  this.input_str;
 
   if ( regexps ) {
     for ( var i=0; i<regexps.length; i++ ) {
@@ -26,7 +27,8 @@ Tokenizer.prototype.add = function(regexp) {
 Tokenizer.prototype.tokenize = function(str) {
   var tmp = [];
   var tmpstr;
-  this.tokens = str.match(this.re);
+  this.input_str = str;
+  this.tokens = this.input_str.match(this.re);
   // Removes empty elements in array produced by match()
   for (var i = 0; i < this.tokens.length; i++) {
     if('' != this.tokens[i]) {
@@ -35,9 +37,9 @@ Tokenizer.prototype.tokenize = function(str) {
   }
   this.tokens = tmp;
   tmpstr = this.tokens.join('');
-  for(var i = 0; i < str.length; i++) {
-    if (str[i] !== tmpstr[i]) {
-      throw new TokenizerException("Unexpected token '" + str[i] + "'", i + 1);
+  for(var i = 0; i < this.input_str.length; i++) {
+    if (this.input_str[i] != tmpstr[i]) {
+      throw new TokenizerException("Unexpected character '" + str[i] + "'", i + 1);
     }
   }
   return this;
@@ -45,7 +47,7 @@ Tokenizer.prototype.tokenize = function(str) {
 
 Tokenizer.prototype.current = function () {
   if (this.eof()) {
-    throw new TokenizerException("No more tokens.", this.tokens.length - 1);
+    throw new TokenizerException("No more tokens", this.input_str.length - 1);
   } else {
     return this.tokens[this.current_token_pos];
   }
@@ -64,7 +66,7 @@ Tokenizer.prototype.next = function() {
 
 Tokenizer.prototype.eat = function () {
   if (this.eof()) {
-    throw new TokenizerException("No more tokens to eat.", this.tokens.length - 1);
+    throw new TokenizerException("No more tokens to eat", this.input_str.length - 1);
   } else {
     return this.tokens[this.current_token_pos++];
   }

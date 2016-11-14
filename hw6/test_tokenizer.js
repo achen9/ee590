@@ -17,12 +17,11 @@ assert(-12 == parseFloat(t.current()));
 
 // Test 2: Test eat() function
 t.eat();
-t.eat();
-assert('+' == t.current());
+assert('+' == t.eat());
 
 // Test 3: Test eof() function
 assert(false == t.eof());
-for (var i = t.current_token_pos; i < t.tokens.length; i++) {
+for (var i = t.current_token_pos; i < t.tokens.length - 1; i++) {
   t.eat();
 }
 assert(true == t.eof());
@@ -30,11 +29,6 @@ assert(true == t.eof());
 // Test 4: Test TokenizerException() function
 try {
   t.eat()
-} catch (e) {
-  console.log(e.name + ": " + e.msg + " at position " + e.position);
-}
-try {
-  t.current()
 } catch (e) {
   console.log(e.name + ": " + e.msg + " at position " + e.position);
 }

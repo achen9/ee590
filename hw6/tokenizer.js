@@ -3,7 +3,7 @@ function Tokenizer(regexps) {
   this.re_string = "";
   this.re;
   this.tokens = [];
-  this.current_token_pos = 0;
+  this.current_token_pos = -1;
   this.input_str;
 
   if ( regexps ) {
@@ -46,8 +46,8 @@ Tokenizer.prototype.tokenize = function(str) {
 }
 
 Tokenizer.prototype.current = function () {
-  if (this.eof()) {
-    throw new TokenizerException("No more tokens", this.input_str.length - 1);
+  if (-1 == this.current_token_pos) {
+    return this.eat();
   } else {
     return this.tokens[this.current_token_pos];
   }
@@ -66,14 +66,15 @@ Tokenizer.prototype.next = function() {
 
 Tokenizer.prototype.eat = function () {
   if (this.eof()) {
-    throw new TokenizerException("No more tokens to eat", this.input_str.length - 1);
+    throw new TokenizerException("At EOF", this.input_str.length - 1);
   } else {
-    return this.tokens[this.current_token_pos++];
+    this.current_token_pos++;
+    return this.current();
   }
 }
 
 Tokenizer.prototype.eof = function() {
-  if (this.current_token_pos >= this.tokens.length) {
+  if (this.current_token_pos >= this.tokens.length - 1) {
     return true;
   } else {
     return false;

@@ -13,57 +13,54 @@ function Parser(str) {
   this.tokenizer.tokenize(str);
 }
 
-Parser.prototype.factor = function () {
+Parser.prototype.factor = function(stack) {
   this.tokenizer.eat_whitespace();
   var pf = this.tokenizer.float_val();
-  if (!isNaN(pf)) {
-    if (!this.tokenizer.eof()) {
+  if(!isNaN(pf)){
+    if(!this.tokenizer.eof()) {
       this.tokenizer.eat();
+      if(!isNaN(this.tokenizer.float_val()) || '(' == this.tokenizer.current()) {
+        this.parseException();
+      }
     }
     return pf;
   } else if('(' == this.tokenizer.current()) {
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
-    pf = this.expr();
+    pf = this.expr(stack + 1);
     this.tokenizer.eat_whitespace();
-    if (')' == this.tokenizer.current()) {
-      if (!this.tokenizer.eof()) {
-        this.tokenizer.eat();
+    if(')' == this.tokenizer.current()) {
+      if(!this.tokenizer.eof()) {
+        if(!isNaN(this.tokenizer.eat())) {
+          this.parseException();
+        }
       }
-    } else if (this.eof()) {
-      throw new ParserException("Unexpected EOF", this.str.length - 1);
+    } else if (this.tokenizer.eof()) {
+      throw new ParserException("Unexpected EOF", this.str.length);
     }  else {
-      var pos = 0;
-      for (var i = 0; i < this.tokenizer.current_token_pos; i++) {
-        pos += this.tokenizer.tokens[i].length;
-      }
-      throw new ParserException("Unexpected token '" + this.tokenizer.current() + "'", pos + 1);
+      this.parseException();
     }
     return pf;
-  } else if ('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
+  } else if('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
     pf = this.expr();
     return pf;
   } else {
-    var pos = 0;
-    for (var i = 0; i < this.tokenizer.current_token_pos; i++) {
-      pos += this.tokenizer.tokens[i].length;
-    }
-    throw new ParserException("Unexpected token '" + this.tokenizer.current() + "'", pos + 1);
+    this.parseException();
   }
 }
 
-Parser.prototype.term = function(sign) {
+Parser.prototype.term = function(stack, sign) {
   var f;
   var number;
   this.tokenizer.eat_whitespace();
-  number = this.factor() * sign;
+  number = this.factor(stack) * sign;
   this.tokenizer.eat_whitespace();
   
-  while ('*' == this.tokenizer.current() || '/' == this.tokenizer.current() || '%' == this.tokenizer.current()) {
+  while('*' == this.tokenizer.current() || '/' == this.tokenizer.current() || '%' == this.tokenizer.current()) {
     var operator = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
-    f = this.factor();
+    f = this.factor(stack);
     this.tokenizer.eat_whitespace();
     if('*' == operator) {
       number *= f;
@@ -76,13 +73,12 @@ Parser.prototype.term = function(sign) {
   return number;
 }
 
-Parser.prototype.expr = function () {
-  debugger;
+Parser.prototype.expr = function(stack) {
   var t;
   var number;
   var sign = 1;
   this.tokenizer.eat_whitespace();
-  while ('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
+  while('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
     var op = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
@@ -90,24 +86,35 @@ Parser.prototype.expr = function () {
       sign *= -1;
     }
   }
-  number = this.term(sign);
+  number = this.term(stack, sign);
   this.tokenizer.eat_whitespace();
   while('-' == this.tokenizer.current() | '+' == this.tokenizer.current()) {
     var operator = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
     if('-' == operator) {
-      t = this.term(-1);
+      t = this.term(stack, -1);
     } else {
-      t = this.term(1);
+      t = this.term(stack, 1);
     }
     number += t;
+  }
+  if(0 == stack && ')' == this.tokenizer.current() && !this.tokenizer.eof()) {
+    this.parseException();
   }
   return number;
 }
 
 Parser.prototype.parse = function() {
-  return this.expr();
+  return this.expr(0);
+}
+
+Parser.prototype.parseException = function () {
+  var pos = 0;
+  for (var i = 0; i < this.tokenizer.current_token_pos; i++) {
+    pos += this.tokenizer.tokens[i].length;
+  }
+  throw new ParserException("Unexpected token '" + this.tokenizer.current() + "'", pos + 1);
 }
 
 function ParserException(errmsg, errpos) {

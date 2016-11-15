@@ -10,7 +10,6 @@ console.log("Passed test 1");
 
 // Test 2: Test term() function
 p2 = new Parser("2.5 * 4 /2");
-debugger;
 assert(5 == p2.term(1));
 console.log("Passed test 2");
 

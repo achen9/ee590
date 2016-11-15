@@ -30,7 +30,9 @@ Parser.prototype.factor = function () {
       if (!this.tokenizer.eof()) {
         this.tokenizer.eat();
       }
-    } else {
+    } else if (this.eof()) {
+      throw new ParserException("Unexpected EOF", this.str.length - 1);
+    }  else {
       var pos = 0;
       for (var i = 0; i < this.tokenizer.current_token_pos; i++) {
         pos += this.tokenizer.tokens[i].length;
@@ -38,7 +40,7 @@ Parser.prototype.factor = function () {
       throw new ParserException("Unexpected token '" + this.tokenizer.current() + "'", pos + 1);
     }
     return pf;
-  } else if ('-' == this.tokenizer.current() | '+' == this.tokenizer.current()) {
+  } else if ('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
     pf = this.expr();
     return pf;
   } else {
@@ -57,7 +59,7 @@ Parser.prototype.term = function(sign) {
   number = this.factor() * sign;
   this.tokenizer.eat_whitespace();
   
-  while ('*' == this.tokenizer.current() | '/' == this.tokenizer.current() | '%' == this.tokenizer.current()) {
+  while ('*' == this.tokenizer.current() || '/' == this.tokenizer.current() || '%' == this.tokenizer.current()) {
     var operator = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
@@ -74,12 +76,13 @@ Parser.prototype.term = function(sign) {
   return number;
 }
 
-Parser.prototype.expr = function() {
+Parser.prototype.expr = function () {
+  debugger;
   var t;
   var number;
   var sign = 1;
   this.tokenizer.eat_whitespace();
-  while ('-' == this.tokenizer.current() | '+' == this.tokenizer.current()) {
+  while ('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
     var op = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();

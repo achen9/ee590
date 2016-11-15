@@ -15,7 +15,7 @@ function Tokenizer(regexps) {
 }
 
 Tokenizer.prototype.add = function(regexp) {
-  if ( this.re_string == "" ) {
+  if( this.re_string == "" ) {
     this.re_string = regexp.source;
   } else {
     this.re_string += "|" + regexp.source;
@@ -30,7 +30,7 @@ Tokenizer.prototype.tokenize = function(str) {
   this.input_str = str;
   this.tokens = this.input_str.match(this.re);
   // Removes empty elements in array produced by match()
-  for (var i = 0; i < this.tokens.length; i++) {
+  for(var i = 0; i < this.tokens.length; i++) {
     if('' != this.tokens[i]) {
         tmp.push(this.tokens[i]);
     }
@@ -38,7 +38,7 @@ Tokenizer.prototype.tokenize = function(str) {
   this.tokens = tmp;
   tmpstr = this.tokens.join('');
   for(var i = 0; i < this.input_str.length; i++) {
-    if (this.input_str[i] != tmpstr[i]) {
+    if(this.input_str[i] != tmpstr[i]) {
       throw new TokenizerException("Unexpected character '" + str[i] + "'", i + 1);
     }
   }
@@ -46,7 +46,7 @@ Tokenizer.prototype.tokenize = function(str) {
 }
 
 Tokenizer.prototype.current = function () {
-  if (-1 == this.current_token_pos) {
+  if(-1 == this.current_token_pos) {
     return this.eat();
   } else {
     return this.tokens[this.current_token_pos];
@@ -65,7 +65,7 @@ Tokenizer.prototype.next = function() {
 }*/
 
 Tokenizer.prototype.eat = function () {
-  if (this.eof()) {
+  if(this.eof()) {
     throw new TokenizerException("At EOF", this.input_str.length - 1);
   } else {
     this.current_token_pos++;
@@ -74,7 +74,7 @@ Tokenizer.prototype.eat = function () {
 }
 
 Tokenizer.prototype.eof = function() {
-  if (this.current_token_pos >= this.tokens.length - 1) {
+  if(this.current_token_pos >= this.tokens.length - 1) {
     return true;
   } else {
     return false;
@@ -82,13 +82,13 @@ Tokenizer.prototype.eof = function() {
 }
 
 Tokenizer.prototype.eat_whitespace = function () {
-  while (this.is_whitespace(this.current())) {
+  while(this.is_whitespace(this.current())) {
     this.eat();
   }
 }
 
 Tokenizer.prototype.is_whitespace = function(token) {
-  if (0 == token.trim().length) {
+  if(0 == token.trim().length) {
     return true;
   } else {
     return false;

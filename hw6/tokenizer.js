@@ -48,6 +48,8 @@ Tokenizer.prototype.tokenize = function(str) {
 Tokenizer.prototype.current = function () {
   if(-1 == this.current_token_pos) {
     return this.eat();
+  } else if(this.eof()) {
+    return 0;
   } else {
     return this.tokens[this.current_token_pos];
   }
@@ -59,14 +61,10 @@ Tokenizer.prototype.float_val = function() {
   // method parseFloat)
   return parseFloat(this.current());
 }
-/*
-Tokenizer.prototype.next = function() {
-  // TODO
-}*/
 
 Tokenizer.prototype.eat = function () {
   if(this.eof()) {
-    throw new TokenizerException("At EOF", this.input_str.length - 1);
+    throw new TokenizerException("At EOF", this.input_str.length);
   } else {
     this.current_token_pos++;
     return this.current();
@@ -74,7 +72,7 @@ Tokenizer.prototype.eat = function () {
 }
 
 Tokenizer.prototype.eof = function() {
-  if(this.current_token_pos >= this.tokens.length - 1) {
+  if(this.current_token_pos >= this.tokens.length) {
     return true;
   } else {
     return false;

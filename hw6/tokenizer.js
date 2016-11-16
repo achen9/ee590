@@ -79,9 +79,13 @@ Tokenizer.prototype.eof = function() {
   }
 }
 
-Tokenizer.prototype.eat_whitespace = function () {
-  while(this.is_whitespace(this.current())) {
-    this.eat();
+Tokenizer.prototype.eat_whitespace = function() {
+  if(this.eof()) {
+    // Do nothing since we are at end of file
+  } else {
+    while(this.is_whitespace(this.current())) {
+      this.eat();
+    }
   }
 }
 

@@ -5,43 +5,41 @@ function Parser(str) {
   this.str = str; // the string to be parsed
   this.tokenizer = new Tokenizer();
   this.tokenizer
-   .add(/\d*.\d*(e|E)((-|\+)?)\d+/) // Parse scientific notation
-   .add(/\d*\.\d*/)                 // Parse  floating points
-   .add(/\d+/)                      // Parse integers
-   .add(/\+|-|\*|\/|%|\(|\)/)       // Parse arithmetic operators and parenthesis
-   .add(/\s*/)                      // Parse whitespaces
+   .add(/\d*\.?\d*(e|E)(-|\+)?\d+/) // Parse scientific notation
+   .add(/\d+\.\d*/)                // Parse floating points
+   .add(/\d*\.\d+/)                // Parse floating points
+   .add(/\d+/)                     // Parse integers
+   .add(/\+|-|\*|\/|%|\(|\)/)      // Parse arithmetic operators and parenthesis
+   .add(/\s+/)                     // Parse whitespaces
   this.tokenizer.tokenize(str);
 }
 
 Parser.prototype.factor = function(stack) {
   this.tokenizer.eat_whitespace();
   var pf = this.tokenizer.float_val();
-  if(!isNaN(pf)){
-    if(!this.tokenizer.eof()) {
-      this.tokenizer.eat();
-      if(!isNaN(this.tokenizer.float_val()) || '(' == this.tokenizer.current()) {
-        this.parseException();
-      }
+  if(!isNaN(pf)) {
+    this.tokenizer.eat();
+    if((!isNaN(this.tokenizer.float_val()) || '(' === this.tokenizer.current()) && !this.tokenizer.eof()) {
+      this.parseException();
     }
     return pf;
-  } else if('(' == this.tokenizer.current()) {
+  } else if('(' === this.tokenizer.current()) {
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
     pf = this.expr(stack + 1);
     this.tokenizer.eat_whitespace();
-    if(')' == this.tokenizer.current()) {
-      if(!this.tokenizer.eof()) {
-        if(!isNaN(this.tokenizer.eat())) {
-          this.parseException();
-        }
+    if(')' === this.tokenizer.current()) {
+      this.tokenizer.eat();
+      if(!isNaN(this.tokenizer.current()) && !this.tokenizer.eof()) {
+        this.parseException();
       }
-    } else if (this.tokenizer.eof()) {
+    } else if(this.tokenizer.eof()) {
       throw new ParserException("Unexpected EOF", this.str.length);
-    }  else {
+    } else {
       this.parseException();
     }
     return pf;
-  } else if('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
+  } else if('-' === this.tokenizer.current() || '+' === this.tokenizer.current()) {
     pf = this.expr();
     return pf;
   } else {
@@ -56,15 +54,15 @@ Parser.prototype.term = function(stack, sign) {
   number = this.factor(stack) * sign;
   this.tokenizer.eat_whitespace();
   
-  while('*' == this.tokenizer.current() || '/' == this.tokenizer.current() || '%' == this.tokenizer.current()) {
+  while('*' === this.tokenizer.current() || '/' === this.tokenizer.current() || '%' === this.tokenizer.current()) {
     var operator = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
     f = this.factor(stack);
     this.tokenizer.eat_whitespace();
-    if('*' == operator) {
+    if('*' === operator) {
       number *= f;
-    } else if ('/' == operator) {
+    } else if ('/' === operator) {
       number /= f;
     } else {
       number %= f;
@@ -78,28 +76,28 @@ Parser.prototype.expr = function(stack) {
   var number;
   var sign = 1;
   this.tokenizer.eat_whitespace();
-  while('-' == this.tokenizer.current() || '+' == this.tokenizer.current()) {
+  while('-' === this.tokenizer.current() || '+' === this.tokenizer.current()) {
     var op = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
-    if ('-' == op) {
+    if ('-' === op) {
       sign *= -1;
     }
   }
   number = this.term(stack, sign);
   this.tokenizer.eat_whitespace();
-  while('-' == this.tokenizer.current() | '+' == this.tokenizer.current()) {
+  while('-' === this.tokenizer.current() | '+' === this.tokenizer.current()) {
     var operator = this.tokenizer.current();
     this.tokenizer.eat();
     this.tokenizer.eat_whitespace();
-    if('-' == operator) {
+    if('-' === operator) {
       t = this.term(stack, -1);
     } else {
       t = this.term(stack, 1);
     }
     number += t;
   }
-  if(0 == stack && ')' == this.tokenizer.current() && !this.tokenizer.eof()) {
+  if(0 === stack && ')' === this.tokenizer.current() && !this.tokenizer.eof()) {
     this.parseException();
   }
   return number;

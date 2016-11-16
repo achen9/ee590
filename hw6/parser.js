@@ -6,11 +6,11 @@ function Parser(str) {
   this.tokenizer = new Tokenizer();
   this.tokenizer
    .add(/\d*\.?\d*(e|E)(-|\+)?\d+/) // Parse scientific notation
-   .add(/\d+\.\d*/)                // Parse floating points
-   .add(/\d*\.\d+/)                // Parse floating points
-   .add(/\d+/)                     // Parse integers
-   .add(/\+|-|\*|\/|%|\(|\)/)      // Parse arithmetic operators and parenthesis
-   .add(/\s+/)                     // Parse whitespaces
+   .add(/\d+\.\d*/)                 // Parse floating points
+   .add(/\d*\.\d+/)                 // Parse floating points
+   .add(/\d+/)                      // Parse integers
+   .add(/\+|-|\*|\/|%|\(|\)/)       // Parse arithmetic operators and parenthesis
+   .add(/\s+/)                      // Parse whitespaces
   this.tokenizer.tokenize(str);
 }
 

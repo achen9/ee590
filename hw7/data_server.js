@@ -1,28 +1,44 @@
 let jnet = require('./json_net');
-let Stack = require("./clients")
+let Clients = require("./clients")
 
 let server = new jnet.JSONServer();
 
-server.stack = new Stack();
+server.clients = new Clients();
 
 server.on('json_connection',function(jsocket) {
-
+  let acquainted = false;
   var responses = {
+    ee590: function(object) {
+      acquainted = true;
+      jsocket.jwrite({result: "ok"});
+    },
 
     push: function(object) {
-      server.stack.push(object.value);
-      jsocket.jwrite({ value: object.value });
+      if(acquainted) {
+        server.clients.push(object.value);
+        jsocket.jwrite({ value: object.value });
+      } else {
+        jsocket.error("Not yet acquainted");
+      }
     },
 
     pop: function(object) {
-      jsocket.jwrite({value: server.stack.pop()});
+      if(acquainted) {
+        jsocket.jwrite({ value: server.clients.pop() });
+      } else {
+        jsocket.error("Not yet acquainted");
+      }
     },
 
     top: function(object) {
-      if ( server.stack.length > 0 ) {
-        jsocket.jwrite({value: server.stack[server.stack.length-1]});
+      if(acquainted) {
+        if(server.clients.length > 0) {
+          jsocket.jwrite({ value: server.clients[server.clients.length - 1] });
+        } else {
+          jsocket.error("Empty stack during 'top'");
+        }
       } else {
-        jsocket.error("Empty stack during 'top'");
+        jsocket.error("Not yet acquainted");
       }
     },
 
@@ -40,7 +56,7 @@ server.on('json_connection',function(jsocket) {
       jsocket.error("Unknown command '" + object.command + "'");
     }
 
-    console.log(server.stack);
+    console.log(server.clients);
 
   });
 

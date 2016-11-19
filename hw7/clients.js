@@ -4,20 +4,20 @@ let JSONable = (superclass) => class extends superclass {
   }
 };
 
-class Stack extends JSONable(Array) {
+class Clients extends JSONable(Array) {
 
   constructor() {
     super();
   }
 
-  get top() {
+  /*get top() {
     if ( this.length > 0 ) {
       return this[this.length-1];
     } else {
       return undefined;
     }
   }
-
+  */
 }
 
-module.exports = Stack;
+module.exports = Clients;

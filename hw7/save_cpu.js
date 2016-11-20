@@ -36,7 +36,7 @@ var test_com = function(port, host) {
   };
 };
 
-var LAN = '10.0.0.193';   //Address to connect
+var LAN = process.argv[2];   //Address to connect
 var PORT = 8080;         //data_server.js port
 
 test_com(PORT, LAN);

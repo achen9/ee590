@@ -7,17 +7,43 @@ server.clients = new Clients();
 
 server.on('json_connection',function(jsocket) {
   let acquainted = false;
+  let address = jsocket.address().address;
+  console.log("Connected to: " + address);
   var responses = {
     ee590: function(object) {
-      acquainted = true;
-      jsocket.jwrite({result: "ok"});
+      if(acquainted) {
+        jsocket.jwrite("Already acquainted.");
+      } else {
+        acquainted = true;
+        jsocket.jwrite({ result: "ok" });
+      }
     },
 
-    push: function(object) {
+    put: function(object) {
       if(acquainted) {
-        server.clients.push(object.value);
-        jsocket.jwrite({ value: object.value });
-      } else {
+        if(!("key" in object)) {
+          jsocket.error("No key provided.");
+        } else if(!("value" in object)) {
+          jsocket.error("No value provided.");
+        } else if(!("timestamp" in object)) {
+          jsocket.error("No timestamp provided.");
+        } else {
+          if("string" != typeof (object.key)) {
+            jsocket.error("Key is not a string.");
+          } else if("string" != typeof (object.value) && "number" != typeof (object.value) && "boolean" != typeof (object.value)) {
+            jsocket.error("Value is not a string, number, or boolean.");
+          } else if(object.timestamp < 0) {
+            jsocket.error("Timestamp is negative.");
+          } else {
+            let UNIXTIME = Math.floor(new Date() / 1000);
+            if(!(address in server.clients)) {
+              server.clients[address] = {};
+            }
+            server.clients[address][object.key] = { value: object.value, timestamp: object.timestamp, received: UNIXTIME }
+            jsocket.jwrite({result: server.clients[address][object.key]});
+          }
+        }
+        } else {
         jsocket.error("Not yet acquainted");
       }
     },
@@ -58,6 +84,10 @@ server.on('json_connection',function(jsocket) {
 
     console.log(server.clients);
 
+  });
+
+  jsocket.on('close', function() {
+    console.log("Closed connection to: " + address);
   });
 
 });

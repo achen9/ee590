@@ -4,7 +4,7 @@ let client = jnet.JSONSocket();
 
 var test_com = function(port, host) {
 
-  let status = null;
+  let status = false;
   let i = 0;
   let input = [{ "command": "put", "key": "key1", "value": 14, "timestamp": 0 },
     { "command": "put", "key": "key2", "value": 15, "timestamp": 0 }];
@@ -17,7 +17,7 @@ var test_com = function(port, host) {
   client.connect(port, host);
 
   setTimeout(function() {
-    if(status) {
+    if(true == status) {
       client.jwrite({"command":"ee590"},inputVals);
     };
   }, 1000);
@@ -27,7 +27,6 @@ var test_com = function(port, host) {
       if(i < input.length) {
         input[i].timestamp = UNIXTIME;
         client.jwrite(input[i++], inputVals);
-        console.log(i);
       } else {
         console.log("Finished testing.");
         client.end();
@@ -35,6 +34,9 @@ var test_com = function(port, host) {
     }, 1000);
   };
 };
+client.on('json', function(object) {
+  console.log(object);
+});
 
 var LAN = process.argv[2];   //Address to connect
 var PORT = 8080;         //data_server.js port

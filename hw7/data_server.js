@@ -32,6 +32,8 @@ server.on('json_connection',function(jsocket) {
             jsocket.error("Key is not a string.");
           } else if("string" != typeof (object.value) && "number" != typeof (object.value) && "boolean" != typeof (object.value)) {
             jsocket.error("Value is not a string, number, or boolean.");
+          } else if("number" != typeof (object.timestamp)) {
+            jsocket.error("Timestamp is not a number.");
           } else if(object.timestamp < 0) {
             jsocket.error("Timestamp is negative.");
           } else {

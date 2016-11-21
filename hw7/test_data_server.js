@@ -48,7 +48,7 @@ client.on('json', function(object) {
   console.log(object);
 });
 
-var LAN = process.argv[2];   //Address to connect
-var PORT = 8080;         //data_server.js port
+var LAN = process.argv[2]; //Address to connect
+var PORT = 8080;           //data_server.js port
 
 test_com(PORT, LAN);

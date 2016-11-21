@@ -38,11 +38,11 @@ server.on('json_connection',function(jsocket) {
             jsocket.error("Timestamp is negative.");
           } else {
             let UNIXTIME = Math.floor(new Date() / 1000);
-            if(!(address in server.clients)) {
-              server.clients[address] = {};
+            if(!(address in server.clients)) { 
+              server.clients[address] = {}; // Otherwise cannot set object.key
             }
             server.clients[address][object.key] = { value: object.value, timestamp: object.timestamp, received: UNIXTIME }
-            jsocket.jwrite({result: server.clients[address][object.key]});
+            jsocket.jwrite({ result: server.clients[address][object.key] });
           }
         }
         } else {
@@ -50,20 +50,26 @@ server.on('json_connection',function(jsocket) {
       }
     },
 
-    pop: function(object) {
+    get: function(object) {
       if(acquainted) {
-        jsocket.jwrite({ value: server.clients.pop() });
-      } else {
-        jsocket.error("Not yet acquainted");
-      }
-    },
-
-    top: function(object) {
-      if(acquainted) {
-        if(server.clients.length > 0) {
-          jsocket.jwrite({ value: server.clients[server.clients.length - 1] });
+        if(!("key" in object)) {
+          jsocket.jwrite({ result: server.clients });
+        } else if(!("host" in object)) {
+          if(!(address in server.clients)) {
+            jsocket.error("No stored data for this client.");
+          } else if(!(object.key in server.clients[address])) {
+            jsocket.error("No key '" + object.key + "' found in this client's data.");
+          } else {
+            jsocket.jwrite({ result: server.clients[address][object.key] });
+          }
         } else {
-          jsocket.error("Empty stack during 'top'");
+          if(!(object.host in server.clients)) {
+            jsocket.error("No stored data for host '" + object.host + "'");
+          } else if(!(object.key in server.clients[object.host])) {
+            jsocket.error("No key '" + object.key + "' in stored data for host '" + object.host + "'");
+          } else {
+            jsocket.jwrite({ result: server.clients[object.host][object.key] });
+          }
         }
       } else {
         jsocket.error("Not yet acquainted");

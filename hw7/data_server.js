@@ -94,6 +94,10 @@ server.on('json_connection',function(jsocket) {
 
   });
 
+  jsocket.on('json_error', function() {
+    jsocket.error("JSON parse error. Check if you have entered valid JSON.");
+  });
+
   jsocket.on('close', function() {
     console.log("Closed connection to: " + address);
   });

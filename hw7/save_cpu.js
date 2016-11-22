@@ -9,6 +9,7 @@ var save_cpu_data = function(port, host) {
   let cpu_load = 0;
   let cpu_data = require('os').cpus();
   let stored_data = { "command": "put", "key": "cpu load", "value": 0, "timestamp": 0 };
+  let stored_name = { "command": "put", "key": "name", "value": "Alex Chen", "timestamp": 0 };
   let input_index = 0;
   let get_inputs = [
     { "command": "get" },
@@ -45,7 +46,14 @@ var save_cpu_data = function(port, host) {
     setTimeout(function() {
       let UNIXTIME = Math.floor(new Date() / 1000);
       stored_data.timestamp = UNIXTIME;
-      client.jwrite(stored_data, get_cpu_load);
+      client.jwrite(stored_data, store_name);
+    }, 1000);
+  };
+  function store_name() {
+    setTimeout(function() {
+      let UNIXTIME = Math.floor(new Date() / 1000);
+      stored_name.timestamp = UNIXTIME;
+      client.jwrite(stored_name, get_cpu_load);
     }, 1000);
   };
   function get_cpu_load() {

@@ -12,3 +12,4 @@ Make sure you have navigated to the /hw7/ folder as the current directory.
 ### Note: running on an instance of AWS in the background
 * Use the "nohup" command: nohup node data_server.js &
 * data_server.js will run in the background even if not connected to the server through SSH.
+* The command "ps ux" can be used to see background processes running.

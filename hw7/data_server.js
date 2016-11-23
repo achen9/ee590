@@ -7,7 +7,7 @@ server.clients = new Clients();
 
 server.on('json_connection',function(jsocket) {
   let acquainted = false;
-  let address = jsocket.address().address;
+  let address = jsocket.remoteAddress;
   console.log("Connected to: " + address);
   var responses = {
     ee590: function(object) {

@@ -42,7 +42,7 @@ server.on('json_connection',function(jsocket) {
               server.clients[address] = {}; // Otherwise cannot set object.key
             }
             server.clients[address][object.key] = { value: object.value, timestamp: object.timestamp, received: UNIXTIME }
-            jsocket.jwrite({ result: server.clients[address][object.key] });
+            jsocket.jwrite({ result: "ok" });
           }
         }
         } else {

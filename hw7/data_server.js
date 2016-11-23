@@ -105,8 +105,13 @@ server.on('json_connection',function(jsocket) {
 });
 
 server.on('error', (err) => {
-  throw err;
+  console.log("Error on server.");
 });
+
+process.on('uncaughtException', (err) => {
+  console.log("whoops! there was an error. It is likely the client crashed.");
+});
+
 
 server.listen(8080, () => {
   console.log('server bound');

@@ -109,7 +109,7 @@ server.on('error', (err) => {
 });
 
 process.on('uncaughtException', (err) => {
-  console.log("whoops! there was an error. It is likely the client crashed.");
+  console.log("Whoops! There was an error. It is likely the client crashed.");
 });
 
 

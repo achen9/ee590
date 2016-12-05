@@ -1,6 +1,7 @@
 .headers on
 SELECT Track, 
-       Title AS Album, Name AS Artist
+       Title AS Album, 
+       Name AS Artist
 FROM Artist
 JOIN
   (SELECT Track,

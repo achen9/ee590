@@ -1,11 +1,15 @@
 .headers on
-SELECT Track, Title AS Album, Name AS Artist
+SELECT Track, 
+       Title AS Album, Name AS Artist
 FROM Artist
 JOIN
-  (SELECT *
+  (SELECT Track,
+          Title,
+          ArtistId
    FROM Album 
    JOIN 
-     (SELECT Name AS Track, AlbumId, Milliseconds
+     (SELECT Name AS Track, 
+             AlbumId
       FROM Track 
       ORDER BY Milliseconds desc
       LIMIT 1)

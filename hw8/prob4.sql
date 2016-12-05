@@ -2,7 +2,8 @@
 SELECT Name AS Track, Quantity
 FROM Track 
 JOIN
-  (SELECT TrackId, sum(Quantity) AS Quantity 
+  (SELECT TrackId, 
+          sum(Quantity) AS Quantity 
    FROM InvoiceLine
    GROUP BY TrackId)
 USING (TrackId)

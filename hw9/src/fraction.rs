@@ -19,6 +19,14 @@
 //! Alex Z. Chen - 12/05/2016
 //! alexac9@uw.edu
 //!
-mod fraction {
 
+// Data definition
+pub struct Fraction {
+  pub numerator: isize,
+  pub denominator: isize,
+}
+
+// Constructors
+pub fn fraction(n: isize, d: isize) -> Fraction {
+  Fraction {numerator: n, denominator: d}
 }

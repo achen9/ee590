@@ -19,6 +19,7 @@
 //! Alex Z. Chen - 12/05/2016
 //! alexac9@uw.edu
 //!
-mod fraction;
+
+pub mod fraction;
 mod complex;
 mod matrix;

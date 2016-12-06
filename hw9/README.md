@@ -13,3 +13,13 @@ Make sure you have navigated to the /hw9/ folder as the current directory.
 * rust version 1.13.0 was used to compile and test the code. 
 * cargo version 0.13.0 was used as the build system and package managers.
 
+## Rust vs. C++
+Alex Chen, 12/15/2016
+
+### Rust vs. C++ differences
+* Rust defaults to not allow variables to be changed. Must use "mut" keyword to allow new values to be assigned to a variable. C++ defaults to allow new values to be assigned to variable. C++ uses "const" to keep a variable constant.
+* Rust defaults to private properties/methods in a module definition. C++ defaults to public properties/methods in a class definition.
+
+### Rust and C++ similarities
+* Rust uses "cargo" similar to a C++ "makefile" for easier management of code compilation. "Cargo" also includes package managemnet features.
+

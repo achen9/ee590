@@ -1,4 +1,5 @@
 .headers on
+.mode column
 SELECT Name AS Track, Quantity
 FROM Track 
 JOIN

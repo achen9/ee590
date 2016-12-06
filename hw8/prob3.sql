@@ -1,4 +1,5 @@
 .headers on
+.mode column
 SELECT FirstName || " " || LastName AS Customer, 
        TotalAmount
 FROM Customer

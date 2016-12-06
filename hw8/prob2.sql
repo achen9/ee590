@@ -1,4 +1,5 @@
 .headers on
+.mode column
 SELECT Track, 
        Title AS Album, 
        Name AS Artist

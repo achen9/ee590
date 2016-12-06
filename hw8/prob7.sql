@@ -1,5 +1,6 @@
 .headers on
-SELECT Name,
+.mode column
+SELECT Name as Artist,
        sum(Duration_Minutes) AS Duration_in_Minutes
 FROM Artist
 JOIN

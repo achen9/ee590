@@ -1,5 +1,6 @@
 .headers on
-SELECT Name,
+.mode column
+SELECT Name AS Artist,
        Artist_Revenue
 FROM Artist
 JOIN

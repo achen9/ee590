@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 20 20 10
 SELECT Title AS Album, 
        Name AS Track, 
        strftime("%M:%S", datetime(Round(Milliseconds/1000.0),"unixepoch")) AS Duration

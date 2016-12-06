@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 100
 SELECT Title
 FROM Album
 JOIN

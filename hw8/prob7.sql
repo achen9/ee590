@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 30 20
 SELECT Name as Artist,
        sum(Duration_Minutes) AS Duration_in_Minutes
 FROM Artist

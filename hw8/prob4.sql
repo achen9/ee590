@@ -1,6 +1,8 @@
 .headers on
 .mode column
-SELECT Name AS Track, Quantity
+.width 40 10
+SELECT Name AS Track, 
+       Quantity
 FROM Track 
 JOIN
   (SELECT TrackId, 

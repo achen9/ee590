@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 100 20 15
 SELECT Title,
        NumSongs,
        Duration

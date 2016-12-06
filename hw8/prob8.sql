@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 25 15
 SELECT Name AS Artist,
        Artist_Revenue
 FROM Artist

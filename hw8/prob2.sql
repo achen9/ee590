@@ -1,5 +1,6 @@
 .headers on
 .mode column
+.width 25 35 25
 SELECT Track, 
        Title AS Album, 
        Name AS Artist

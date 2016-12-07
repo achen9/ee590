@@ -26,8 +26,8 @@ extern crate matrix_lib;
 fn constructor_test1() {
   use matrix_lib::fraction;
   let f: fraction::Fraction = fraction::fraction(2,3);
-  assert_eq!(f.numerator,2);
-  assert_eq!(f.denominator,3);
+  assert_eq!(f.num(),2);
+  assert_eq!(f.den(),3);
   
 }
 // Constructor Test 2: Test if setting denominator to 0 will cause panic
@@ -43,9 +43,9 @@ fn copy_constructor_test() {
   use matrix_lib::fraction;
   let f1: fraction::Fraction = fraction::fraction(-3,4);
   let mut f2: fraction::Fraction = f1.clone();
-  assert_eq!(f2.numerator,-3);
-  assert_eq!(f2.denominator,4);
-  f2.numerator = 5;
-  assert_eq!(f2.numerator,5);
-  assert_eq!(f1.numerator,-3);
+  assert_eq!(f2.num(),-3);
+  assert_eq!(f2.den(),4);
+  f2.set_num(5);
+  assert_eq!(f2.num(),5);
+  assert_eq!(f1.num(),-3);
 }

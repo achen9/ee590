@@ -21,11 +21,31 @@
 //!
 extern crate matrix_lib;
 
-// Test 1: Constructor test
+// Constructor Test 1: Test if 2/3 can be assigned to a fraction 
 #[test]
-fn constructor() {
+fn constructor_test1() {
   use matrix_lib::fraction;
   let f: fraction::Fraction = fraction::fraction(2,3);
   assert_eq!(f.numerator,2);
   assert_eq!(f.denominator,3);
+  
+}
+// Constructor Test 2: Test if setting denominator to 0 will cause panic
+#[test]
+#[should_panic]
+fn constructor_test2() {
+  use matrix_lib::fraction;
+  let f1: fraction::Fraction = fraction::fraction(2,0);
+}
+// Copy Constructor Test 1: Test if fraction -3/4 can be copied to another variable
+#[test]
+fn copy_constructor_test() {
+  use matrix_lib::fraction;
+  let f1: fraction::Fraction = fraction::fraction(-3,4);
+  let mut f2: fraction::Fraction = f1.clone();
+  assert_eq!(f2.numerator,-3);
+  assert_eq!(f2.denominator,4);
+  f2.numerator = 5;
+  assert_eq!(f2.numerator,5);
+  assert_eq!(f1.numerator,-3);
 }

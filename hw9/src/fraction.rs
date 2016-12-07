@@ -21,6 +21,7 @@
 //!
 
 // Data definition
+#[derive(Clone)]
 pub struct Fraction {
   pub numerator: isize,
   pub denominator: isize,
@@ -28,5 +29,10 @@ pub struct Fraction {
 
 // Constructors
 pub fn fraction(n: isize, d: isize) -> Fraction {
+  if 0 == d {
+    panic!("Attempted to set denominator to 0");
+  } 
   Fraction {numerator: n, denominator: d}
 }
+
+

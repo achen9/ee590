@@ -23,3 +23,6 @@ Alex Chen, 12/15/2016
 ### Rust and C++ similarities
 * Rust uses "cargo" similar to a C++ "makefile" for easier management of code compilation. "Cargo" also includes package managemnet features.
 
+### Rust quirks
+* Cannot overload the '=' operator in Rust
+

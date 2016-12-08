@@ -70,4 +70,39 @@ impl Fraction {
       }
     Fraction {numerator: self.num()/gcd, denominator: self.den()/gcd}
   }
+
+  
+
+}
+// Arithmetic operations & operator overload
+impl ::std::ops::Add for Fraction {
+  type Output = Fraction;
+  fn add(self, other: Fraction) -> Fraction {
+    let f = Fraction {numerator: self.num() * other.den() + self.den() * other.num(), denominator: self.den() * other.den()};
+    f.reduce()
+  }
+}
+impl ::std::ops::Sub for Fraction {
+  type Output = Fraction;
+  fn sub(self, other: Fraction) -> Fraction {
+    let f = Fraction {numerator: self.num() * other.den() - self.den() * other.num(), denominator: self.den() * other.den()};
+    f.reduce()
+  }
+}
+impl ::std::ops::Mul for Fraction {
+  type Output = Fraction;
+  fn mul(self, other:Fraction) -> Fraction {
+    let f = Fraction {numerator: self.num() * other.num(), denominator: self.den() * other.den()};
+    f.reduce()
+  }
+}
+impl ::std::ops::Div for Fraction {
+  type Output = Fraction;
+  fn div(self, other:Fraction) -> Fraction {
+    if 0 == other.num() {
+      panic!("Attempted to divide by zero.");
+    }
+    let f = Fraction {numerator: self.num() * other.den(), denominator: self.den() * other.num()};
+    f.reduce()
+  }
 }

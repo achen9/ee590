@@ -98,6 +98,8 @@ fn division_test1() {
   let f1: Fraction = fraction(-5,7);
   let f2: Fraction = fraction(-6,7);
   let f = f1 / f2;
+  assert!(-5 == f1.num()); // Check f1 still exists and can be used
+  assert!(-6 == f2.num()); // Check f2 still exists and can be used
   assert!(5 == f.num());
   assert!(6 == f.den());
 }
@@ -111,4 +113,13 @@ fn division_test2() {
   let f = f1 / f2;
   assert!(true); // If assertion passes, something went wrong
 }
-
+// Unary Negate Operator Overload Test : Test if -(-5/-7) = -5/7
+#[test]
+fn negate_test() {
+  use matrix_lib::fraction::{Fraction, fraction};
+  let f1: Fraction = fraction(-5,-7);
+  let f = -f1;
+  assert!(-5 == f.num()); 
+  assert!(7 == f.den());
+  assert!(-5 == f1.num()); // Check f1 still exists and can be used
+}

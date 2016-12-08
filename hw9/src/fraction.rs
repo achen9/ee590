@@ -21,6 +21,7 @@
 //!
 
 #[derive(Clone)]
+#[derive(Copy)]
 // Data definition
 pub struct Fraction {
   numerator: isize,
@@ -70,9 +71,6 @@ impl Fraction {
       }
     Fraction {numerator: self.num()/gcd, denominator: self.den()/gcd}
   }
-
-  
-
 }
 // Arithmetic operations & operator overload
 impl ::std::ops::Add for Fraction {
@@ -103,6 +101,14 @@ impl ::std::ops::Div for Fraction {
       panic!("Attempted to divide by zero.");
     }
     let f = Fraction {numerator: self.num() * other.den(), denominator: self.den() * other.num()};
+    f.reduce()
+  }
+}
+// Unary operator overload
+impl ::std::ops::Neg for Fraction {
+  type Output = Fraction;
+  fn neg(self) -> Fraction {
+    let f = Fraction {numerator: -self.num(), denominator: self.den()};
     f.reduce()
   }
 }

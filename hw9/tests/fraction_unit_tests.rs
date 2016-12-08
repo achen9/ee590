@@ -24,8 +24,8 @@ extern crate matrix_lib;
 // Constructor Test 1: Test if 2/3 can be assigned to a fraction 
 #[test]
 fn constructor_test1() {
-  use matrix_lib::fraction;
-  let f: fraction::Fraction = fraction::fraction(2,3);
+  use matrix_lib::fraction::{Fraction, fraction};
+  let f: Fraction = fraction(2,3);
   assert_eq!(f.num(),2);
   assert_eq!(f.den(),3);
   
@@ -34,18 +34,29 @@ fn constructor_test1() {
 #[test]
 #[should_panic]
 fn constructor_test2() {
-  use matrix_lib::fraction;
-  let f1: fraction::Fraction = fraction::fraction(2,0);
+  use matrix_lib::fraction::{Fraction, fraction};
+  let f1: Fraction = fraction(2,0);
 }
 // Copy Constructor Test 1: Test if fraction -3/4 can be copied to another variable
 #[test]
 fn copy_constructor_test() {
-  use matrix_lib::fraction;
-  let f1: fraction::Fraction = fraction::fraction(-3,4);
-  let mut f2: fraction::Fraction = f1.clone();
+  use matrix_lib::fraction::{Fraction, fraction};
+  let f1: Fraction = fraction(-3,4);
+  let mut f2: Fraction = f1.clone();
   assert_eq!(f2.num(),-3);
   assert_eq!(f2.den(),4);
   f2.set_num(5);
   assert_eq!(f2.num(),5);
   assert_eq!(f1.num(),-3);
+}
+// Reduce method Test 1: Test if fraction 6/-8 can be reduced to -3/4
+#[test]
+fn reduce_method_test1() {
+  use matrix_lib::fraction::{Fraction, fraction};
+  let f1: Fraction = fraction(8,-32);
+  let f2: Fraction = f1.reduce();
+  assert_eq!(f2.num(),-1);
+  assert_eq!(f2.den(),4);
+  assert_eq!(f1.num(),8);
+  assert_eq!(f1.den(),-32);
 }

@@ -25,4 +25,5 @@ Alex Chen, 12/15/2016
 
 ### Rust quirks
 * Cannot overload the '=' operator in Rust
+* Overloading functions is hard and tedious. Also, "overloaded" functions cannot accept different number of input arguments.
 
